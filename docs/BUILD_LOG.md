@@ -151,7 +151,30 @@
 | 86 | 2026-04-24 | 1 | `package.json` | e3a29d8 | release(schema): v0.2.0 — Phase 1 Database Schema |
 | 87 | 2026-04-24 | 1 | `CHANGELOG.md` | e3a29d8 | (same commit as #86) |
 | 88 | 2026-04-24 | 1 | `ROADMAP.md` | e3a29d8 | (same commit as #86) |
-| 89 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record v0.2.0 release prep in build log |
+| 89 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | 844b492 | docs(log): record v0.2.0 release prep in build log |
+
+---
+
+## Phase 2 — Database Seeding (In Progress)
+
+| # | Date | Phase | File | Commit | Subject |
+|---|---|---|---|---|---|
+| 1 | 2026-04-24 | 2 | `scripts/seed/guard.ts` | 1a65df5 | feat(seed): add Phase 2 database seeding with persona-driven fixtures |
+| 2 | 2026-04-24 | 2 | `scripts/seed/connection.ts` | 1a65df5 | (same commit as #1) |
+| 3 | 2026-04-24 | 2 | `scripts/seed/personas.ts` | 1a65df5 | (same commit as #1) |
+| 4 | 2026-04-24 | 2 | `scripts/seed/runners/rbac.ts` | 1a65df5 | (same commit as #1) |
+| 5 | 2026-04-24 | 2 | `scripts/seed/runners/billing.ts` | 1a65df5 | (same commit as #1) |
+| 6 | 2026-04-24 | 2 | `scripts/seed/runners/users.ts` | 1a65df5 | (same commit as #1) |
+| 7 | 2026-04-24 | 2 | `scripts/seed/runners/content.ts` | 1a65df5 | (same commit as #1) |
+| 8 | 2026-04-24 | 2 | `scripts/seed/index.ts` | 1a65df5 | (same commit as #1) |
+| 9 | 2026-04-24 | 2 | `scripts/seed/wipe.ts` | 1a65df5 | (same commit as #1) |
+| 10 | 2026-04-24 | 2 | `scripts/seed/reset.ts` | 1a65df5 | (same commit as #1) |
+| 11 | 2026-04-24 | 2 | `package.json` | 1a65df5 | (same commit as #1) |
+| 12 | 2026-04-24 | 2 | `pnpm-lock.yaml` | 1a65df5 | (same commit as #1) |
+| 13 | 2026-04-24 | 2 | `drizzle.config.ts` | 1a65df5 | (same commit as #1) |
+| 14 | 2026-04-24 | 2 | `svelte.config.js` | 1a65df5 | (same commit as #1) |
+| 15 | 2026-04-24 | 2 | `biome.json` | 1a65df5 | (same commit as #1) |
+| 16 | 2026-04-24 | 2 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): open Phase 2 section and record seed infrastructure |
 
 ---
 
