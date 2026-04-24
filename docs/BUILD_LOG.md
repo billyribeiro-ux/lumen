@@ -80,7 +80,16 @@
 | 15 | 2026-04-24 | 1 | `src/routes/+page.svelte` | 3bfeffe | (same commit as #1) |
 | 16 | 2026-04-24 | 1 | `static/favicon.svg` | 3bfeffe | (same commit as #1) |
 | 17 | 2026-04-24 | 1 | `static/robots.txt` | 3bfeffe | (same commit as #1) |
-| 18 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): open Phase 1 section and record SvelteKit scaffold |
+| 18 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | c154aa5 | docs(log): open Phase 1 section and record SvelteKit scaffold |
+| 19 | 2026-04-24 | 1 | `biome.json` | c38cc0e | feat(ci): add Biome 2 lint+format with PE7 strict rule set |
+| 20 | 2026-04-24 | 1 | `package.json` | c38cc0e | (same commit as #19) |
+| 21 | 2026-04-24 | 1 | `pnpm-lock.yaml` | c38cc0e | (same commit as #19) |
+| 22 | 2026-04-24 | 1 | `.vscode/extensions.json` | c38cc0e | (same commit as #19) |
+| 23 | 2026-04-24 | 1 | `playwright.config.ts` | c38cc0e | (same commit as #19) |
+| 24 | 2026-04-24 | 1 | `src/app.d.ts` | c38cc0e | (same commit as #19) |
+| 25 | 2026-04-24 | 1 | `svelte.config.js` | c38cc0e | (same commit as #19) |
+| 26 | 2026-04-24 | 1 | `vite.config.ts` | c38cc0e | (same commit as #19) |
+| 27 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record Biome install in build log |
 
 ---
 
