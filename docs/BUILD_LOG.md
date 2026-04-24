@@ -145,7 +145,9 @@
 | 80 | 2026-04-24 | 1 | `svelte.config.js` | 78094f6 | build(deploy): migrate csrf.checkOrigin -> csrf.trustedOrigins |
 | 81 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | cb1508a | docs(log): record csrf config migration in build log |
 | 82 | 2026-04-24 | 1 | `docs/runbooks/database-migrations.md` | 79499ad | docs: add database migration runbook (docs/runbooks/database-migrations.md) |
-| 83 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record migration runbook in build log |
+| 83 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | 9336216 | docs(log): record migration runbook in build log |
+| 84 | 2026-04-24 | 1 | `CHANGELOG.md` | 0126c0e | docs: extend CHANGELOG Unreleased with Phase 1 entries |
+| 85 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record CHANGELOG Phase 1 entries in build log |
 
 ---
 
