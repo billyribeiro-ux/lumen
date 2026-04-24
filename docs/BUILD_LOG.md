@@ -174,7 +174,9 @@
 | 13 | 2026-04-24 | 2 | `drizzle.config.ts` | 1a65df5 | (same commit as #1) |
 | 14 | 2026-04-24 | 2 | `svelte.config.js` | 1a65df5 | (same commit as #1) |
 | 15 | 2026-04-24 | 2 | `biome.json` | 1a65df5 | (same commit as #1) |
-| 16 | 2026-04-24 | 2 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): open Phase 2 section and record seed infrastructure |
+| 16 | 2026-04-24 | 2 | `docs/BUILD_LOG.md` | 4603548 | docs(log): open Phase 2 section and record seed infrastructure |
+| 17 | 2026-04-24 | 2 | `docs/runbooks/database-seeding.md` | f32b155 | docs: add database seeding runbook |
+| 18 | 2026-04-24 | 2 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record seeding runbook in build log |
 
 ---
 
