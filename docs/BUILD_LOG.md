@@ -97,7 +97,10 @@
 | 32 | 2026-04-24 | 1 | `commitlint.config.js` | a0bde1f | build(ci): add commitlint with Conventional Commits + Lumen scope set |
 | 33 | 2026-04-24 | 1 | `package.json` | a0bde1f | (same commit as #32) |
 | 34 | 2026-04-24 | 1 | `pnpm-lock.yaml` | a0bde1f | (same commit as #32) |
-| 35 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record commitlint install in build log |
+| 35 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | 11cccde | docs(log): record commitlint install in build log |
+| 36 | 2026-04-24 | 1 | `.gitleaks.toml` | ffaa5c3 | build(ci): add gitleaks config and tolerant pre-commit hook |
+| 37 | 2026-04-24 | 1 | `lefthook.yml` | ffaa5c3 | (same commit as #36) |
+| 38 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record gitleaks config in build log |
 
 ---
 
