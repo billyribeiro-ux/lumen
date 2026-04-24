@@ -29,6 +29,65 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
 
 ---
 
+## [0.4.0] — 2026-04-24
+
+> **Phase 3 — Authentication**
+> Better Auth wired with passkeys, TOTP 2FA, OAuth (Google + GitHub),
+> magic links, and email + password — all with sessions persisted in
+> Postgres.
+
+### Added
+
+- `src/lib/server/auth.ts` — Better Auth instance with the Drizzle
+  adapter, Argon2id hashing (`@node-rs/argon2`, OWASP 2024 params),
+  and three plugins: `twoFactor`, `magicLink` (15-min TTL), and
+  `passkey` (`@better-auth/passkey`). Production startup refuses
+  to run without OAuth credentials.
+- `src/lib/server/auth-bridge.ts` — `copyAuthCookies()` helper that
+  forwards Better Auth's `Set-Cookie` headers onto the SvelteKit
+  request event so form-action sign-ins set cookies before redirecting.
+- `src/hooks.server.ts` — request-level session resolution that hydrates
+  `event.locals.{user, session}` and structured `handleError` logger
+  emitting `errorId` for cross-correlation (Sentry wires in Phase 14).
+- `src/app.d.ts` — typed `App.Locals` (user + session) and `App.Error`.
+- `src/routes/api/auth/[...all]/+server.ts` — Better Auth catch-all.
+- `src/lib/auth-client.ts` — browser-side `createAuthClient` with
+  passkey, magicLink, and twoFactor plugins.
+- Auth route group:
+  - `src/routes/(auth)/+layout.svelte` — shared visual frame.
+  - `src/routes/(auth)/sign-in/` — password form action + progressive
+    enhancement for OAuth + magic-link.
+  - `src/routes/(auth)/sign-up/` — name + email + password (12+ chars).
+  - `src/routes/(auth)/forgot-password/` — enumeration-safe reset
+    request flow.
+  - `src/routes/(auth)/reset-password/` — token-based reset.
+  - `src/routes/(auth)/verify-email/` — landing after sign-up.
+- `src/routes/account/security/` — sessions list, passkey registration,
+  sign-out-everywhere form action, single-session sign-out.
+- Schema additions in `src/lib/server/db/schema/auth.ts`:
+  - `passkeys` table for the `@better-auth/passkey` plugin.
+  - `two_factor` table for TOTP secrets and backup codes.
+- `drizzle/0001_auth_plugin_tables.sql` — generated migration.
+- `.env.example` — added passkey RP id, cookie domain, trusted-origins
+  list, and `ALLOW_DESTRUCTIVE_DB_OPS` documentation.
+
+### Notes
+
+- Email delivery (verification, password reset, magic link) is logged
+  to stderr in dev. Phase 7 (`v0.8.0`) wires Resend with Svelte-rendered
+  templates.
+- The Phase 2 seeded credential accounts (Argon2id-hashed default
+  password `LumenDev2026!`) are signable via the new sign-in form
+  out of the box.
+- Better Auth's session cookie is `lumen.session_token`. Cookie
+  domain is settable via `LUMEN_COOKIE_DOMAIN` for Phase 18 subdomain
+  publishing.
+
+> **Phase 2 status:** ✅ Database seeding shipped (v0.3.0).
+> **Phase 3 status:** ✅ Authentication shipped. Next: Phase 4 — RBAC & Permissions (targets v0.5.0).
+
+---
+
 ## [0.3.0] — 2026-04-24
 
 > **Phase 2 — Database Seeding**
@@ -201,7 +260,8 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
      Update these with each new release tag.
      ══════════════════════════════════════════════════════════════ -->
 
-[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.4.0
 [0.3.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.3.0
 [0.2.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.2.0
 [0.1.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.1.0

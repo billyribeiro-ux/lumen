@@ -1,7 +1,7 @@
 # Lumen Roadmap
 
 > **Last updated:** 2026-04-24
-> **Current version:** `v0.3.0`
+> **Current version:** `v0.4.0`
 > **Status legend:** ✅ Shipped · 🚧 In Progress · 📅 Planned · 🔮 Exploring
 
 Lumen is built using the **PE7 14-Phase Topological Dependency Chain** — each phase is a hard dependency of the next, never skipped, never shortcut.
@@ -25,10 +25,10 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 
 ## Current Milestone
 
-### 🚧 v0.4.0 — Authentication
-**Target:** Q2 2026
-**Phase:** 3 (Authentication)
-**Focus:** Better Auth wiring with passkeys, TOTP 2FA, OAuth (Google + GitHub), magic links. Sign-in, sign-up, account/security UI.
+### 🚧 v0.5.0 — RBAC & Permissions
+**Target:** Q3 2026
+**Phase:** 4 (RBAC)
+**Focus:** `can()`/`requirePermission()` helpers, route guards, UI gating, invite flow.
 
 ---
 
@@ -39,8 +39,8 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 | v0.1.0   | 0     | Foundation & Environment           | ✅ Shipped | 2026-04-24 |
 | v0.2.0   | 1     | Database Schema                    | ✅ Shipped | 2026-04-24 |
 | v0.3.0   | 2     | Database Seeding                   | ✅ Shipped | 2026-04-24 |
-| v0.4.0   | 3     | Authentication (Better Auth + Passkeys + 2FA) | 🚧 In Progress | Q2 2026 |
-| v0.5.0   | 4     | RBAC & Permissions                 | 📅 Planned | Q3 2026    |
+| v0.4.0   | 3     | Authentication (Better Auth + Passkeys + 2FA) | ✅ Shipped | 2026-04-24 |
+| v0.5.0   | 4     | RBAC & Permissions                 | 🚧 In Progress | Q3 2026 |
 | v0.6.0   | 5     | Validation & Security Layer        | 📅 Planned | Q3 2026    |
 | v0.7.0   | 6     | Core CRUD (Nodes, Links, Tags)     | 📅 Planned | Q3 2026    |
 | v0.8.0   | 7     | Email Service (Resend)             | 📅 Planned | Q3 2026    |
@@ -104,20 +104,10 @@ Reproducible local development data on top of the Phase 1 schema. Personas + RBA
 
 ---
 
-### 📅 Phase 3 — Authentication (`v0.4.0`)
+### ✅ Phase 3 — Authentication (`v0.4.0`)
+**Shipped 2026-04-24**
 
-Better Auth 1.6.x with passkeys, 2FA, and OAuth.
-
-- Email + password auth
-- Passkey (WebAuthn) registration and sign-in
-- TOTP 2FA
-- OAuth: Google, GitHub
-- Magic link sign-in
-- Session middleware in `hooks.server.ts`
-- Email verification flow
-- Password reset flow
-- Account settings UI (`/account/security`)
-- Sign-in, sign-up, forgot password, verify email routes
+Better Auth 1.6 wired with the Drizzle adapter. Email + password (Argon2id), WebAuthn passkeys, TOTP 2FA + backup codes, OAuth (Google + GitHub), and magic-link sign-in. Sessions persisted in Postgres; cookies prefixed `lumen.`, HttpOnly + SameSite=Lax + Secure-in-prod. See `src/lib/server/auth.ts` and `src/routes/(auth)/`.
 
 ---
 
