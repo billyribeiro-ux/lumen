@@ -39,7 +39,9 @@
 | 26 | 2026-04-24 | 0 | `ARCHITECTURE.md` | 51ed998 | docs: reconcile ARCHITECTURE/ROADMAP/VISION on AI tables, themes, fonts |
 | 27 | 2026-04-24 | 0 | `ROADMAP.md` | 51ed998 | (same commit as #26) |
 | 28 | 2026-04-24 | 0 | `docs/LUMEN_VISION.md` | 51ed998 | (same commit as #26) |
-| 29 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record VISION reconciliation in build log |
+| 29 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | a193009 | docs(log): record VISION reconciliation in build log |
+| 30 | 2026-04-24 | 0 | `docs/adr/005-validation-valibot.md` | 98df3a3 | docs(adr): ADR-005 validation Valibot over Zod/Arktype/TypeBox |
+| 31 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record ADR-005 in build log |
 
 ---
 
