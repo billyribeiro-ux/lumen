@@ -180,7 +180,43 @@
 | 19 | 2026-04-24 | 2 | `package.json` | d847993 | release(seed): v0.3.0 — Phase 2 Database Seeding |
 | 20 | 2026-04-24 | 2 | `CHANGELOG.md` | d847993 | (same commit as #19) |
 | 21 | 2026-04-24 | 2 | `ROADMAP.md` | d847993 | (same commit as #19) |
-| 22 | 2026-04-24 | 2 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record v0.3.0 release prep in build log |
+| 22 | 2026-04-24 | 2 | `docs/BUILD_LOG.md` | d847993 | docs(log): record v0.3.0 release prep in build log |
+
+---
+
+## Phase 3 — Authentication (In Progress)
+
+| # | Date | Phase | File | Commit | Subject |
+|---|---|---|---|---|---|
+| 1 | 2026-04-24 | 3 | `src/lib/server/auth.ts` | 92d796f | feat(auth): wire Better Auth with passkeys, TOTP 2FA, OAuth, magic links |
+| 2 | 2026-04-24 | 3 | `src/lib/server/auth-bridge.ts` | 92d796f | (same commit as #1) |
+| 3 | 2026-04-24 | 3 | `src/hooks.server.ts` | 92d796f | (same commit as #1) |
+| 4 | 2026-04-24 | 3 | `src/app.d.ts` | 92d796f | (same commit as #1) |
+| 5 | 2026-04-24 | 3 | `src/routes/api/auth/[...all]/+server.ts` | 92d796f | (same commit as #1) |
+| 6 | 2026-04-24 | 3 | `src/lib/auth-client.ts` | 92d796f | (same commit as #1) |
+| 7 | 2026-04-24 | 3 | `src/routes/(auth)/+layout.svelte` | 92d796f | (same commit as #1) |
+| 8 | 2026-04-24 | 3 | `src/routes/(auth)/sign-in/+page.server.ts` | 92d796f | (same commit as #1) |
+| 9 | 2026-04-24 | 3 | `src/routes/(auth)/sign-in/+page.svelte` | 92d796f | (same commit as #1) |
+| 10 | 2026-04-24 | 3 | `src/routes/(auth)/sign-up/+page.server.ts` | 92d796f | (same commit as #1) |
+| 11 | 2026-04-24 | 3 | `src/routes/(auth)/sign-up/+page.svelte` | 92d796f | (same commit as #1) |
+| 12 | 2026-04-24 | 3 | `src/routes/(auth)/forgot-password/+page.server.ts` | 92d796f | (same commit as #1) |
+| 13 | 2026-04-24 | 3 | `src/routes/(auth)/forgot-password/+page.svelte` | 92d796f | (same commit as #1) |
+| 14 | 2026-04-24 | 3 | `src/routes/(auth)/reset-password/+page.server.ts` | 92d796f | (same commit as #1) |
+| 15 | 2026-04-24 | 3 | `src/routes/(auth)/reset-password/+page.svelte` | 92d796f | (same commit as #1) |
+| 16 | 2026-04-24 | 3 | `src/routes/(auth)/verify-email/+page.svelte` | 92d796f | (same commit as #1) |
+| 17 | 2026-04-24 | 3 | `src/routes/account/security/+page.server.ts` | 92d796f | (same commit as #1) |
+| 18 | 2026-04-24 | 3 | `src/routes/account/security/+page.svelte` | 92d796f | (same commit as #1) |
+| 19 | 2026-04-24 | 3 | `src/lib/server/db/schema/auth.ts` | 92d796f | (same commit as #1) |
+| 20 | 2026-04-24 | 3 | `drizzle/0001_auth_plugin_tables.sql` | 92d796f | (same commit as #1) |
+| 21 | 2026-04-24 | 3 | `drizzle/meta/0001_snapshot.json` | 92d796f | (same commit as #1) |
+| 22 | 2026-04-24 | 3 | `drizzle/meta/_journal.json` | 92d796f | (same commit as #1) |
+| 23 | 2026-04-24 | 3 | `.env.example` | 92d796f | (same commit as #1) |
+| 24 | 2026-04-24 | 3 | `package.json` | 92d796f | (same commit as #1) |
+| 25 | 2026-04-24 | 3 | `pnpm-lock.yaml` | 92d796f | (same commit as #1) |
+| 26 | 2026-04-24 | 3 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): open Phase 3 section and record auth work |
+
+> Release prep for v0.4.0 (CHANGELOG / ROADMAP / package.json bump) lands
+> in the next commit alongside this log update.
 
 ---
 
@@ -191,6 +227,7 @@
 | v0.1.0 | 2026-04-24 | 0 | 9c8e992 | Phase 0: Foundation baseline — docs only, no code yet |
 | v0.2.0 | 2026-04-24 | 1 | _pending PR-merge_ | Phase 1: Database Schema — SvelteKit scaffold + 31-table Drizzle schema |
 | v0.3.0 | 2026-04-24 | 2 | _pending PR-merge_ | Phase 2: Database Seeding — personas, RBAC, billing catalog, sample content |
+| v0.4.0 | 2026-04-24 | 3 | _pending PR-merge_ | Phase 3: Authentication — Better Auth + passkeys + TOTP + OAuth + magic links |
 
 ---
 
