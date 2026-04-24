@@ -135,7 +135,11 @@
 | 70 | 2026-04-24 | 1 | `drizzle/0000_initial_schema.sql` | 5a7264d | feat(schema): generate initial_schema migration for 31-table baseline |
 | 71 | 2026-04-24 | 1 | `drizzle/meta/0000_snapshot.json` | 5a7264d | (same commit as #70) |
 | 72 | 2026-04-24 | 1 | `drizzle/meta/_journal.json` | 5a7264d | (same commit as #70) |
-| 73 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record initial migration in build log |
+| 73 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | d454d31 | docs(log): record initial migration in build log |
+| 74 | 2026-04-24 | 1 | `src/lib/server/db/index.ts` | e6d762e | feat(db): add Drizzle instance factory with HTTP + WebSocket variants |
+| 75 | 2026-04-24 | 1 | `package.json` | e6d762e | (same commit as #74) |
+| 76 | 2026-04-24 | 1 | `pnpm-lock.yaml` | e6d762e | (same commit as #74) |
+| 77 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record DB instance factory in build log |
 
 ---
 
