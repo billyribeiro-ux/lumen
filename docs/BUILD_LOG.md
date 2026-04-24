@@ -28,7 +28,10 @@
 | 15 | 2026-04-24 | 0 | `docs/adr/000-template.md` | 5abc248 | docs(adr): add ADR template based on Nygard format |
 | 16 | 2026-04-24 | 0 | `docs/adr/001-meta-framework-sveltekit.md` | 3a467bc | docs(adr): ADR-001 meta-framework SvelteKit 2 over Next/Nuxt/Remix |
 | 17 | 2026-04-24 | 0 | `docs/handoffs/2026-04-24-phase-0-handoff.md` | 4948457 | docs(handoff): add Phase 0 → Phase 18 handoff brief for Claude Code |
-| 18 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | _this commit_ | docs: initialize build log with current file inventory |
+| 18 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | 62cc428 | docs: initialize build log with current file inventory |
+| 19 | 2026-04-24 | 0 | `docs/handoffs/CLAUDE_CODE_PROMPT.md` | 2d0a15f | docs(handoff): add Claude Code entry prompt |
+| 20 | 2026-04-24 | 0 | `docs/adr/002-database-neon-postgres.md` | e9d3855 | docs(adr): ADR-002 database Neon Postgres over Supabase/D1/self-host |
+| 21 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record ADR-002 and CLAUDE_CODE_PROMPT in build log |
 
 ---
 
