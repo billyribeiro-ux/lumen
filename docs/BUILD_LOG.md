@@ -100,7 +100,11 @@
 | 35 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | 11cccde | docs(log): record commitlint install in build log |
 | 36 | 2026-04-24 | 1 | `.gitleaks.toml` | ffaa5c3 | build(ci): add gitleaks config and tolerant pre-commit hook |
 | 37 | 2026-04-24 | 1 | `lefthook.yml` | ffaa5c3 | (same commit as #36) |
-| 38 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record gitleaks config in build log |
+| 38 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | 139d1b7 | docs(log): record gitleaks config in build log |
+| 39 | 2026-04-24 | 1 | `svelte.config.js` | 9351606 | build(deploy): swap adapter-auto for adapter-vercel |
+| 40 | 2026-04-24 | 1 | `package.json` | 9351606 | (same commit as #39) |
+| 41 | 2026-04-24 | 1 | `pnpm-lock.yaml` | 9351606 | (same commit as #39) |
+| 42 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record Vercel adapter swap in build log |
 
 ---
 
