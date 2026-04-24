@@ -139,7 +139,9 @@
 | 74 | 2026-04-24 | 1 | `src/lib/server/db/index.ts` | e6d762e | feat(db): add Drizzle instance factory with HTTP + WebSocket variants |
 | 75 | 2026-04-24 | 1 | `package.json` | e6d762e | (same commit as #74) |
 | 76 | 2026-04-24 | 1 | `pnpm-lock.yaml` | e6d762e | (same commit as #74) |
-| 77 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record DB instance factory in build log |
+| 77 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | ec42de6 | docs(log): record DB instance factory in build log |
+| 78 | 2026-04-24 | 1 | `package.json` | 158a0a9 | build(db): wire Drizzle Kit scripts into pnpm |
+| 79 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record db:* scripts in build log |
 
 ---
 
