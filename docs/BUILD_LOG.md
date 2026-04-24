@@ -113,7 +113,25 @@
 | 48 | 2026-04-24 | 1 | `pnpm-lock.yaml` | 8fe14d6 | (same commit as #47) |
 | 49 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | 1153613 | docs(log): record Drizzle install in build log |
 | 50 | 2026-04-24 | 1 | `drizzle.config.ts` | d96c337 | build(db): add drizzle.config.ts pointing schema dir to src/lib/server/db/schema |
-| 51 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record drizzle.config in build log |
+| 51 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | 3a1b00f | docs(log): record drizzle.config in build log |
+| 52 | 2026-04-24 | 1 | `src/lib/server/db/schema/_columns.ts` | 0adec25 | feat(schema): author Drizzle schema for 31 tables across 8 domains |
+| 53 | 2026-04-24 | 1 | `src/lib/server/db/schema/auth.ts` | 0adec25 | (same commit as #52) |
+| 54 | 2026-04-24 | 1 | `src/lib/server/db/schema/organizations.ts` | 0adec25 | (same commit as #52) |
+| 55 | 2026-04-24 | 1 | `src/lib/server/db/schema/rbac.ts` | 0adec25 | (same commit as #52) |
+| 56 | 2026-04-24 | 1 | `src/lib/server/db/schema/nodes.ts` | 0adec25 | (same commit as #52) |
+| 57 | 2026-04-24 | 1 | `src/lib/server/db/schema/links.ts` | 0adec25 | (same commit as #52) |
+| 58 | 2026-04-24 | 1 | `src/lib/server/db/schema/tags.ts` | 0adec25 | (same commit as #52) |
+| 59 | 2026-04-24 | 1 | `src/lib/server/db/schema/decisions.ts` | 0adec25 | (same commit as #52) |
+| 60 | 2026-04-24 | 1 | `src/lib/server/db/schema/snippets.ts` | 0adec25 | (same commit as #52) |
+| 61 | 2026-04-24 | 1 | `src/lib/server/db/schema/dailies.ts` | 0adec25 | (same commit as #52) |
+| 62 | 2026-04-24 | 1 | `src/lib/server/db/schema/publications.ts` | 0adec25 | (same commit as #52) |
+| 63 | 2026-04-24 | 1 | `src/lib/server/db/schema/inbox.ts` | 0adec25 | (same commit as #52) |
+| 64 | 2026-04-24 | 1 | `src/lib/server/db/schema/ai.ts` | 0adec25 | (same commit as #52) |
+| 65 | 2026-04-24 | 1 | `src/lib/server/db/schema/billing.ts` | 0adec25 | (same commit as #52) |
+| 66 | 2026-04-24 | 1 | `src/lib/server/db/schema/audit.ts` | 0adec25 | (same commit as #52) |
+| 67 | 2026-04-24 | 1 | `src/lib/server/db/schema/webhooks.ts` | 0adec25 | (same commit as #52) |
+| 68 | 2026-04-24 | 1 | `src/lib/server/db/schema/index.ts` | 0adec25 | (same commit as #52) |
+| 69 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record full Drizzle schema in build log |
 
 ---
 
