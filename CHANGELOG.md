@@ -34,9 +34,36 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
 - ARCHITECTURE.md §8.4 expanded to include three self-hosted fonts (Inter, JetBrains Mono, Literata) and three themes in OKLCH (Obsidian default OLED, Parchment, Nord-PE7) wired through a `[data-theme]` attribute.
 - ROADMAP.md Phase 1 deliverables now enumerate the full 31-table target across 8 domains.
 
+#### Phase 1 — Application scaffold + data model (targets v0.2.0)
+- SvelteKit 2.58 + Svelte 5.55 scaffold (runes mode forced; minimal template) with TypeScript strict mode extended to `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`, `verbatimModuleSyntax`, `noImplicitOverride`, `noFallthroughCasesInSwitch`, `noPropertyAccessFromIndexSignature`.
+- Vercel adapter 6.3 (`@sveltejs/adapter-vercel`) swapped in for `adapter-auto`. Runtime `nodejs22.x`, default region `iad1`, AVIF + WebP image sizes.
+- Biome 2.4 configured with PE7 lint + format rules (2-space indent, 100-char width, single quotes, semicolons, trailing commas; `noExplicitAny=error`, `noConsole` scoped stricter inside `src/lib/server/`). Prettier retained solely for `*.svelte` formatting via `.prettierignore` exclusion.
+- lefthook hooks: pre-commit runs Biome auto-fix, Prettier on `*.svelte`, `svelte-check` (fail on warnings), gitleaks (soft-skipped locally when the binary is missing), and a guard that rejects commits introducing `package-lock.json` / `yarn.lock` / `bun.lockb`. commit-msg runs commitlint.
+- commitlint with `@commitlint/config-conventional` + the Lumen scope list from CONTRIBUTING.md.
+- gitleaks 8.x config (`.gitleaks.toml`) extending the default rule set with Lumen-specific patterns for Neon connection strings, Stripe sk/rk/pk keys, Anthropic Claude keys, Resend keys, Upstash Redis tokens, BETTER_AUTH_SECRET values, and Tauri updater Ed25519 private keys.
+- Svelte MCP server wired (`sv add mcp`) + Lumen-augmented `CLAUDE.md` encoding PE7 standards, forbidden UI patterns, and the build-log discipline rule.
+- Drizzle ORM 0.45 + drizzle-kit 0.31 + `@neondatabase/serverless` 1.1 + `ws` for Node transport.
+- `drizzle.config.ts` at repo root (snake_case, strict, verbose).
+- **31-table data model authored across 15 schema modules** in `src/lib/server/db/schema/`:
+  - Auth (4): `users`, `sessions`, `accounts`, `verification` (Better Auth shape).
+  - Organizations (3): `organizations`, `memberships`, `invitations`.
+  - RBAC (3): `roles`, `permissions`, `role_permissions`.
+  - Content (6): `nodes`, `node_content`, `node_versions`, `links`, `tags`, `node_tags`.
+  - Satellites (5): `decisions`, `snippets`, `dailies`, `publications`, `inbox_items`.
+  - AI co-pilot (2): `ai_conversations`, `ai_messages`.
+  - Billing (6): `products`, `prices`, `subscriptions`, `invoices`, `payment_methods`, `entitlements`.
+  - System (2): `audit_log`, `webhook_events`.
+  - Shared helpers: `_columns.ts` (`idColumn`, `createdAt`, `updatedAt`, `deletedAt`, `timestamps()`, `auditTimestamps()`).
+- Initial Drizzle migration (`drizzle/0000_initial_schema.sql`) — 507 lines, 13 enums, 31 tables, 68 indexes, 41 foreign-keys, 1 CHECK constraint (links no-self-link).
+- Drizzle instance factory (`src/lib/server/db/index.ts`) with `db` (HTTP, edge-safe) and `dbTransact(fn)` (WebSocket Pool, multi-statement transactions).
+- `pnpm db:*` scripts: `generate`, `migrate`, `push`, `studio`, `check`.
+- Database migration runbook (`docs/runbooks/database-migrations.md`) covering the zero-downtime rule, forward-only rollback policy, preview-branch workflow, and emergency procedures.
+- `CLAUDE.md` ships alongside the SvelteKit MCP for agentic development workflows.
+
 ### Changed
 
 - LUMEN_VISION.md "22 Tables" header corrected to "31 tables across 8 domains"; "Content (5 tables)" subheading corrected to "Content (6 tables)" to match the enumerated list.
+- `svelte.config.js` `csrf.checkOrigin` migrated to `csrf.trustedOrigins: []` per SvelteKit 2.58 deprecation.
 
 ### Deprecated
 - _None._
@@ -50,7 +77,8 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
 ### Security
 - _None._
 
-> **Phase 0 status:** Documentation foundation complete. No application code yet. Next: Phase 1 (Database Schema) → SvelteKit scaffold + Drizzle schema → release `v0.2.0`.
+> **Phase 0 status:** ✅ Documentation foundation complete.
+> **Phase 1 status:** 🚧 Near-complete — scaffold shipped, tooling shipped, 31-table schema + initial migration shipped. Release `v0.2.0` tagging next.
 
 ---
 
