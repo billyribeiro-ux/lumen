@@ -55,7 +55,32 @@
 | 42 | 2026-04-24 | 0 | `docs/adr/README.md` | 7ff3737 | docs(adr): add ADR index README with all 10 Phase 0 ADRs |
 | 43 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | 96c9367 | docs(log): record ADR README in build log |
 | 44 | 2026-04-24 | 0 | `CHANGELOG.md` | 47f287e | docs(adr): close Phase 0 with CHANGELOG entry for ADRs 001-010 + reconciliation |
-| 45 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record Phase 0 CHANGELOG closure in build log |
+| 45 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | de11143 | docs(log): record Phase 0 CHANGELOG closure in build log |
+
+---
+
+## Phase 1 — Database Schema (In Progress)
+
+| # | Date | Phase | File | Commit | Subject |
+|---|---|---|---|---|---|
+| 1 | 2026-04-24 | 1 | `package.json` | 3bfeffe | feat(scaffold): SvelteKit 2 + Svelte 5 + TypeScript strict baseline |
+| 2 | 2026-04-24 | 1 | `pnpm-lock.yaml` | 3bfeffe | (same commit as #1) |
+| 3 | 2026-04-24 | 1 | `tsconfig.json` | 3bfeffe | (same commit as #1) |
+| 4 | 2026-04-24 | 1 | `svelte.config.js` | 3bfeffe | (same commit as #1) |
+| 5 | 2026-04-24 | 1 | `vite.config.ts` | 3bfeffe | (same commit as #1) |
+| 6 | 2026-04-24 | 1 | `playwright.config.ts` | 3bfeffe | (same commit as #1) |
+| 7 | 2026-04-24 | 1 | `.npmrc` | 3bfeffe | (same commit as #1) |
+| 8 | 2026-04-24 | 1 | `.prettierrc` | 3bfeffe | (same commit as #1) |
+| 9 | 2026-04-24 | 1 | `.prettierignore` | 3bfeffe | (same commit as #1) |
+| 10 | 2026-04-24 | 1 | `.vscode/extensions.json` | 3bfeffe | (same commit as #1) |
+| 11 | 2026-04-24 | 1 | `src/app.html` | 3bfeffe | (same commit as #1) |
+| 12 | 2026-04-24 | 1 | `src/app.d.ts` | 3bfeffe | (same commit as #1) |
+| 13 | 2026-04-24 | 1 | `src/lib/index.ts` | 3bfeffe | (same commit as #1) |
+| 14 | 2026-04-24 | 1 | `src/routes/+layout.svelte` | 3bfeffe | (same commit as #1) |
+| 15 | 2026-04-24 | 1 | `src/routes/+page.svelte` | 3bfeffe | (same commit as #1) |
+| 16 | 2026-04-24 | 1 | `static/favicon.svg` | 3bfeffe | (same commit as #1) |
+| 17 | 2026-04-24 | 1 | `static/robots.txt` | 3bfeffe | (same commit as #1) |
+| 18 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): open Phase 1 section and record SvelteKit scaffold |
 
 ---
 
