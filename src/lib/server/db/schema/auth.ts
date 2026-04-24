@@ -6,7 +6,16 @@
 //
 // Tables: users, sessions, accounts, verification.
 
-import { boolean, index, pgTable, text, timestamp, uniqueIndex, uuid } from 'drizzle-orm/pg-core';
+import {
+  boolean,
+  index,
+  integer,
+  pgTable,
+  text,
+  timestamp,
+  uniqueIndex,
+  uuid,
+} from 'drizzle-orm/pg-core';
 import { auditTimestamps, idColumn } from './_columns';
 
 export const users = pgTable(
@@ -93,5 +102,53 @@ export const verification = pgTable(
   (table) => [
     index('verification_identifier_idx').on(table.identifier),
     index('verification_expires_at_idx').on(table.expiresAt),
+  ],
+);
+
+// Phase 3 — Better Auth plugin tables.
+//
+// `passkeys` is owned by @better-auth/passkey. Field names match the
+// plugin's expected schema verbatim so the Drizzle adapter can map
+// without overrides.
+
+export const passkeys = pgTable(
+  'passkeys',
+  {
+    id: idColumn(),
+    name: text('name'),
+    publicKey: text('public_key').notNull(),
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    credentialID: text('credential_id').notNull(),
+    counter: integer('counter').notNull(),
+    deviceType: text('device_type').notNull(),
+    backedUp: boolean('backed_up').notNull(),
+    transports: text('transports'),
+    aaguid: text('aaguid'),
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().defaultNow(),
+  },
+  (table) => [
+    index('passkeys_user_id_idx').on(table.userId),
+    index('passkeys_credential_id_idx').on(table.credentialID),
+  ],
+);
+
+// `two_factor` is owned by Better Auth's two-factor plugin (TOTP + backup codes).
+// secret is the encrypted TOTP secret; backupCodes is an encrypted comma-list.
+export const twoFactor = pgTable(
+  'two_factor',
+  {
+    id: idColumn(),
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    secret: text('secret').notNull(),
+    backupCodes: text('backup_codes').notNull(),
+    verified: boolean('verified').notNull().default(true),
+  },
+  (table) => [
+    index('two_factor_user_id_idx').on(table.userId),
+    index('two_factor_secret_idx').on(table.secret),
   ],
 );
