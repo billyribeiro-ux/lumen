@@ -104,7 +104,11 @@
 | 39 | 2026-04-24 | 1 | `svelte.config.js` | 9351606 | build(deploy): swap adapter-auto for adapter-vercel |
 | 40 | 2026-04-24 | 1 | `package.json` | 9351606 | (same commit as #39) |
 | 41 | 2026-04-24 | 1 | `pnpm-lock.yaml` | 9351606 | (same commit as #39) |
-| 42 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record Vercel adapter swap in build log |
+| 42 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | 8ae2590 | docs(log): record Vercel adapter swap in build log |
+| 43 | 2026-04-24 | 1 | `.mcp.json` | 61e850a | build(ci): add Svelte MCP server and Lumen-augmented CLAUDE.md |
+| 44 | 2026-04-24 | 1 | `CLAUDE.md` | 61e850a | (same commit as #43) |
+| 45 | 2026-04-24 | 1 | `commitlint.config.js` | 9107c72 | style(ci): format commitlint.config.js per Biome line-width |
+| 46 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record MCP install + commitlint format fix |
 
 ---
 
