@@ -337,3 +337,41 @@ Billy is direct and values speed + correctness. Don't ask permission for obvious
 ---
 
 *End of handoff.*
+
+---
+
+## ADDENDUM — BUILD LOG REQUIREMENT (ADDED 2026-04-24)
+
+**This supersedes any earlier omission.** The project maintains a strict chronological build log at `docs/BUILD_LOG.md`.
+
+### The Rule
+
+After every single `git commit`, you MUST:
+
+1. Open `docs/BUILD_LOG.md`.
+2. Append one row to the current phase section per file created, modified, or deleted in that commit.
+3. Use the short commit SHA (first 7 chars) in the commit column.
+4. Use the exact Conventional Commit subject line.
+5. Commit the updated `BUILD_LOG.md` in the NEXT commit (not the same commit — one log row per commit, and the log commit itself gets a row).
+
+### Format | # | Date | Phase | File | Commit | Subject |- `#` is the next integer in the current phase section.
+- `Date` is YYYY-MM-DD.
+- `Phase` is the numeric phase (0, 1, 2, etc.).
+- `File` is the path from repo root, wrapped in backticks.
+- `Commit` is the 7-char SHA in plain text (no backticks).
+- `Subject` is the full Conventional Commit subject line (type + scope + description).
+
+### Why This Exists
+
+If another handoff ever becomes necessary, the next executor (human or AI) must be able to reconstruct the project's exact build history by reading this one file. No relying on `git log` alone — the log captures both the file and the semantic intent in one place. Auditability, debuggability, and context-safety all compound from this single discipline.
+
+### When Phases Close
+
+When a phase completes (version bump + tag + release):
+1. Add a Milestone Tag row to the table.
+2. Start a new phase heading: `## Phase N — <Title>`.
+3. Reset the row numbering to 1 for the new phase.
+
+### When You Fail
+
+If you ever create a file and forget to log it, stop. Do not continue to the next file. Your next commit must ONLY be a `BUILD_LOG.md` update that reconciles reality with the log. The log is more important than velocity. A lost-but-logged file is recoverable; an unlogged phase is not.
