@@ -176,7 +176,11 @@
 | 15 | 2026-04-24 | 2 | `biome.json` | 1a65df5 | (same commit as #1) |
 | 16 | 2026-04-24 | 2 | `docs/BUILD_LOG.md` | 4603548 | docs(log): open Phase 2 section and record seed infrastructure |
 | 17 | 2026-04-24 | 2 | `docs/runbooks/database-seeding.md` | f32b155 | docs: add database seeding runbook |
-| 18 | 2026-04-24 | 2 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record seeding runbook in build log |
+| 18 | 2026-04-24 | 2 | `docs/BUILD_LOG.md` | fac988a | docs(log): record seeding runbook in build log |
+| 19 | 2026-04-24 | 2 | `package.json` | d847993 | release(seed): v0.3.0 — Phase 2 Database Seeding |
+| 20 | 2026-04-24 | 2 | `CHANGELOG.md` | d847993 | (same commit as #19) |
+| 21 | 2026-04-24 | 2 | `ROADMAP.md` | d847993 | (same commit as #19) |
+| 22 | 2026-04-24 | 2 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record v0.3.0 release prep in build log |
 
 ---
 
@@ -186,6 +190,7 @@
 |---|---|---|---|---|
 | v0.1.0 | 2026-04-24 | 0 | 9c8e992 | Phase 0: Foundation baseline — docs only, no code yet |
 | v0.2.0 | 2026-04-24 | 1 | _pending PR-merge_ | Phase 1: Database Schema — SvelteKit scaffold + 31-table Drizzle schema |
+| v0.3.0 | 2026-04-24 | 2 | _pending PR-merge_ | Phase 2: Database Seeding — personas, RBAC, billing catalog, sample content |
 
 ---
 
