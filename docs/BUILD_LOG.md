@@ -89,7 +89,11 @@
 | 24 | 2026-04-24 | 1 | `src/app.d.ts` | c38cc0e | (same commit as #19) |
 | 25 | 2026-04-24 | 1 | `svelte.config.js` | c38cc0e | (same commit as #19) |
 | 26 | 2026-04-24 | 1 | `vite.config.ts` | c38cc0e | (same commit as #19) |
-| 27 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record Biome install in build log |
+| 27 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | e299ce6 | docs(log): record Biome install in build log |
+| 28 | 2026-04-24 | 1 | `lefthook.yml` | 603eb35 | build(ci): add lefthook with PE7 pre-commit and commit-msg hooks |
+| 29 | 2026-04-24 | 1 | `package.json` | 603eb35 | (same commit as #28) |
+| 30 | 2026-04-24 | 1 | `pnpm-lock.yaml` | 603eb35 | (same commit as #28) |
+| 31 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record lefthook install in build log |
 
 ---
 
