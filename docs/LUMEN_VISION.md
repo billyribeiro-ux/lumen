@@ -279,7 +279,7 @@ Sync engine lives in Rust (`src-tauri/src/sync/`). Typed IPC surface to the web 
 
 ---
 
-## Data Model Summary (22 Tables)
+## Data Model Summary (31 tables across 8 domains)
 
 Full schema lives in `src/lib/server/db/schema/`. See `ARCHITECTURE.md` §4 for detail. Tables grouped by domain:
 
@@ -292,7 +292,7 @@ Full schema lives in `src/lib/server/db/schema/`. See `ARCHITECTURE.md` §4 for 
 ### RBAC (3 tables)
 `roles`, `permissions`, `role_permissions`
 
-### Content (5 tables)
+### Content (6 tables)
 `nodes`, `node_content`, `node_versions`, `links`, `tags`, `node_tags`
 
 ### Satellite Type Tables (5 tables)
