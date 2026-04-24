@@ -1,7 +1,7 @@
 # Lumen Roadmap
 
 > **Last updated:** 2026-04-24
-> **Current version:** `v0.1.0`
+> **Current version:** `v0.2.0`
 > **Status legend:** ✅ Shipped · 🚧 In Progress · 📅 Planned · 🔮 Exploring
 
 Lumen is built using the **PE7 14-Phase Topological Dependency Chain** — each phase is a hard dependency of the next, never skipped, never shortcut.
@@ -25,10 +25,10 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 
 ## Current Milestone
 
-### 🚧 v0.2.0 — Database Schema Foundation
+### 🚧 v0.3.0 — Database Seeding
 **Target:** Q2 2026
-**Phase:** 1 (Schema Design)
-**Focus:** Drizzle schema for Nodes, Links, Users, Projects, and auth scaffolding.
+**Phase:** 2 (Seeding)
+**Focus:** Reproducible dev data — personas across tiers + roles, sample projects, nodes, links, tags, snippets.
 
 ---
 
@@ -37,8 +37,8 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 | Version  | Phase | Milestone                          | Status    | Target     |
 | -------- | ----- | ---------------------------------- | --------- | ---------- |
 | v0.1.0   | 0     | Foundation & Environment           | ✅ Shipped | 2026-04-24 |
-| v0.2.0   | 1     | Database Schema                    | 🚧 In Progress | Q2 2026 |
-| v0.3.0   | 2     | Database Seeding                   | 📅 Planned | Q2 2026    |
+| v0.2.0   | 1     | Database Schema                    | ✅ Shipped | 2026-04-24 |
+| v0.3.0   | 2     | Database Seeding                   | 🚧 In Progress | Q2 2026 |
 | v0.4.0   | 3     | Authentication (Better Auth + Passkeys + 2FA) | 📅 Planned | Q2 2026 |
 | v0.5.0   | 4     | RBAC & Permissions                 | 📅 Planned | Q3 2026    |
 | v0.6.0   | 5     | Validation & Security Layer        | 📅 Planned | Q3 2026    |
@@ -75,9 +75,10 @@ Baseline documentation, repository setup, and governance.
 
 ---
 
-### 🚧 Phase 1 — Database Schema (`v0.2.0`)
+### ✅ Phase 1 — Database Schema (`v0.2.0`)
+**Shipped 2026-04-24**
 
-Design and implement the foundational Drizzle schema. **Target: 22 tables across 8 domains** as specified in `docs/LUMEN_VISION.md`.
+Foundational application scaffold + 31-table Drizzle schema across 8 domains per `docs/LUMEN_VISION.md`. Authored in `src/lib/server/db/schema/`; initial migration at `drizzle/0000_initial_schema.sql`.
 
 - `sv create` SvelteKit scaffold with TypeScript strict
 - Vercel adapter configuration

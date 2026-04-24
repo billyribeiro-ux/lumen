@@ -10,6 +10,32 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
 ## [Unreleased]
 
 ### Added
+- _Features in progress for the next release go here._
+
+### Changed
+- _Modifications to existing functionality._
+
+### Deprecated
+- _Features scheduled for removal._
+
+### Removed
+- _Features removed in this release._
+
+### Fixed
+- _Bug fixes._
+
+### Security
+- _Vulnerability fixes and hardening._
+
+---
+
+## [0.2.0] — 2026-04-24
+
+> **Phase 1 — Database Schema**
+> Application code begins. SvelteKit scaffolded with PE7 strict tooling;
+> 31-table Drizzle schema authored; initial migration generated.
+
+### Added
 
 #### Phase 0 closure — Architecture Decision Records
 - `docs/adr/002-database-neon-postgres.md` — Neon Postgres over Supabase, Cloudflare D1, and self-hosted Postgres.
@@ -77,8 +103,8 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
 ### Security
 - _None._
 
-> **Phase 0 status:** ✅ Documentation foundation complete.
-> **Phase 1 status:** 🚧 Near-complete — scaffold shipped, tooling shipped, 31-table schema + initial migration shipped. Release `v0.2.0` tagging next.
+> **Phase 0 status:** ✅ Documentation foundation complete (shipped with `v0.2.0` as part of this Phase 1 release).
+> **Phase 1 status:** ✅ Database schema foundation shipped. Next: Phase 2 — Database Seeding (targets `v0.3.0`).
 
 ---
 
@@ -111,5 +137,6 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
      Update these with each new release tag.
      ══════════════════════════════════════════════════════════════ -->
 
-[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.2.0
 [0.1.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.1.0
