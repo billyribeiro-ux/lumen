@@ -4,7 +4,7 @@ import { defineConfig } from 'drizzle-kit';
 // DATABASE_URL is required for migrate / push / studio. generate works
 // without a connection (schema-only) so initial scaffolding can proceed
 // before any Neon project exists.
-const databaseUrl = process.env.DATABASE_URL;
+const databaseUrl = process.env['DATABASE_URL'];
 
 export default defineConfig({
   dialect: 'postgresql',

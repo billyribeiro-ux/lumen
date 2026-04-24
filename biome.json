@@ -63,7 +63,7 @@
       },
       "complexity": {
         "noUselessTypeConstraint": "error",
-        "useLiteralKeys": "error"
+        "useLiteralKeys": "off"
       }
     }
   },

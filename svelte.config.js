@@ -30,6 +30,23 @@ const config = {
     serviceWorker: {
       register: false,
     },
+    typescript: {
+      // Extend the SvelteKit-generated tsconfig so svelte-check covers
+      // our seed scripts (`scripts/**`) too. Without this, the scripts
+      // dir is silently excluded and bugs slip past `pnpm check`.
+      config: (config) => {
+        const existing = Array.isArray(config.include) ? config.include : [];
+        return {
+          ...config,
+          include: [
+            ...existing,
+            '../scripts/**/*.ts',
+            '../scripts/**/*.js',
+            '../drizzle.config.ts',
+          ],
+        };
+      },
+    },
   },
 };
 
