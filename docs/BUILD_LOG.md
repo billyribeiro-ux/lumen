@@ -49,7 +49,9 @@
 | 36 | 2026-04-24 | 0 | `docs/adr/008-desktop-tauri-2.md` | b1658d2 | docs(adr): ADR-008 desktop Tauri 2 over Electron/Neutralino/native |
 | 37 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | fc922af | docs(log): record ADR-008 in build log |
 | 38 | 2026-04-24 | 0 | `docs/adr/009-package-manager-pnpm.md` | 18560ed | docs(adr): ADR-009 package manager pnpm exclusive over npm/yarn/bun |
-| 39 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record ADR-009 in build log |
+| 39 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | b383edc | docs(log): record ADR-009 in build log |
+| 40 | 2026-04-24 | 0 | `docs/adr/010-lint-format-biome.md` | d4cb7a8 | docs(adr): ADR-010 lint+format Biome over ESLint+Prettier |
+| 41 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record ADR-010 in build log |
 
 ---
 
