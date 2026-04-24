@@ -213,10 +213,26 @@
 | 23 | 2026-04-24 | 3 | `.env.example` | 92d796f | (same commit as #1) |
 | 24 | 2026-04-24 | 3 | `package.json` | 92d796f | (same commit as #1) |
 | 25 | 2026-04-24 | 3 | `pnpm-lock.yaml` | 92d796f | (same commit as #1) |
-| 26 | 2026-04-24 | 3 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): open Phase 3 section and record auth work |
+| 26 | 2026-04-24 | 3 | `docs/BUILD_LOG.md` | 49e911c | docs(log): open Phase 3 section and record auth work |
 
-> Release prep for v0.4.0 (CHANGELOG / ROADMAP / package.json bump) lands
-> in the next commit alongside this log update.
+---
+
+## Phase 4 — RBAC & Permissions (Shipped 2026-04-24)
+
+| # | Date | Phase | File | Commit | Subject |
+|---|---|---|---|---|---|
+| 1 | 2026-04-24 | 4 | `src/lib/server/rbac.ts` | a230ed0 | feat(rbac): role-based access control + invite flow |
+| 2 | 2026-04-24 | 4 | `src/lib/server/auth-helpers.ts` | a230ed0 | (same commit as #1) |
+| 3 | 2026-04-24 | 4 | `src/lib/server/invitations.ts` | a230ed0 | (same commit as #1) |
+| 4 | 2026-04-24 | 4 | `src/hooks.server.ts` | a230ed0 | (same commit as #1) |
+| 5 | 2026-04-24 | 4 | `src/routes/account/team/+page.server.ts` | a230ed0 | (same commit as #1) |
+| 6 | 2026-04-24 | 4 | `src/routes/account/team/+page.svelte` | a230ed0 | (same commit as #1) |
+| 7 | 2026-04-24 | 4 | `src/routes/invite/[token]/+page.server.ts` | a230ed0 | (same commit as #1) |
+| 8 | 2026-04-24 | 4 | `src/routes/invite/[token]/+page.svelte` | a230ed0 | (same commit as #1) |
+| 9 | 2026-04-24 | 4 | `package.json` | _next commit_ | release(rbac): v0.5.0 |
+| 10 | 2026-04-24 | 4 | `CHANGELOG.md` | _next commit_ | (same commit as #9) |
+| 11 | 2026-04-24 | 4 | `ROADMAP.md` | _next commit_ | (same commit as #9) |
+| 12 | 2026-04-24 | 4 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record Phase 4 + v0.5.0 release prep |
 
 ---
 
@@ -228,6 +244,7 @@
 | v0.2.0 | 2026-04-24 | 1 | _pending PR-merge_ | Phase 1: Database Schema — SvelteKit scaffold + 31-table Drizzle schema |
 | v0.3.0 | 2026-04-24 | 2 | _pending PR-merge_ | Phase 2: Database Seeding — personas, RBAC, billing catalog, sample content |
 | v0.4.0 | 2026-04-24 | 3 | _pending PR-merge_ | Phase 3: Authentication — Better Auth + passkeys + TOTP + OAuth + magic links |
+| v0.5.0 | 2026-04-24 | 4 | _pending PR-merge_ | Phase 4: RBAC & Permissions — can()/requirePermission() + invite flow |
 
 ---
 
