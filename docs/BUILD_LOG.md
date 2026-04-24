@@ -131,7 +131,11 @@
 | 66 | 2026-04-24 | 1 | `src/lib/server/db/schema/audit.ts` | 0adec25 | (same commit as #52) |
 | 67 | 2026-04-24 | 1 | `src/lib/server/db/schema/webhooks.ts` | 0adec25 | (same commit as #52) |
 | 68 | 2026-04-24 | 1 | `src/lib/server/db/schema/index.ts` | 0adec25 | (same commit as #52) |
-| 69 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record full Drizzle schema in build log |
+| 69 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | 736bde2 | docs(log): record full Drizzle schema in build log |
+| 70 | 2026-04-24 | 1 | `drizzle/0000_initial_schema.sql` | 5a7264d | feat(schema): generate initial_schema migration for 31-table baseline |
+| 71 | 2026-04-24 | 1 | `drizzle/meta/0000_snapshot.json` | 5a7264d | (same commit as #70) |
+| 72 | 2026-04-24 | 1 | `drizzle/meta/_journal.json` | 5a7264d | (same commit as #70) |
+| 73 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record initial migration in build log |
 
 ---
 
