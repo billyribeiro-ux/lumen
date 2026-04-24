@@ -45,7 +45,9 @@
 | 32 | 2026-04-24 | 0 | `docs/adr/006-dynamic-pricing-from-database.md` | b05e389 | docs(adr): ADR-006 dynamic pricing from DB, Stripe is a processor |
 | 33 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | 1bae465 | docs(log): record ADR-006 in build log |
 | 34 | 2026-04-24 | 0 | `docs/adr/007-ui-primitives-bits-ui.md` | be700f1 | docs(adr): ADR-007 UI primitives Bits UI over shadcn/Skeleton/Melt/custom |
-| 35 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record ADR-007 in build log |
+| 35 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | 8d8b47c | docs(log): record ADR-007 in build log |
+| 36 | 2026-04-24 | 0 | `docs/adr/008-desktop-tauri-2.md` | b1658d2 | docs(adr): ADR-008 desktop Tauri 2 over Electron/Neutralino/native |
+| 37 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record ADR-008 in build log |
 
 ---
 
