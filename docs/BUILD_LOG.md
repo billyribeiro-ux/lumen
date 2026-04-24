@@ -33,7 +33,9 @@
 | 20 | 2026-04-24 | 0 | `docs/adr/002-database-neon-postgres.md` | e9d3855 | docs(adr): ADR-002 database Neon Postgres over Supabase/D1/self-host |
 | 21 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | 6154e68 | docs(log): record ADR-002 and CLAUDE_CODE_PROMPT in build log |
 | 22 | 2026-04-24 | 0 | `docs/adr/003-orm-drizzle.md` | 8cdb1b9 | docs(adr): ADR-003 ORM Drizzle over Prisma/Kysely/raw SQL |
-| 23 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record ADR-003 in build log |
+| 23 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | f59e26f | docs(log): record ADR-003 in build log |
+| 24 | 2026-04-24 | 0 | `docs/adr/004-authentication-better-auth.md` | ea64780 | docs(adr): ADR-004 authentication Better Auth over Lucia/Auth.js/Clerk |
+| 25 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record ADR-004 in build log |
 
 ---
 
