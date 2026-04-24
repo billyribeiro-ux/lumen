@@ -108,7 +108,10 @@
 | 43 | 2026-04-24 | 1 | `.mcp.json` | 61e850a | build(ci): add Svelte MCP server and Lumen-augmented CLAUDE.md |
 | 44 | 2026-04-24 | 1 | `CLAUDE.md` | 61e850a | (same commit as #43) |
 | 45 | 2026-04-24 | 1 | `commitlint.config.js` | 9107c72 | style(ci): format commitlint.config.js per Biome line-width |
-| 46 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record MCP install + commitlint format fix |
+| 46 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | cd9f4eb | docs(log): record MCP install + commitlint format fix |
+| 47 | 2026-04-24 | 1 | `package.json` | 8fe14d6 | build(db): install Drizzle ORM, drizzle-kit, and Neon serverless driver |
+| 48 | 2026-04-24 | 1 | `pnpm-lock.yaml` | 8fe14d6 | (same commit as #47) |
+| 49 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record Drizzle install in build log |
 
 ---
 
