@@ -35,7 +35,11 @@
 | 22 | 2026-04-24 | 0 | `docs/adr/003-orm-drizzle.md` | 8cdb1b9 | docs(adr): ADR-003 ORM Drizzle over Prisma/Kysely/raw SQL |
 | 23 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | f59e26f | docs(log): record ADR-003 in build log |
 | 24 | 2026-04-24 | 0 | `docs/adr/004-authentication-better-auth.md` | ea64780 | docs(adr): ADR-004 authentication Better Auth over Lucia/Auth.js/Clerk |
-| 25 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record ADR-004 in build log |
+| 25 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | 37bc6e2 | docs(log): record ADR-004 in build log |
+| 26 | 2026-04-24 | 0 | `ARCHITECTURE.md` | 51ed998 | docs: reconcile ARCHITECTURE/ROADMAP/VISION on AI tables, themes, fonts |
+| 27 | 2026-04-24 | 0 | `ROADMAP.md` | 51ed998 | (same commit as #26) |
+| 28 | 2026-04-24 | 0 | `docs/LUMEN_VISION.md` | 51ed998 | (same commit as #26) |
+| 29 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record VISION reconciliation in build log |
 
 ---
 
