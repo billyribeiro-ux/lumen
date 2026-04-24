@@ -51,7 +51,9 @@
 | 38 | 2026-04-24 | 0 | `docs/adr/009-package-manager-pnpm.md` | 18560ed | docs(adr): ADR-009 package manager pnpm exclusive over npm/yarn/bun |
 | 39 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | b383edc | docs(log): record ADR-009 in build log |
 | 40 | 2026-04-24 | 0 | `docs/adr/010-lint-format-biome.md` | d4cb7a8 | docs(adr): ADR-010 lint+format Biome over ESLint+Prettier |
-| 41 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record ADR-010 in build log |
+| 41 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | 3e2b84a | docs(log): record ADR-010 in build log |
+| 42 | 2026-04-24 | 0 | `docs/adr/README.md` | 7ff3737 | docs(adr): add ADR index README with all 10 Phase 0 ADRs |
+| 43 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record ADR README in build log |
 
 ---
 
