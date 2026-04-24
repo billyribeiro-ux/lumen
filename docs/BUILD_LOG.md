@@ -143,7 +143,9 @@
 | 78 | 2026-04-24 | 1 | `package.json` | 158a0a9 | build(db): wire Drizzle Kit scripts into pnpm |
 | 79 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | 4d3222f | docs(log): record db:* scripts in build log |
 | 80 | 2026-04-24 | 1 | `svelte.config.js` | 78094f6 | build(deploy): migrate csrf.checkOrigin -> csrf.trustedOrigins |
-| 81 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record csrf config migration in build log |
+| 81 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | cb1508a | docs(log): record csrf config migration in build log |
+| 82 | 2026-04-24 | 1 | `docs/runbooks/database-migrations.md` | 79499ad | docs: add database migration runbook (docs/runbooks/database-migrations.md) |
+| 83 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record migration runbook in build log |
 
 ---
 
