@@ -1,7 +1,7 @@
 # Lumen Roadmap
 
 > **Last updated:** 2026-04-24
-> **Current version:** `v0.2.0`
+> **Current version:** `v0.3.0`
 > **Status legend:** ✅ Shipped · 🚧 In Progress · 📅 Planned · 🔮 Exploring
 
 Lumen is built using the **PE7 14-Phase Topological Dependency Chain** — each phase is a hard dependency of the next, never skipped, never shortcut.
@@ -25,10 +25,10 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 
 ## Current Milestone
 
-### 🚧 v0.3.0 — Database Seeding
+### 🚧 v0.4.0 — Authentication
 **Target:** Q2 2026
-**Phase:** 2 (Seeding)
-**Focus:** Reproducible dev data — personas across tiers + roles, sample projects, nodes, links, tags, snippets.
+**Phase:** 3 (Authentication)
+**Focus:** Better Auth wiring with passkeys, TOTP 2FA, OAuth (Google + GitHub), magic links. Sign-in, sign-up, account/security UI.
 
 ---
 
@@ -38,8 +38,8 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 | -------- | ----- | ---------------------------------- | --------- | ---------- |
 | v0.1.0   | 0     | Foundation & Environment           | ✅ Shipped | 2026-04-24 |
 | v0.2.0   | 1     | Database Schema                    | ✅ Shipped | 2026-04-24 |
-| v0.3.0   | 2     | Database Seeding                   | 🚧 In Progress | Q2 2026 |
-| v0.4.0   | 3     | Authentication (Better Auth + Passkeys + 2FA) | 📅 Planned | Q2 2026 |
+| v0.3.0   | 2     | Database Seeding                   | ✅ Shipped | 2026-04-24 |
+| v0.4.0   | 3     | Authentication (Better Auth + Passkeys + 2FA) | 🚧 In Progress | Q2 2026 |
 | v0.5.0   | 4     | RBAC & Permissions                 | 📅 Planned | Q3 2026    |
 | v0.6.0   | 5     | Validation & Security Layer        | 📅 Planned | Q3 2026    |
 | v0.7.0   | 6     | Core CRUD (Nodes, Links, Tags)     | 📅 Planned | Q3 2026    |
@@ -97,16 +97,10 @@ Foundational application scaffold + 31-table Drizzle schema across 8 domains per
 
 ---
 
-### 📅 Phase 2 — Database Seeding (`v0.3.0`)
+### ✅ Phase 2 — Database Seeding (`v0.3.0`)
+**Shipped 2026-04-24**
 
-Reproducible local development data.
-
-- `drizzle/seed.ts` entry point
-- Dev persona generator (15 credentialed test users across tiers + roles)
-- Sample projects, nodes, links, tags, snippets
-- Seed data for all node types (note, task, decision, spec, snippet, person, daily)
-- `pnpm db:seed` and `pnpm db:reset` scripts
-- Seed data isolation from production (env-guarded)
+Reproducible local development data on top of the Phase 1 schema. Personas + RBAC + billing catalog + sample content. See `docs/runbooks/database-seeding.md`.
 
 ---
 

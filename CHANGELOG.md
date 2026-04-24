@@ -29,6 +29,70 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
 
 ---
 
+## [0.3.0] — 2026-04-24
+
+> **Phase 2 — Database Seeding**
+> Reproducible dev data on top of the Phase 1 schema.
+
+### Added
+
+- `scripts/seed/` — full database seed authored as TypeScript scripts
+  driven by `tsx`. Idempotent on every run; aborts on any production
+  signal via the three-guard model (`NODE_ENV` + `ALLOW_DESTRUCTIVE_DB_OPS`
+  + hostname pattern).
+- **3 organizations** (`Lumen Labs` studio / `Indie Studio` pro / `Free Hacker` free).
+- **15 user personas** across owner / admin / editor / viewer roles
+  including 5 trial users with their own one-person workspaces.
+  Default password `LumenDev2026!` hashed with Argon2id (OWASP 2024
+  parameters) — sign-in becomes functional once Phase 3 wires Better
+  Auth.
+- **4 RBAC roles** (owner / admin / editor / viewer) and **16 permission
+  keys** wired into the default role-permission matrix (e.g. `node.read`,
+  `node.publish`, `org.invite`, `billing.manage`, `ai.chat`).
+- **Billing catalog**: 3 products (free / pro / studio) and 4 prices
+  (pro monthly + annual, studio monthly + annual). Stripe IDs left null
+  until `pnpm stripe:sync` (Phase 8).
+- **Sample content**: ~15 nodes spanning every node type, 11 tags, daily
+  notes for org owners across the past 3 days, inbox items for Lumen
+  Labs users, 3 typed inter-node links, 6 tag assignments. Decision
+  and snippet satellite tables populated.
+- **Tier-correct entitlements** for every user (studio / pro / free /
+  pro-trial-with-`trial_ends_at`).
+- `pnpm db:seed`, `pnpm db:wipe`, `pnpm db:reset` scripts.
+- `docs/runbooks/database-seeding.md` — runbook covering idempotency,
+  preview-branch usage, fixture extension, and production safety.
+- `@node-rs/argon2` (Argon2id hashing, OWASP 2024 params) and `tsx` +
+  `@types/node` added as dev dependencies.
+- `kit.typescript.config` hook in `svelte.config.js` so `pnpm check`
+  covers `scripts/**` and `drizzle.config.ts`.
+
+### Changed
+
+- `biome.json` — `complexity/useLiteralKeys` disabled because it
+  conflicted with TypeScript's `noPropertyAccessFromIndexSignature`
+  rule on `process.env.*` access. We choose the tighter guarantee
+  from TypeScript over Biome's stylistic preference.
+
+### Deprecated
+- _None._
+
+### Removed
+- _None._
+
+### Fixed
+- _None._
+
+### Security
+- All seed users carry an Argon2id-hashed credential account; the
+  default password is published deliberately for dev convenience and
+  will refuse to insert against any production-shaped DB connection
+  (see `scripts/seed/guard.ts`).
+
+> **Phase 1 status:** ✅ Database schema shipped (v0.2.0).
+> **Phase 2 status:** ✅ Database seeding shipped. Next: Phase 3 — Authentication (targets v0.4.0).
+
+---
+
 ## [0.2.0] — 2026-04-24
 
 > **Phase 1 — Database Schema**
@@ -137,6 +201,7 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
      Update these with each new release tag.
      ══════════════════════════════════════════════════════════════ -->
 
-[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.3.0
 [0.2.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.2.0
 [0.1.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.1.0
