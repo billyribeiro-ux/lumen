@@ -29,6 +29,45 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
 
 ---
 
+## [0.5.0] — 2026-04-24
+
+> **Phase 4 — RBAC & Permissions**
+> Server-authoritative role-based access control + invite flow.
+
+### Added
+
+- `src/lib/server/rbac.ts` — `can(ctx, key)`, `requirePermission(ctx, key)`,
+  `getRoleForOrg`, `permissionsForOrg`, `outranks` helpers. Single SQL
+  query per check; owner role short-circuits.
+- `src/lib/server/auth-helpers.ts` — `requireUser`, `requireMember`,
+  `requireOrgRole`, `requirePermissionFor` for use in `+page.server.ts`
+  and `+server.ts` files. All throw SvelteKit's `error()` / `redirect()`.
+- `src/lib/server/invitations.ts` — `issueInvitation()` (192-bit
+  url-safe base64 token, 7-day TTL, revokes prior pending) +
+  `acceptInvitation()` (atomic membership-insert + invite-stamp under
+  `dbTransact`).
+- Anonymous route guard in `src/hooks.server.ts` — public allowlist
+  (auth routes, `/`, `/pricing`, `/about`, `/p/*`, `/invite/*`); all
+  other routes redirect to `/sign-in?next=<path>`.
+- `/account/team` — member list, org switcher (defaulting to the user's
+  owner-org), pending invites, invite form, role badges, remove-member
+  action with last-owner guard.
+- `/invite/[token]` — six-state accept page (not-found / expired /
+  revoked / accepted / pending-anon / pending-wrong-account / pending).
+  Anonymous users redirect to sign-in with the invite URL preserved.
+
+### Notes
+
+- Default permission matrix from the Phase 2 seed governs roles. Owner
+  always wins; admin holds org-management + billing-management; editor
+  holds node CRUD + AI; viewer holds `node.read` only.
+- Email delivery for invitations logs to stderr in dev. Phase 7 wires
+  Resend with a Svelte-rendered template.
+
+> **Phase 4 status:** ✅ shipped. Next: Phase 5 — Validation & Security.
+
+---
+
 ## [0.4.0] — 2026-04-24
 
 > **Phase 3 — Authentication**
@@ -260,7 +299,8 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
      Update these with each new release tag.
      ══════════════════════════════════════════════════════════════ -->
 
-[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.5.0
 [0.4.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.4.0
 [0.3.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.3.0
 [0.2.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.2.0
