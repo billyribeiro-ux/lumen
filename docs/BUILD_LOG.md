@@ -41,7 +41,9 @@
 | 28 | 2026-04-24 | 0 | `docs/LUMEN_VISION.md` | 51ed998 | (same commit as #26) |
 | 29 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | a193009 | docs(log): record VISION reconciliation in build log |
 | 30 | 2026-04-24 | 0 | `docs/adr/005-validation-valibot.md` | 98df3a3 | docs(adr): ADR-005 validation Valibot over Zod/Arktype/TypeBox |
-| 31 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record ADR-005 in build log |
+| 31 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | 501f7d3 | docs(log): record ADR-005 in build log |
+| 32 | 2026-04-24 | 0 | `docs/adr/006-dynamic-pricing-from-database.md` | b05e389 | docs(adr): ADR-006 dynamic pricing from DB, Stripe is a processor |
+| 33 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record ADR-006 in build log |
 
 ---
 
