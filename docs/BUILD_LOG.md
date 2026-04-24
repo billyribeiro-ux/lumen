@@ -111,7 +111,9 @@
 | 46 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | cd9f4eb | docs(log): record MCP install + commitlint format fix |
 | 47 | 2026-04-24 | 1 | `package.json` | 8fe14d6 | build(db): install Drizzle ORM, drizzle-kit, and Neon serverless driver |
 | 48 | 2026-04-24 | 1 | `pnpm-lock.yaml` | 8fe14d6 | (same commit as #47) |
-| 49 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record Drizzle install in build log |
+| 49 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | 1153613 | docs(log): record Drizzle install in build log |
+| 50 | 2026-04-24 | 1 | `drizzle.config.ts` | d96c337 | build(db): add drizzle.config.ts pointing schema dir to src/lib/server/db/schema |
+| 51 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record drizzle.config in build log |
 
 ---
 
