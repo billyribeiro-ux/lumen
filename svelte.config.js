@@ -21,7 +21,11 @@ const config = {
       },
     }),
     csrf: {
-      checkOrigin: true,
+      // `trustedOrigins` replaces the deprecated `checkOrigin` option.
+      // Empty list = default origin check is active (request Origin must
+      // match the host). Add staging / preview origins here when those
+      // domains are configured.
+      trustedOrigins: [],
     },
     serviceWorker: {
       register: false,
