@@ -147,7 +147,11 @@
 | 82 | 2026-04-24 | 1 | `docs/runbooks/database-migrations.md` | 79499ad | docs: add database migration runbook (docs/runbooks/database-migrations.md) |
 | 83 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | 9336216 | docs(log): record migration runbook in build log |
 | 84 | 2026-04-24 | 1 | `CHANGELOG.md` | 0126c0e | docs: extend CHANGELOG Unreleased with Phase 1 entries |
-| 85 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record CHANGELOG Phase 1 entries in build log |
+| 85 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | 1caa472 | docs(log): record CHANGELOG Phase 1 entries in build log |
+| 86 | 2026-04-24 | 1 | `package.json` | e3a29d8 | release(schema): v0.2.0 — Phase 1 Database Schema |
+| 87 | 2026-04-24 | 1 | `CHANGELOG.md` | e3a29d8 | (same commit as #86) |
+| 88 | 2026-04-24 | 1 | `ROADMAP.md` | e3a29d8 | (same commit as #86) |
+| 89 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record v0.2.0 release prep in build log |
 
 ---
 
@@ -156,6 +160,7 @@
 | Tag | Date | Phase | Commit | Description |
 |---|---|---|---|---|
 | v0.1.0 | 2026-04-24 | 0 | 9c8e992 | Phase 0: Foundation baseline — docs only, no code yet |
+| v0.2.0 | 2026-04-24 | 1 | _pending PR-merge_ | Phase 1: Database Schema — SvelteKit scaffold + 31-table Drizzle schema |
 
 ---
 
