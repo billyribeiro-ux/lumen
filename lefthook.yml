@@ -26,9 +26,16 @@ pre-commit:
 
     gitleaks:
       tags: security
-      # Requires gitleaks installed via Homebrew (brew install gitleaks) or
-      # available on PATH. Hook is skipped if the binary is not present.
-      run: gitleaks protect --staged --redact --no-banner --config .gitleaks.toml
+      # Requires gitleaks (brew install gitleaks). If absent, the hook
+      # prints a one-line warning and exits 0 so local commits still flow;
+      # CI installs gitleaks unconditionally and runs the same command.
+      run: |
+        if command -v gitleaks >/dev/null 2>&1; then
+          gitleaks protect --staged --redact --no-banner --config .gitleaks.toml
+        else
+          echo "lefthook(gitleaks): binary not found on PATH — skipping locally."
+          echo "  Install: brew install gitleaks   (CI runs gitleaks unconditionally)"
+        fi
       skip:
         - merge
         - rebase
