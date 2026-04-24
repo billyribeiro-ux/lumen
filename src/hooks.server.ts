@@ -1,19 +1,37 @@
-// SvelteKit server hooks — auth session resolution + locals enrichment.
-//
-// `handle` runs on every request. We:
-//   1. Resolve the Better Auth session from the cookie.
-//   2. Hydrate event.locals.user / event.locals.session.
-//   3. Hand off to the route handler.
-//
-// Per-request locals are typed in src/app.d.ts.
+// SvelteKit server hooks — auth session resolution + route guards.
 
-import type { Handle, HandleServerError } from '@sveltejs/kit';
+import { type Handle, type HandleServerError, redirect } from '@sveltejs/kit';
 import { auth } from '$lib/server/auth';
 
+const PUBLIC_PREFIXES = [
+  '/sign-in',
+  '/sign-up',
+  '/forgot-password',
+  '/reset-password',
+  '/verify-email',
+  '/magic-link',
+  '/invite',
+  '/api/auth',
+  '/p/', // public publications (Phase 18)
+];
+
+const isPublic = (pathname: string): boolean => {
+  if (pathname === '/' || pathname === '/pricing' || pathname === '/about') return true;
+  return PUBLIC_PREFIXES.some((prefix) => pathname.startsWith(prefix));
+};
+
 export const handle: Handle = async ({ event, resolve }) => {
+  // 1. Resolve session.
   const session = await auth.api.getSession({ headers: event.request.headers });
   event.locals.session = session?.session ?? null;
   event.locals.user = session?.user ?? null;
+
+  // 2. Route guard for protected paths.
+  if (!event.locals.user && !isPublic(event.url.pathname)) {
+    const next = event.url.pathname + event.url.search;
+    throw redirect(303, `/sign-in?next=${encodeURIComponent(next)}`);
+  }
+
   return resolve(event);
 };
 
