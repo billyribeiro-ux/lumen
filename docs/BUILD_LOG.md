@@ -93,7 +93,11 @@
 | 28 | 2026-04-24 | 1 | `lefthook.yml` | 603eb35 | build(ci): add lefthook with PE7 pre-commit and commit-msg hooks |
 | 29 | 2026-04-24 | 1 | `package.json` | 603eb35 | (same commit as #28) |
 | 30 | 2026-04-24 | 1 | `pnpm-lock.yaml` | 603eb35 | (same commit as #28) |
-| 31 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record lefthook install in build log |
+| 31 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | 0e7f959 | docs(log): record lefthook install in build log |
+| 32 | 2026-04-24 | 1 | `commitlint.config.js` | a0bde1f | build(ci): add commitlint with Conventional Commits + Lumen scope set |
+| 33 | 2026-04-24 | 1 | `package.json` | a0bde1f | (same commit as #32) |
+| 34 | 2026-04-24 | 1 | `pnpm-lock.yaml` | a0bde1f | (same commit as #32) |
+| 35 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record commitlint install in build log |
 
 ---
 
