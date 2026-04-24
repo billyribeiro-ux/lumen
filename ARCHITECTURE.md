@@ -279,17 +279,26 @@ Some Node types have dedicated satellite tables when they need structure beyond 
 - `roles` — `owner`, `admin`, `editor`, `viewer`.
 - `permissions` — fine-grained actions (future-proofed; denormalized into roles for now).
 
-### 4.9 Audit Log
+### 4.9 AI Co-Pilot Tables
+
+The Phase 16 AI co-pilot persists conversations grounded in the user's own graph:
+
+- `ai_conversations` — one row per conversation thread. Scoped to `user_id` and `organization_id`. Carries title, model, tier-derived quota counters, and `last_message_at` for sidebar ordering.
+- `ai_messages` — append-only message log keyed to `ai_conversations`. Stores role (`user` / `assistant` / `tool`), content, and a JSONB `grounding` array of `node_id` references used for retrieval-augmented generation.
+
+These tables exist in the schema from Phase 1 even though the feature ships in Phase 16; defining them up front keeps RBAC and entitlement plumbing aware of the surface from day one.
+
+### 4.10 Audit Log
 
 `audit_log` captures every mutating action: who, what, when, before-state, after-state. Append-only, queryable by actor, resource, or time window. Essential for compliance, debugging, and trust.
 
-### 4.10 Foreign Keys and Cascades
+### 4.11 Foreign Keys and Cascades
 
 - `ON DELETE CASCADE` is used sparingly — only for leaf tables (e.g. `node_tags` when a tag is deleted).
 - For all user-facing resources, **soft delete** is the default. `deleted_at` is set; the row persists.
 - Hard delete is available as a separate admin operation with a 30-day grace window.
 
-### 4.11 Indexes
+### 4.12 Indexes
 
 Every foreign key has an index. Additional indexes:
 - `nodes (organization_id, type, updated_at DESC)` — list views
@@ -501,31 +510,65 @@ A single keyboard event dispatcher lives in \`src/lib/stores/shortcuts.svelte.ts
 ### 8.4 PE7 CSS Architecture
 
 \`\`\`
-@layer reset, tokens, base, layout, components, utilities;
+@layer reset, tokens, theme, base, layout, components, utilities;
 
 @layer tokens {
   :root {
-    --color-background: oklch(0.98 0.004 250);
-    --color-surface:    oklch(0.96 0.006 250);
-    --color-text:       oklch(0.24 0.012 250);
-    --color-accent:     oklch(0.62 0.18 250);
-
+    /* Tier-1 primitives — never read directly from components */
     --font-ui:       'Inter', system-ui, sans-serif;
     --font-mono:     'JetBrains Mono', ui-monospace, monospace;
+    --font-reading:  'Literata', Georgia, serif;
 
     --text-base:     clamp(1rem, 0.94rem + 0.3vw, 1.125rem);
     --space-4:       clamp(1rem, 0.9rem + 0.5vw, 1.5rem);
   }
 }
+
+@layer theme {
+  /* Theme: Obsidian — default OLED-friendly near-black, electric accent */
+  [data-theme='obsidian'], :root {
+    --color-background: oklch(0.12 0.01  260);
+    --color-surface:    oklch(0.16 0.012 260);
+    --color-text:       oklch(0.94 0.008 260);
+    --color-accent:     oklch(0.72 0.20  260);
+  }
+  /* Theme: Parchment — warm off-white, amber accent */
+  [data-theme='parchment'] {
+    --color-background: oklch(0.96 0.018  85);
+    --color-surface:    oklch(0.93 0.022  85);
+    --color-text:       oklch(0.24 0.015  85);
+    --color-accent:     oklch(0.62 0.14   65);
+  }
+  /* Theme: Nord-PE7 — cool blue-slate, signature palette */
+  [data-theme='nord-pe7'] {
+    --color-background: oklch(0.20 0.02  240);
+    --color-surface:    oklch(0.26 0.022 240);
+    --color-text:       oklch(0.92 0.012 240);
+    --color-accent:     oklch(0.66 0.13  235);
+  }
+}
 \`\`\`
 
+**Three themes** ship in \`src/lib/styles/themes/\` and are switchable via \`⌘,\`:
+
+1. **Obsidian** — near-black OLED default; high contrast, electric accent.
+2. **Parchment** — warm off-white; reading mode pairs naturally with Literata.
+3. **Nord-PE7** — Billy's signature OKLCH-tuned blue-slate.
+
+**Three font families** are self-hosted (never Google Fonts CDN):
+
+- **Inter** — UI, headings, dense surfaces.
+- **JetBrains Mono** — code, snippets, terminal-style copy.
+- **Literata** — reading mode and long-form node bodies.
+
 Rules:
-- OKLCH only for color.
+- OKLCH only for color. No hex, no \`rgb()\`.
 - Logical properties only: \`padding-inline\`, \`margin-block\`, \`border-block-end\`.
 - \`clamp()\` for any value that should fluidly scale.
 - Native CSS nesting; no SCSS.
 - No Tailwind; no utility classes.
 - 9-tier breakpoint system: \`xs\` (320px) → \`xl5\` (3840px).
+- Theme switching is instantaneous and FOUC-free (the active theme is set on \`<html data-theme>\` server-side from the user's preference cookie before first paint).
 
 ### 8.5 Forms
 

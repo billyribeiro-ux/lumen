@@ -77,12 +77,19 @@ Baseline documentation, repository setup, and governance.
 
 ### 🚧 Phase 1 — Database Schema (`v0.2.0`)
 
-Design and implement the foundational Drizzle schema.
+Design and implement the foundational Drizzle schema. **Target: 22 tables across 8 domains** as specified in `docs/LUMEN_VISION.md`.
 
 - `sv create` SvelteKit scaffold with TypeScript strict
 - Vercel adapter configuration
 - Drizzle ORM + `@neondatabase/serverless` setup
-- Core tables: `users`, `sessions`, `accounts`, `organizations`, `projects`, `nodes`, `node_types`, `node_content`, `node_versions`, `links`, `tags`, `node_tags`
+- **Auth (4):** `users`, `sessions`, `accounts`, `verification`
+- **Organizations (3):** `organizations`, `memberships`, `invitations`
+- **RBAC (3):** `roles`, `permissions`, `role_permissions`
+- **Content (6):** `nodes`, `node_content`, `node_versions`, `links`, `tags`, `node_tags`
+- **Satellite type tables (5):** `decisions`, `snippets`, `dailies`, `publications`, `inbox_items`
+- **AI co-pilot (2):** `ai_conversations`, `ai_messages` (defined now, used in Phase 16)
+- **Billing (6):** `products`, `prices`, `subscriptions`, `invoices`, `payment_methods`, `entitlements`
+- **System (2):** `audit_log`, `webhook_events`
 - Initial migration + migration strategy (Drizzle Kit)
 - `drizzle.config.ts`, `drizzle/` directory structure
 - Database connection module (`src/lib/server/db/`)

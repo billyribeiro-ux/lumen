@@ -35,7 +35,27 @@
 | 22 | 2026-04-24 | 0 | `docs/adr/003-orm-drizzle.md` | 8cdb1b9 | docs(adr): ADR-003 ORM Drizzle over Prisma/Kysely/raw SQL |
 | 23 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | f59e26f | docs(log): record ADR-003 in build log |
 | 24 | 2026-04-24 | 0 | `docs/adr/004-authentication-better-auth.md` | ea64780 | docs(adr): ADR-004 authentication Better Auth over Lucia/Auth.js/Clerk |
-| 25 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record ADR-004 in build log |
+| 25 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | 37bc6e2 | docs(log): record ADR-004 in build log |
+| 26 | 2026-04-24 | 0 | `ARCHITECTURE.md` | 51ed998 | docs: reconcile ARCHITECTURE/ROADMAP/VISION on AI tables, themes, fonts |
+| 27 | 2026-04-24 | 0 | `ROADMAP.md` | 51ed998 | (same commit as #26) |
+| 28 | 2026-04-24 | 0 | `docs/LUMEN_VISION.md` | 51ed998 | (same commit as #26) |
+| 29 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | a193009 | docs(log): record VISION reconciliation in build log |
+| 30 | 2026-04-24 | 0 | `docs/adr/005-validation-valibot.md` | 98df3a3 | docs(adr): ADR-005 validation Valibot over Zod/Arktype/TypeBox |
+| 31 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | 501f7d3 | docs(log): record ADR-005 in build log |
+| 32 | 2026-04-24 | 0 | `docs/adr/006-dynamic-pricing-from-database.md` | b05e389 | docs(adr): ADR-006 dynamic pricing from DB, Stripe is a processor |
+| 33 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | 1bae465 | docs(log): record ADR-006 in build log |
+| 34 | 2026-04-24 | 0 | `docs/adr/007-ui-primitives-bits-ui.md` | be700f1 | docs(adr): ADR-007 UI primitives Bits UI over shadcn/Skeleton/Melt/custom |
+| 35 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | 8d8b47c | docs(log): record ADR-007 in build log |
+| 36 | 2026-04-24 | 0 | `docs/adr/008-desktop-tauri-2.md` | b1658d2 | docs(adr): ADR-008 desktop Tauri 2 over Electron/Neutralino/native |
+| 37 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | fc922af | docs(log): record ADR-008 in build log |
+| 38 | 2026-04-24 | 0 | `docs/adr/009-package-manager-pnpm.md` | 18560ed | docs(adr): ADR-009 package manager pnpm exclusive over npm/yarn/bun |
+| 39 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | b383edc | docs(log): record ADR-009 in build log |
+| 40 | 2026-04-24 | 0 | `docs/adr/010-lint-format-biome.md` | d4cb7a8 | docs(adr): ADR-010 lint+format Biome over ESLint+Prettier |
+| 41 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | 3e2b84a | docs(log): record ADR-010 in build log |
+| 42 | 2026-04-24 | 0 | `docs/adr/README.md` | 7ff3737 | docs(adr): add ADR index README with all 10 Phase 0 ADRs |
+| 43 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | 96c9367 | docs(log): record ADR README in build log |
+| 44 | 2026-04-24 | 0 | `CHANGELOG.md` | 47f287e | docs(adr): close Phase 0 with CHANGELOG entry for ADRs 001-010 + reconciliation |
+| 45 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record Phase 0 CHANGELOG closure in build log |
 
 ---
 
