@@ -9,7 +9,19 @@ const config = {
     'type-enum': [
       2,
       'always',
-      ['feat', 'fix', 'docs', 'chore', 'refactor', 'perf', 'test', 'style', 'build', 'ci', 'revert'],
+      [
+        'feat',
+        'fix',
+        'docs',
+        'chore',
+        'refactor',
+        'perf',
+        'test',
+        'style',
+        'build',
+        'ci',
+        'revert',
+      ],
     ],
     'scope-enum': [
       2,
