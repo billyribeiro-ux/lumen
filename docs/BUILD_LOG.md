@@ -141,7 +141,9 @@
 | 76 | 2026-04-24 | 1 | `pnpm-lock.yaml` | e6d762e | (same commit as #74) |
 | 77 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | ec42de6 | docs(log): record DB instance factory in build log |
 | 78 | 2026-04-24 | 1 | `package.json` | 158a0a9 | build(db): wire Drizzle Kit scripts into pnpm |
-| 79 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record db:* scripts in build log |
+| 79 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | 4d3222f | docs(log): record db:* scripts in build log |
+| 80 | 2026-04-24 | 1 | `svelte.config.js` | 78094f6 | build(deploy): migrate csrf.checkOrigin -> csrf.trustedOrigins |
+| 81 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record csrf config migration in build log |
 
 ---
 
