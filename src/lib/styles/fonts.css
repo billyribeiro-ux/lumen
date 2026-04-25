@@ -1,0 +1,43 @@
+/* Self-hosted font registrations.
+ *
+ * Drop the woff2 files at:
+ *   static/fonts/inter/InterVariable.woff2          (variable axis)
+ *   static/fonts/jetbrains-mono/JetBrainsMono.woff2 (variable axis)
+ *   static/fonts/literata/Literata.woff2            (variable axis)
+ *
+ * Sources:
+ *   Inter         https://github.com/rsms/inter (OFL)
+ *   JetBrains Mono https://www.jetbrains.com/lp/mono/ (OFL)
+ *   Literata      https://fonts.google.com/specimen/Literata (OFL)
+ *
+ * Until the files are present, the @font-face declarations resolve to
+ * 404 and the page falls back to the next font in the stack (system-ui,
+ * monospace, Georgia). The OPS task to bundle the binaries lives in
+ * the Phase 6 launch checklist.
+ */
+
+@layer base {
+  @font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url("/fonts/inter/InterVariable.woff2") format("woff2-variations");
+  }
+
+  @font-face {
+    font-family: "JetBrains Mono";
+    font-style: normal;
+    font-weight: 100 800;
+    font-display: swap;
+    src: url("/fonts/jetbrains-mono/JetBrainsMono.woff2") format("woff2-variations");
+  }
+
+  @font-face {
+    font-family: "Literata";
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: swap;
+    src: url("/fonts/literata/Literata.woff2") format("woff2-variations");
+  }
+}

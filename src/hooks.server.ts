@@ -19,7 +19,10 @@ const PUBLIC_PREFIXES = [
 ];
 
 const isPublic = (pathname: string): boolean => {
-  if (pathname === '/' || pathname === '/pricing' || pathname === '/about') return true;
+  // The marketing landing page at `/` is auth-gated until Phase 11 (Pricing) ships
+  // a public marketing surface. Until then, `/` redirects anonymous visitors to
+  // `/sign-in`, which is the most useful default for a dev/staging environment.
+  if (pathname === '/pricing' || pathname === '/about') return true;
   return PUBLIC_PREFIXES.some((prefix) => pathname.startsWith(prefix));
 };
 
