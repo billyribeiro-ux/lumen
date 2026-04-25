@@ -1,0 +1,38 @@
+# Lumen Prettier ignore — Prettier formats *.svelte ONLY (see ADR-010).
+# Biome (biome.json) owns TS / JS / JSON / CSS / etc.
+
+# Build + cache outputs
+.svelte-kit/
+build/
+dist/
+node_modules/
+coverage/
+.vercel/
+.cache/
+
+# Lockfiles
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+bun.lock
+bun.lockb
+
+# Static assets
+/static/
+
+# Biome's domain — Prettier never touches these
+**/*.ts
+**/*.tsx
+**/*.cts
+**/*.mts
+**/*.js
+**/*.jsx
+**/*.cjs
+**/*.mjs
+**/*.json
+**/*.jsonc
+**/*.json5
+**/*.css
+
+# Markdown is owned by Biome 2.x where supported; otherwise let Prettier through.
+# (Adjust this comment when Biome's md support stabilizes.)

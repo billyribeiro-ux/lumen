@@ -1,0 +1,64 @@
+# Lumen lefthook config — git hooks managed in code (per ADR-009 + ADR-010).
+#
+# Activate hooks locally with:  pnpm lefthook install
+# CI runs the same commands directly, not via lefthook.
+
+assert_lefthook_installed: false
+no_tty: true
+min_version: 2.0.0
+
+pre-commit:
+  parallel: true
+  commands:
+    biome:
+      glob: '*.{ts,tsx,js,jsx,mjs,cjs,json,jsonc,css}'
+      run: pnpm exec biome check --write --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}
+      stage_fixed: true
+
+    prettier-svelte:
+      glob: '*.svelte'
+      run: pnpm exec prettier --write --ignore-unknown {staged_files}
+      stage_fixed: true
+
+    svelte-check:
+      glob: '*.{ts,svelte}'
+      run: pnpm exec svelte-check --tsconfig ./tsconfig.json --fail-on-warnings
+
+    gitleaks:
+      tags: security
+      # Requires gitleaks (brew install gitleaks). If absent, the hook
+      # prints a one-line warning and exits 0 so local commits still flow;
+      # CI installs gitleaks unconditionally and runs the same command.
+      run: |
+        if command -v gitleaks >/dev/null 2>&1; then
+          gitleaks protect --staged --redact --no-banner --config .gitleaks.toml
+        else
+          echo "lefthook(gitleaks): binary not found on PATH — skipping locally."
+          echo "  Install: brew install gitleaks   (CI runs gitleaks unconditionally)"
+        fi
+      skip:
+        - merge
+        - rebase
+      fail_text: |
+        gitleaks blocked the commit — a potential secret was detected.
+        Inspect the redacted output above. If it is a false positive,
+        add a rule to .gitleaks.toml; if it is a real secret, rotate it
+        and amend the commit before retrying.
+
+    forbid-rival-lockfiles:
+      glob: '{package-lock.json,yarn.lock,bun.lockb}'
+      run: |
+        echo "ERROR: pnpm is the only allowed package manager (ADR-009)."
+        echo "Detected forbidden lockfile in staged files. Refusing commit."
+        exit 1
+
+commit-msg:
+  commands:
+    commitlint:
+      run: pnpm exec commitlint --edit {1}
+
+# Future hooks (enabled when their tooling lands):
+# pre-push:
+#   commands:
+#     test:
+#       run: pnpm test

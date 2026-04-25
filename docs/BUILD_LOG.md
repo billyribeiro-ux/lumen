@@ -55,7 +55,235 @@
 | 42 | 2026-04-24 | 0 | `docs/adr/README.md` | 7ff3737 | docs(adr): add ADR index README with all 10 Phase 0 ADRs |
 | 43 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | 96c9367 | docs(log): record ADR README in build log |
 | 44 | 2026-04-24 | 0 | `CHANGELOG.md` | 47f287e | docs(adr): close Phase 0 with CHANGELOG entry for ADRs 001-010 + reconciliation |
-| 45 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record Phase 0 CHANGELOG closure in build log |
+| 45 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | de11143 | docs(log): record Phase 0 CHANGELOG closure in build log |
+
+---
+
+## Phase 1 — Database Schema (In Progress)
+
+| # | Date | Phase | File | Commit | Subject |
+|---|---|---|---|---|---|
+| 1 | 2026-04-24 | 1 | `package.json` | 3bfeffe | feat(scaffold): SvelteKit 2 + Svelte 5 + TypeScript strict baseline |
+| 2 | 2026-04-24 | 1 | `pnpm-lock.yaml` | 3bfeffe | (same commit as #1) |
+| 3 | 2026-04-24 | 1 | `tsconfig.json` | 3bfeffe | (same commit as #1) |
+| 4 | 2026-04-24 | 1 | `svelte.config.js` | 3bfeffe | (same commit as #1) |
+| 5 | 2026-04-24 | 1 | `vite.config.ts` | 3bfeffe | (same commit as #1) |
+| 6 | 2026-04-24 | 1 | `playwright.config.ts` | 3bfeffe | (same commit as #1) |
+| 7 | 2026-04-24 | 1 | `.npmrc` | 3bfeffe | (same commit as #1) |
+| 8 | 2026-04-24 | 1 | `.prettierrc` | 3bfeffe | (same commit as #1) |
+| 9 | 2026-04-24 | 1 | `.prettierignore` | 3bfeffe | (same commit as #1) |
+| 10 | 2026-04-24 | 1 | `.vscode/extensions.json` | 3bfeffe | (same commit as #1) |
+| 11 | 2026-04-24 | 1 | `src/app.html` | 3bfeffe | (same commit as #1) |
+| 12 | 2026-04-24 | 1 | `src/app.d.ts` | 3bfeffe | (same commit as #1) |
+| 13 | 2026-04-24 | 1 | `src/lib/index.ts` | 3bfeffe | (same commit as #1) |
+| 14 | 2026-04-24 | 1 | `src/routes/+layout.svelte` | 3bfeffe | (same commit as #1) |
+| 15 | 2026-04-24 | 1 | `src/routes/+page.svelte` | 3bfeffe | (same commit as #1) |
+| 16 | 2026-04-24 | 1 | `static/favicon.svg` | 3bfeffe | (same commit as #1) |
+| 17 | 2026-04-24 | 1 | `static/robots.txt` | 3bfeffe | (same commit as #1) |
+| 18 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | c154aa5 | docs(log): open Phase 1 section and record SvelteKit scaffold |
+| 19 | 2026-04-24 | 1 | `biome.json` | c38cc0e | feat(ci): add Biome 2 lint+format with PE7 strict rule set |
+| 20 | 2026-04-24 | 1 | `package.json` | c38cc0e | (same commit as #19) |
+| 21 | 2026-04-24 | 1 | `pnpm-lock.yaml` | c38cc0e | (same commit as #19) |
+| 22 | 2026-04-24 | 1 | `.vscode/extensions.json` | c38cc0e | (same commit as #19) |
+| 23 | 2026-04-24 | 1 | `playwright.config.ts` | c38cc0e | (same commit as #19) |
+| 24 | 2026-04-24 | 1 | `src/app.d.ts` | c38cc0e | (same commit as #19) |
+| 25 | 2026-04-24 | 1 | `svelte.config.js` | c38cc0e | (same commit as #19) |
+| 26 | 2026-04-24 | 1 | `vite.config.ts` | c38cc0e | (same commit as #19) |
+| 27 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | e299ce6 | docs(log): record Biome install in build log |
+| 28 | 2026-04-24 | 1 | `lefthook.yml` | 603eb35 | build(ci): add lefthook with PE7 pre-commit and commit-msg hooks |
+| 29 | 2026-04-24 | 1 | `package.json` | 603eb35 | (same commit as #28) |
+| 30 | 2026-04-24 | 1 | `pnpm-lock.yaml` | 603eb35 | (same commit as #28) |
+| 31 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | 0e7f959 | docs(log): record lefthook install in build log |
+| 32 | 2026-04-24 | 1 | `commitlint.config.js` | a0bde1f | build(ci): add commitlint with Conventional Commits + Lumen scope set |
+| 33 | 2026-04-24 | 1 | `package.json` | a0bde1f | (same commit as #32) |
+| 34 | 2026-04-24 | 1 | `pnpm-lock.yaml` | a0bde1f | (same commit as #32) |
+| 35 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | 11cccde | docs(log): record commitlint install in build log |
+| 36 | 2026-04-24 | 1 | `.gitleaks.toml` | ffaa5c3 | build(ci): add gitleaks config and tolerant pre-commit hook |
+| 37 | 2026-04-24 | 1 | `lefthook.yml` | ffaa5c3 | (same commit as #36) |
+| 38 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | 139d1b7 | docs(log): record gitleaks config in build log |
+| 39 | 2026-04-24 | 1 | `svelte.config.js` | 9351606 | build(deploy): swap adapter-auto for adapter-vercel |
+| 40 | 2026-04-24 | 1 | `package.json` | 9351606 | (same commit as #39) |
+| 41 | 2026-04-24 | 1 | `pnpm-lock.yaml` | 9351606 | (same commit as #39) |
+| 42 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | 8ae2590 | docs(log): record Vercel adapter swap in build log |
+| 43 | 2026-04-24 | 1 | `.mcp.json` | 61e850a | build(ci): add Svelte MCP server and Lumen-augmented CLAUDE.md |
+| 44 | 2026-04-24 | 1 | `CLAUDE.md` | 61e850a | (same commit as #43) |
+| 45 | 2026-04-24 | 1 | `commitlint.config.js` | 9107c72 | style(ci): format commitlint.config.js per Biome line-width |
+| 46 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | cd9f4eb | docs(log): record MCP install + commitlint format fix |
+| 47 | 2026-04-24 | 1 | `package.json` | 8fe14d6 | build(db): install Drizzle ORM, drizzle-kit, and Neon serverless driver |
+| 48 | 2026-04-24 | 1 | `pnpm-lock.yaml` | 8fe14d6 | (same commit as #47) |
+| 49 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | 1153613 | docs(log): record Drizzle install in build log |
+| 50 | 2026-04-24 | 1 | `drizzle.config.ts` | d96c337 | build(db): add drizzle.config.ts pointing schema dir to src/lib/server/db/schema |
+| 51 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | 3a1b00f | docs(log): record drizzle.config in build log |
+| 52 | 2026-04-24 | 1 | `src/lib/server/db/schema/_columns.ts` | 0adec25 | feat(schema): author Drizzle schema for 31 tables across 8 domains |
+| 53 | 2026-04-24 | 1 | `src/lib/server/db/schema/auth.ts` | 0adec25 | (same commit as #52) |
+| 54 | 2026-04-24 | 1 | `src/lib/server/db/schema/organizations.ts` | 0adec25 | (same commit as #52) |
+| 55 | 2026-04-24 | 1 | `src/lib/server/db/schema/rbac.ts` | 0adec25 | (same commit as #52) |
+| 56 | 2026-04-24 | 1 | `src/lib/server/db/schema/nodes.ts` | 0adec25 | (same commit as #52) |
+| 57 | 2026-04-24 | 1 | `src/lib/server/db/schema/links.ts` | 0adec25 | (same commit as #52) |
+| 58 | 2026-04-24 | 1 | `src/lib/server/db/schema/tags.ts` | 0adec25 | (same commit as #52) |
+| 59 | 2026-04-24 | 1 | `src/lib/server/db/schema/decisions.ts` | 0adec25 | (same commit as #52) |
+| 60 | 2026-04-24 | 1 | `src/lib/server/db/schema/snippets.ts` | 0adec25 | (same commit as #52) |
+| 61 | 2026-04-24 | 1 | `src/lib/server/db/schema/dailies.ts` | 0adec25 | (same commit as #52) |
+| 62 | 2026-04-24 | 1 | `src/lib/server/db/schema/publications.ts` | 0adec25 | (same commit as #52) |
+| 63 | 2026-04-24 | 1 | `src/lib/server/db/schema/inbox.ts` | 0adec25 | (same commit as #52) |
+| 64 | 2026-04-24 | 1 | `src/lib/server/db/schema/ai.ts` | 0adec25 | (same commit as #52) |
+| 65 | 2026-04-24 | 1 | `src/lib/server/db/schema/billing.ts` | 0adec25 | (same commit as #52) |
+| 66 | 2026-04-24 | 1 | `src/lib/server/db/schema/audit.ts` | 0adec25 | (same commit as #52) |
+| 67 | 2026-04-24 | 1 | `src/lib/server/db/schema/webhooks.ts` | 0adec25 | (same commit as #52) |
+| 68 | 2026-04-24 | 1 | `src/lib/server/db/schema/index.ts` | 0adec25 | (same commit as #52) |
+| 69 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | 736bde2 | docs(log): record full Drizzle schema in build log |
+| 70 | 2026-04-24 | 1 | `drizzle/0000_initial_schema.sql` | 5a7264d | feat(schema): generate initial_schema migration for 31-table baseline |
+| 71 | 2026-04-24 | 1 | `drizzle/meta/0000_snapshot.json` | 5a7264d | (same commit as #70) |
+| 72 | 2026-04-24 | 1 | `drizzle/meta/_journal.json` | 5a7264d | (same commit as #70) |
+| 73 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | d454d31 | docs(log): record initial migration in build log |
+| 74 | 2026-04-24 | 1 | `src/lib/server/db/index.ts` | e6d762e | feat(db): add Drizzle instance factory with HTTP + WebSocket variants |
+| 75 | 2026-04-24 | 1 | `package.json` | e6d762e | (same commit as #74) |
+| 76 | 2026-04-24 | 1 | `pnpm-lock.yaml` | e6d762e | (same commit as #74) |
+| 77 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | ec42de6 | docs(log): record DB instance factory in build log |
+| 78 | 2026-04-24 | 1 | `package.json` | 158a0a9 | build(db): wire Drizzle Kit scripts into pnpm |
+| 79 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | 4d3222f | docs(log): record db:* scripts in build log |
+| 80 | 2026-04-24 | 1 | `svelte.config.js` | 78094f6 | build(deploy): migrate csrf.checkOrigin -> csrf.trustedOrigins |
+| 81 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | cb1508a | docs(log): record csrf config migration in build log |
+| 82 | 2026-04-24 | 1 | `docs/runbooks/database-migrations.md` | 79499ad | docs: add database migration runbook (docs/runbooks/database-migrations.md) |
+| 83 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | 9336216 | docs(log): record migration runbook in build log |
+| 84 | 2026-04-24 | 1 | `CHANGELOG.md` | 0126c0e | docs: extend CHANGELOG Unreleased with Phase 1 entries |
+| 85 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | 1caa472 | docs(log): record CHANGELOG Phase 1 entries in build log |
+| 86 | 2026-04-24 | 1 | `package.json` | e3a29d8 | release(schema): v0.2.0 — Phase 1 Database Schema |
+| 87 | 2026-04-24 | 1 | `CHANGELOG.md` | e3a29d8 | (same commit as #86) |
+| 88 | 2026-04-24 | 1 | `ROADMAP.md` | e3a29d8 | (same commit as #86) |
+| 89 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | 844b492 | docs(log): record v0.2.0 release prep in build log |
+
+---
+
+## Phase 2 — Database Seeding (In Progress)
+
+| # | Date | Phase | File | Commit | Subject |
+|---|---|---|---|---|---|
+| 1 | 2026-04-24 | 2 | `scripts/seed/guard.ts` | 1a65df5 | feat(seed): add Phase 2 database seeding with persona-driven fixtures |
+| 2 | 2026-04-24 | 2 | `scripts/seed/connection.ts` | 1a65df5 | (same commit as #1) |
+| 3 | 2026-04-24 | 2 | `scripts/seed/personas.ts` | 1a65df5 | (same commit as #1) |
+| 4 | 2026-04-24 | 2 | `scripts/seed/runners/rbac.ts` | 1a65df5 | (same commit as #1) |
+| 5 | 2026-04-24 | 2 | `scripts/seed/runners/billing.ts` | 1a65df5 | (same commit as #1) |
+| 6 | 2026-04-24 | 2 | `scripts/seed/runners/users.ts` | 1a65df5 | (same commit as #1) |
+| 7 | 2026-04-24 | 2 | `scripts/seed/runners/content.ts` | 1a65df5 | (same commit as #1) |
+| 8 | 2026-04-24 | 2 | `scripts/seed/index.ts` | 1a65df5 | (same commit as #1) |
+| 9 | 2026-04-24 | 2 | `scripts/seed/wipe.ts` | 1a65df5 | (same commit as #1) |
+| 10 | 2026-04-24 | 2 | `scripts/seed/reset.ts` | 1a65df5 | (same commit as #1) |
+| 11 | 2026-04-24 | 2 | `package.json` | 1a65df5 | (same commit as #1) |
+| 12 | 2026-04-24 | 2 | `pnpm-lock.yaml` | 1a65df5 | (same commit as #1) |
+| 13 | 2026-04-24 | 2 | `drizzle.config.ts` | 1a65df5 | (same commit as #1) |
+| 14 | 2026-04-24 | 2 | `svelte.config.js` | 1a65df5 | (same commit as #1) |
+| 15 | 2026-04-24 | 2 | `biome.json` | 1a65df5 | (same commit as #1) |
+| 16 | 2026-04-24 | 2 | `docs/BUILD_LOG.md` | 4603548 | docs(log): open Phase 2 section and record seed infrastructure |
+| 17 | 2026-04-24 | 2 | `docs/runbooks/database-seeding.md` | f32b155 | docs: add database seeding runbook |
+| 18 | 2026-04-24 | 2 | `docs/BUILD_LOG.md` | fac988a | docs(log): record seeding runbook in build log |
+| 19 | 2026-04-24 | 2 | `package.json` | d847993 | release(seed): v0.3.0 — Phase 2 Database Seeding |
+| 20 | 2026-04-24 | 2 | `CHANGELOG.md` | d847993 | (same commit as #19) |
+| 21 | 2026-04-24 | 2 | `ROADMAP.md` | d847993 | (same commit as #19) |
+| 22 | 2026-04-24 | 2 | `docs/BUILD_LOG.md` | d847993 | docs(log): record v0.3.0 release prep in build log |
+
+---
+
+## Phase 3 — Authentication (In Progress)
+
+| # | Date | Phase | File | Commit | Subject |
+|---|---|---|---|---|---|
+| 1 | 2026-04-24 | 3 | `src/lib/server/auth.ts` | 92d796f | feat(auth): wire Better Auth with passkeys, TOTP 2FA, OAuth, magic links |
+| 2 | 2026-04-24 | 3 | `src/lib/server/auth-bridge.ts` | 92d796f | (same commit as #1) |
+| 3 | 2026-04-24 | 3 | `src/hooks.server.ts` | 92d796f | (same commit as #1) |
+| 4 | 2026-04-24 | 3 | `src/app.d.ts` | 92d796f | (same commit as #1) |
+| 5 | 2026-04-24 | 3 | `src/routes/api/auth/[...all]/+server.ts` | 92d796f | (same commit as #1) |
+| 6 | 2026-04-24 | 3 | `src/lib/auth-client.ts` | 92d796f | (same commit as #1) |
+| 7 | 2026-04-24 | 3 | `src/routes/(auth)/+layout.svelte` | 92d796f | (same commit as #1) |
+| 8 | 2026-04-24 | 3 | `src/routes/(auth)/sign-in/+page.server.ts` | 92d796f | (same commit as #1) |
+| 9 | 2026-04-24 | 3 | `src/routes/(auth)/sign-in/+page.svelte` | 92d796f | (same commit as #1) |
+| 10 | 2026-04-24 | 3 | `src/routes/(auth)/sign-up/+page.server.ts` | 92d796f | (same commit as #1) |
+| 11 | 2026-04-24 | 3 | `src/routes/(auth)/sign-up/+page.svelte` | 92d796f | (same commit as #1) |
+| 12 | 2026-04-24 | 3 | `src/routes/(auth)/forgot-password/+page.server.ts` | 92d796f | (same commit as #1) |
+| 13 | 2026-04-24 | 3 | `src/routes/(auth)/forgot-password/+page.svelte` | 92d796f | (same commit as #1) |
+| 14 | 2026-04-24 | 3 | `src/routes/(auth)/reset-password/+page.server.ts` | 92d796f | (same commit as #1) |
+| 15 | 2026-04-24 | 3 | `src/routes/(auth)/reset-password/+page.svelte` | 92d796f | (same commit as #1) |
+| 16 | 2026-04-24 | 3 | `src/routes/(auth)/verify-email/+page.svelte` | 92d796f | (same commit as #1) |
+| 17 | 2026-04-24 | 3 | `src/routes/account/security/+page.server.ts` | 92d796f | (same commit as #1) |
+| 18 | 2026-04-24 | 3 | `src/routes/account/security/+page.svelte` | 92d796f | (same commit as #1) |
+| 19 | 2026-04-24 | 3 | `src/lib/server/db/schema/auth.ts` | 92d796f | (same commit as #1) |
+| 20 | 2026-04-24 | 3 | `drizzle/0001_auth_plugin_tables.sql` | 92d796f | (same commit as #1) |
+| 21 | 2026-04-24 | 3 | `drizzle/meta/0001_snapshot.json` | 92d796f | (same commit as #1) |
+| 22 | 2026-04-24 | 3 | `drizzle/meta/_journal.json` | 92d796f | (same commit as #1) |
+| 23 | 2026-04-24 | 3 | `.env.example` | 92d796f | (same commit as #1) |
+| 24 | 2026-04-24 | 3 | `package.json` | 92d796f | (same commit as #1) |
+| 25 | 2026-04-24 | 3 | `pnpm-lock.yaml` | 92d796f | (same commit as #1) |
+| 26 | 2026-04-24 | 3 | `docs/BUILD_LOG.md` | 49e911c | docs(log): open Phase 3 section and record auth work |
+
+---
+
+## Phase 4 — RBAC & Permissions (Shipped 2026-04-24)
+
+| # | Date | Phase | File | Commit | Subject |
+|---|---|---|---|---|---|
+| 1 | 2026-04-24 | 4 | `src/lib/server/rbac.ts` | a230ed0 | feat(rbac): role-based access control + invite flow |
+| 2 | 2026-04-24 | 4 | `src/lib/server/auth-helpers.ts` | a230ed0 | (same commit as #1) |
+| 3 | 2026-04-24 | 4 | `src/lib/server/invitations.ts` | a230ed0 | (same commit as #1) |
+| 4 | 2026-04-24 | 4 | `src/hooks.server.ts` | a230ed0 | (same commit as #1) |
+| 5 | 2026-04-24 | 4 | `src/routes/account/team/+page.server.ts` | a230ed0 | (same commit as #1) |
+| 6 | 2026-04-24 | 4 | `src/routes/account/team/+page.svelte` | a230ed0 | (same commit as #1) |
+| 7 | 2026-04-24 | 4 | `src/routes/invite/[token]/+page.server.ts` | a230ed0 | (same commit as #1) |
+| 8 | 2026-04-24 | 4 | `src/routes/invite/[token]/+page.svelte` | a230ed0 | (same commit as #1) |
+| 9 | 2026-04-24 | 4 | `package.json` | _next commit_ | release(rbac): v0.5.0 |
+| 10 | 2026-04-24 | 4 | `CHANGELOG.md` | _next commit_ | (same commit as #9) |
+| 11 | 2026-04-24 | 4 | `ROADMAP.md` | _next commit_ | (same commit as #9) |
+| 12 | 2026-04-24 | 4 | `docs/BUILD_LOG.md` | 42a8ccd | docs(log): record Phase 4 + v0.5.0 release prep |
+
+---
+
+## Phase 5 — Validation & Security (Shipped 2026-04-24)
+
+| # | Date | Phase | File | Commit | Subject |
+|---|---|---|---|---|---|
+| 1 | 2026-04-24 | 5 | `src/lib/validation/schemas.ts` | ad27aee | feat(validation): Valibot schemas + audit log + rate limit + CSP headers |
+| 2 | 2026-04-24 | 5 | `src/lib/errors.ts` | ad27aee | (same commit as #1) |
+| 3 | 2026-04-24 | 5 | `src/lib/server/audit.ts` | ad27aee | (same commit as #1) |
+| 4 | 2026-04-24 | 5 | `src/lib/server/rate-limit.ts` | ad27aee | (same commit as #1) |
+| 5 | 2026-04-24 | 5 | `src/hooks.server.ts` | ad27aee | (same commit as #1) |
+| 6 | 2026-04-24 | 5 | `package.json` | ad27aee | (same commit as #1) |
+| 7 | 2026-04-24 | 5 | `pnpm-lock.yaml` | ad27aee | (same commit as #1) |
+| 8 | 2026-04-24 | 5 | `package.json` | _next commit_ | release(validation): v0.6.0 |
+| 9 | 2026-04-24 | 5 | `CHANGELOG.md` | _next commit_ | (same commit as #8) |
+| 10 | 2026-04-24 | 5 | `ROADMAP.md` | _next commit_ | (same commit as #8) |
+| 11 | 2026-04-24 | 5 | `docs/BUILD_LOG.md` | 2d10fdd | docs(log): record Phase 5 + v0.6.0 release prep |
+
+---
+
+## Phase 6 — Core CRUD (Shipped 2026-04-24)
+
+| # | Date | Phase | File | Commit | Subject |
+|---|---|---|---|---|---|
+| 1 | 2026-04-24 | 6 | `src/lib/server/nodes.ts` | e883c94 | feat(crud): node CRUD + command bar + themes + keyboard system |
+| 2 | 2026-04-24 | 6 | `src/lib/styles/tokens.css` | e883c94 | (same commit as #1) |
+| 3 | 2026-04-24 | 6 | `src/lib/styles/fonts.css` | e883c94 | (same commit as #1) |
+| 4 | 2026-04-24 | 6 | `src/lib/styles/base.css` | e883c94 | (same commit as #1) |
+| 5 | 2026-04-24 | 6 | `src/routes/+layout.svelte` | e883c94 | (same commit as #1) |
+| 6 | 2026-04-24 | 6 | `src/routes/+page.svelte` (deleted) | e883c94 | (same commit as #1) |
+| 7 | 2026-04-24 | 6 | `src/lib/stores/theme.svelte.ts` | e883c94 | (same commit as #1) |
+| 8 | 2026-04-24 | 6 | `src/lib/stores/shortcuts.svelte.ts` | e883c94 | (same commit as #1) |
+| 9 | 2026-04-24 | 6 | `src/lib/components/layout/Topbar.svelte` | e883c94 | (same commit as #1) |
+| 10 | 2026-04-24 | 6 | `src/lib/components/command-bar/CommandBar.svelte` | e883c94 | (same commit as #1) |
+| 11 | 2026-04-24 | 6 | `src/routes/(app)/+layout.server.ts` | e883c94 | (same commit as #1) |
+| 12 | 2026-04-24 | 6 | `src/routes/(app)/+layout.svelte` | e883c94 | (same commit as #1) |
+| 13 | 2026-04-24 | 6 | `src/routes/(app)/+page.server.ts` | e883c94 | (same commit as #1) |
+| 14 | 2026-04-24 | 6 | `src/routes/(app)/+page.svelte` | e883c94 | (same commit as #1) |
+| 15 | 2026-04-24 | 6 | `src/routes/(app)/n/new/+page.server.ts` | e883c94 | (same commit as #1) |
+| 16 | 2026-04-24 | 6 | `src/routes/(app)/n/new/+page.svelte` | e883c94 | (same commit as #1) |
+| 17 | 2026-04-24 | 6 | `src/routes/(app)/n/[slug]/+page.server.ts` | e883c94 | (same commit as #1) |
+| 18 | 2026-04-24 | 6 | `src/routes/(app)/n/[slug]/+page.svelte` | e883c94 | (same commit as #1) |
+| 19 | 2026-04-24 | 6 | `src/routes/api/search/+server.ts` | e883c94 | (same commit as #1) |
+| 20 | 2026-04-24 | 6 | `src/hooks.server.ts` | e883c94 | (same commit as #1) |
+| 21 | 2026-04-24 | 6 | `package.json` | e883c94 | (same commit as #1) |
+| 22 | 2026-04-24 | 6 | `pnpm-lock.yaml` | e883c94 | (same commit as #1) |
+| 23 | 2026-04-24 | 6 | `package.json` | _next commit_ | release(crud): v0.7.0 |
+| 24 | 2026-04-24 | 6 | `CHANGELOG.md` | _next commit_ | (same commit as #23) |
+| 25 | 2026-04-24 | 6 | `ROADMAP.md` | _next commit_ | (same commit as #23) |
+| 26 | 2026-04-24 | 6 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record Phase 6 + v0.7.0 release prep |
 
 ---
 
@@ -64,6 +292,12 @@
 | Tag | Date | Phase | Commit | Description |
 |---|---|---|---|---|
 | v0.1.0 | 2026-04-24 | 0 | 9c8e992 | Phase 0: Foundation baseline — docs only, no code yet |
+| v0.2.0 | 2026-04-24 | 1 | _pending PR-merge_ | Phase 1: Database Schema — SvelteKit scaffold + 31-table Drizzle schema |
+| v0.3.0 | 2026-04-24 | 2 | _pending PR-merge_ | Phase 2: Database Seeding — personas, RBAC, billing catalog, sample content |
+| v0.4.0 | 2026-04-24 | 3 | _pending PR-merge_ | Phase 3: Authentication — Better Auth + passkeys + TOTP + OAuth + magic links |
+| v0.5.0 | 2026-04-24 | 4 | _pending PR-merge_ | Phase 4: RBAC & Permissions — can()/requirePermission() + invite flow |
+| v0.6.0 | 2026-04-24 | 5 | _pending PR-merge_ | Phase 5: Validation & Security — Valibot + audit + rate-limit + CSP |
+| v0.7.0 | 2026-04-24 | 6 | _pending PR-merge_ | Phase 6: Core CRUD — nodes, command bar, themes, keyboard system |
 
 ---
 

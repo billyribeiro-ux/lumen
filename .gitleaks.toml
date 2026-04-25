@@ -1,0 +1,103 @@
+# Lumen gitleaks config — secret detection in pre-commit + CI.
+#
+# Install locally:    brew install gitleaks
+# CI installs via the gitleaks/gitleaks-action GitHub Action.
+#
+# This config extends gitleaks' default rule set and adds Lumen-specific
+# patterns plus an allowlist for known-safe contexts (test fixtures, ADRs).
+
+[extend]
+useDefault = true
+
+# ─────────────────────────────────────────────────────────────────────────
+# Custom rules — Lumen-specific service tokens
+# ─────────────────────────────────────────────────────────────────────────
+
+[[rules]]
+id = "neon-database-url"
+description = "Neon Postgres connection string with embedded credentials"
+regex = '''postgres(?:ql)?:\/\/[^:\s]+:[^@\s]+@[^\s'\"]+\.neon\.tech\/[^\s'\"]+'''
+tags = ["secret", "neon", "database"]
+[rules.allowlist]
+description = "Allow placeholder URLs in .env.example and docs"
+paths = ['''\.env\.example''', '''docs/.*\.md''', '''ARCHITECTURE\.md''']
+
+[[rules]]
+id = "stripe-restricted-key"
+description = "Stripe restricted API key"
+regex = '''rk_(?:live|test)_[0-9a-zA-Z]{24,}'''
+tags = ["secret", "stripe"]
+
+[[rules]]
+id = "stripe-secret-key"
+description = "Stripe secret API key"
+regex = '''sk_(?:live|test)_[0-9a-zA-Z]{24,}'''
+tags = ["secret", "stripe"]
+
+[[rules]]
+id = "stripe-publishable-key"
+description = "Stripe publishable key (public, but flagged for audit)"
+regex = '''pk_(?:live|test)_[0-9a-zA-Z]{24,}'''
+tags = ["public", "stripe"]
+[rules.allowlist]
+description = "Publishable keys are public; allow in PUBLIC_ env vars only"
+regexes = ['''PUBLIC_STRIPE_[A-Z_]+''']
+
+[[rules]]
+id = "anthropic-api-key"
+description = "Anthropic Claude API key"
+regex = '''sk-ant-(?:api03|admin01)-[A-Za-z0-9_\-]{32,}'''
+tags = ["secret", "anthropic", "ai"]
+
+[[rules]]
+id = "resend-api-key"
+description = "Resend email API key"
+regex = '''re_[A-Za-z0-9]{8,}_[A-Za-z0-9]{16,}'''
+tags = ["secret", "resend", "email"]
+
+[[rules]]
+id = "upstash-redis-token"
+description = "Upstash Redis REST token"
+regex = '''AI[A-Za-z0-9_\-]{32,}\.upstash\.io'''
+tags = ["secret", "upstash", "redis"]
+
+[[rules]]
+id = "better-auth-secret"
+description = "BETTER_AUTH_SECRET in source"
+regex = '''(?i)better[_-]auth[_-]secret\s*[:=]\s*['\"][A-Za-z0-9+/=_\-]{32,}['\"]'''
+tags = ["secret", "auth"]
+[rules.allowlist]
+description = "Allow placeholder values in .env.example"
+paths = ['''\.env\.example''']
+
+[[rules]]
+id = "tauri-private-key"
+description = "Tauri auto-updater Ed25519 private key (must never be committed)"
+regex = '''-----BEGIN (?:OPENSSH|RSA|EC|EDDSA)? *PRIVATE KEY-----'''
+tags = ["secret", "tauri", "signing"]
+
+# ─────────────────────────────────────────────────────────────────────────
+# Global allowlist
+# ─────────────────────────────────────────────────────────────────────────
+
+[allowlist]
+description = "Lumen-wide allowlist for false positives"
+paths = [
+  '''\.gitleaks\.toml''',
+  '''pnpm-lock\.yaml''',
+  '''node_modules/''',
+  '''\.svelte-kit/''',
+  '''build/''',
+  '''dist/''',
+  '''\.vercel/''',
+  # ADRs may quote redacted example tokens for context
+  '''docs/adr/.*\.md''',
+]
+regexes = [
+  # Common test/example placeholders
+  '''sk_test_(?:placeholder|example|FAKE|XXXX)''',
+  '''pk_test_(?:placeholder|example|FAKE|XXXX)''',
+  '''postgres:\/\/user:password@host''',
+  # Public Stripe publishable keys in PUBLIC_ env vars are allowed
+  '''PUBLIC_STRIPE_PUBLISHABLE_KEY''',
+]

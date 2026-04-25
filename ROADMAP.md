@@ -1,7 +1,7 @@
 # Lumen Roadmap
 
 > **Last updated:** 2026-04-24
-> **Current version:** `v0.1.0`
+> **Current version:** `v0.8.0`
 > **Status legend:** ✅ Shipped · 🚧 In Progress · 📅 Planned · 🔮 Exploring
 
 Lumen is built using the **PE7 14-Phase Topological Dependency Chain** — each phase is a hard dependency of the next, never skipped, never shortcut.
@@ -25,10 +25,10 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 
 ## Current Milestone
 
-### 🚧 v0.2.0 — Database Schema Foundation
-**Target:** Q2 2026
-**Phase:** 1 (Schema Design)
-**Focus:** Drizzle schema for Nodes, Links, Users, Projects, and auth scaffolding.
+### 🚧 v0.9.0 — Stripe Foundation
+**Target:** Q3 2026
+**Phase:** 8 (Stripe Foundation)
+**Focus:** Stripe SDK, sync script (DB → Stripe products + prices), webhook handler skeleton with signature verification.
 
 ---
 
@@ -37,14 +37,14 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 | Version  | Phase | Milestone                          | Status    | Target     |
 | -------- | ----- | ---------------------------------- | --------- | ---------- |
 | v0.1.0   | 0     | Foundation & Environment           | ✅ Shipped | 2026-04-24 |
-| v0.2.0   | 1     | Database Schema                    | 🚧 In Progress | Q2 2026 |
-| v0.3.0   | 2     | Database Seeding                   | 📅 Planned | Q2 2026    |
-| v0.4.0   | 3     | Authentication (Better Auth + Passkeys + 2FA) | 📅 Planned | Q2 2026 |
-| v0.5.0   | 4     | RBAC & Permissions                 | 📅 Planned | Q3 2026    |
-| v0.6.0   | 5     | Validation & Security Layer        | 📅 Planned | Q3 2026    |
-| v0.7.0   | 6     | Core CRUD (Nodes, Links, Tags)     | 📅 Planned | Q3 2026    |
-| v0.8.0   | 7     | Email Service (Resend)             | 📅 Planned | Q3 2026    |
-| v0.9.0   | 8     | Stripe Foundation                  | 📅 Planned | Q3 2026    |
+| v0.2.0   | 1     | Database Schema                    | ✅ Shipped | 2026-04-24 |
+| v0.3.0   | 2     | Database Seeding                   | ✅ Shipped | 2026-04-24 |
+| v0.4.0   | 3     | Authentication (Better Auth + Passkeys + 2FA) | ✅ Shipped | 2026-04-24 |
+| v0.5.0   | 4     | RBAC & Permissions                 | ✅ Shipped | 2026-04-24 |
+| v0.6.0   | 5     | Validation & Security Layer        | ✅ Shipped | 2026-04-24 |
+| v0.7.0   | 6     | Core CRUD (Nodes, Links, Tags)     | ✅ Shipped | 2026-04-24 |
+| v0.8.0   | 7     | Email Service (Resend)             | ✅ Shipped | 2026-04-24 |
+| v0.9.0   | 8     | Stripe Foundation                  | 🚧 In Progress | Q3 2026 |
 | v0.10.0  | 9     | Billing Services                   | 📅 Planned | Q4 2026    |
 | v0.11.0  | 10    | Stripe & Plan Seeding              | 📅 Planned | Q4 2026    |
 | v0.12.0  | 11    | Pricing Page & Checkout            | 📅 Planned | Q4 2026    |
@@ -75,9 +75,10 @@ Baseline documentation, repository setup, and governance.
 
 ---
 
-### 🚧 Phase 1 — Database Schema (`v0.2.0`)
+### ✅ Phase 1 — Database Schema (`v0.2.0`)
+**Shipped 2026-04-24**
 
-Design and implement the foundational Drizzle schema. **Target: 22 tables across 8 domains** as specified in `docs/LUMEN_VISION.md`.
+Foundational application scaffold + 31-table Drizzle schema across 8 domains per `docs/LUMEN_VISION.md`. Authored in `src/lib/server/db/schema/`; initial migration at `drizzle/0000_initial_schema.sql`.
 
 - `sv create` SvelteKit scaffold with TypeScript strict
 - Vercel adapter configuration
@@ -96,91 +97,53 @@ Design and implement the foundational Drizzle schema. **Target: 22 tables across
 
 ---
 
-### 📅 Phase 2 — Database Seeding (`v0.3.0`)
+### ✅ Phase 2 — Database Seeding (`v0.3.0`)
+**Shipped 2026-04-24**
 
-Reproducible local development data.
-
-- `drizzle/seed.ts` entry point
-- Dev persona generator (15 credentialed test users across tiers + roles)
-- Sample projects, nodes, links, tags, snippets
-- Seed data for all node types (note, task, decision, spec, snippet, person, daily)
-- `pnpm db:seed` and `pnpm db:reset` scripts
-- Seed data isolation from production (env-guarded)
+Reproducible local development data on top of the Phase 1 schema. Personas + RBAC + billing catalog + sample content. See `docs/runbooks/database-seeding.md`.
 
 ---
 
-### 📅 Phase 3 — Authentication (`v0.4.0`)
+### ✅ Phase 3 — Authentication (`v0.4.0`)
+**Shipped 2026-04-24**
 
-Better Auth 1.6.x with passkeys, 2FA, and OAuth.
-
-- Email + password auth
-- Passkey (WebAuthn) registration and sign-in
-- TOTP 2FA
-- OAuth: Google, GitHub
-- Magic link sign-in
-- Session middleware in `hooks.server.ts`
-- Email verification flow
-- Password reset flow
-- Account settings UI (`/account/security`)
-- Sign-in, sign-up, forgot password, verify email routes
+Better Auth 1.6 wired with the Drizzle adapter. Email + password (Argon2id), WebAuthn passkeys, TOTP 2FA + backup codes, OAuth (Google + GitHub), and magic-link sign-in. Sessions persisted in Postgres; cookies prefixed `lumen.`, HttpOnly + SameSite=Lax + Secure-in-prod. See `src/lib/server/auth.ts` and `src/routes/(auth)/`.
 
 ---
 
-### 📅 Phase 4 — RBAC & Permissions (`v0.5.0`)
+### ✅ Phase 4 — RBAC & Permissions (`v0.5.0`)
+**Shipped 2026-04-24**
 
-Fine-grained role-based access control.
-
-- Roles: `owner`, `admin`, `editor`, `viewer`
-- Per-project and per-organization scope
-- `roles`, `permissions`, `role_permissions`, `memberships` tables
-- Permission check helpers (`can(user, action, resource)`)
-- Route-level guards in `hooks.server.ts`
-- UI-level gating via derived permissions
-- Invite flow for teammates (Studio tier)
+Server-authoritative role-based access control with `can()` and `requirePermission()` helpers, route guards in `hooks.server.ts`, and an end-to-end invitation flow (`/account/team` + `/invite/[token]`). See `src/lib/server/rbac.ts`, `src/lib/server/auth-helpers.ts`, `src/lib/server/invitations.ts`.
 
 ---
 
-### 📅 Phase 5 — Validation & Security (`v0.6.0`)
+### ✅ Phase 5 — Validation & Security (`v0.6.0`)
+**Shipped 2026-04-24**
 
-Server-side validation everywhere.
-
-- Valibot schemas for every mutation
-- `sveltekit-superforms` integration with Valibot adapter
-- Centralized error types and error boundary pattern
-- CSRF protection (SvelteKit built-in)
-- Rate limiting (Upstash Redis)
-- Input sanitization for user-generated content (HTML, Markdown)
-- Audit log table and write helper
+Valibot schemas for auth, organizations, nodes, links, tags, and inbox capture. `LumenError` taxonomy keyed to HTTP statuses. Append-only `audit()` helper. Three Upstash sliding-window rate limiters. CSP + HSTS + standard defensive headers via `hooks.server.ts`. Superforms 2.30 added (Phase 6 wires forms).
 
 ---
 
-### 📅 Phase 6 — Core CRUD (`v0.7.0`)
+### ✅ Phase 6 — Core CRUD (`v0.7.0`)
+**Shipped 2026-04-24**
 
-The core Lumen experience.
+The visible product. Node CRUD across all 9 types with version history, command bar (⌘K) backed by `/api/search`, three OKLCH themes (Obsidian/Parchment/Nord-PE7), self-hosted Inter+JetBrains Mono+Literata, global keyboard shortcut registry (`⌘N`, `⌘K`, `⌘⇧T`, `⌘/`), backlinks panel, audit-logged mutations.
 
-- Node CRUD (all types: note, task, decision, spec, snippet, link, person, daily)
-- Bidirectional link creation (`[[wiki-style]]`)
-- Typed relations (`blocks`, `related`, `supersedes`, `derives_from`)
-- Tag CRUD + tag autocomplete
-- Full-text search (Postgres `tsvector`)
-- Node versioning on every edit
-- Command bar (`⌘K`) with fuzzy search
-- Split panes (`⌘\`)
-- Keyboard shortcut system
+**Deferred to 6.x (post-launch hardening):**
+- Postgres `tsvector` migration to upgrade `searchNodes` from substring to full-text.
+- `[[wiki-link]]` auto-link parser inside node bodies.
+- Split panes (`⌘\`).
+- WYSIWYG editor (current surface is markdown textarea).
 
 ---
 
-### 📅 Phase 7 — Email Service (`v0.8.0`)
+### ✅ Phase 7 — Email Service (`v0.8.0`)
+**Shipped 2026-04-24**
 
-Transactional email via Resend.
+Resend integration with Svelte-rendered templates (Welcome, VerifyEmail, PasswordReset, MagicLink, TeamInvite). Better Auth callbacks and the invitation flow now route through `sendEmail()`. Dev path stubs to stderr; production hard-fails without `RESEND_API_KEY`.
 
-- Resend SDK integration
-- Email template system (Svelte-rendered)
-- Welcome email, verification, password reset, magic link
-- Team invite emails
-- Weekly digest email
-- Email preferences in account settings
-- Unsubscribe tokens + handling
+**Deferred to 7.x post-launch:** weekly digest, in-app email preferences, unsubscribe token table.
 
 ---
 
