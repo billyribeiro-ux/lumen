@@ -29,6 +29,41 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
 
 ---
 
+## [0.6.0] — 2026-04-24
+
+> **Phase 5 — Validation & Security**
+> Valibot schemas, audit log helper, rate limiting, CSP and other
+> defensive HTTP headers.
+
+### Added
+
+- `src/lib/validation/schemas.ts` — shared Valibot schemas for auth,
+  org/invites, node CRUD, links, tags, and inbox capture. Inferred
+  TypeScript types exported.
+- `src/lib/errors.ts` — `LumenError` + `LumenErrorCode` (validation,
+  unauthenticated, forbidden, not_found, conflict, gone, rate_limited,
+  entitlement_denied, webhook_replay, integration_unavailable, internal)
+  keyed to HTTP statuses. `flattenValibotIssues()` helper.
+- `src/lib/server/audit.ts` — `audit(event, …)` append-only logger that
+  records actor, IP, user-agent, request id, and before/after JSONB
+  state to `audit_log`. Insertion failures are swallowed to stderr so
+  audit never blocks the user-facing action.
+- `src/lib/server/rate-limit.ts` — three Upstash sliding-window limiters
+  (`auth` 5/60s, `api` 120/60s, `webhook` 300/60s). No-op when Upstash
+  env vars are unset (local dev path).
+- `src/hooks.server.ts` recomposed via `sequence()`:
+  session → route-guard → rate-limit → security-headers. Auth hot
+  endpoints (sign-in, sign-up, forgot-password, `/api/auth/sign-in/email`)
+  IP-rate-limited.
+- Security headers per ARCHITECTURE.md §12.3: CSP, HSTS, X-Content-Type-
+  Options, Referrer-Policy, X-Frame-Options DENY.
+- `valibot` 1.3, `sveltekit-superforms` 2.30, `@upstash/redis` 1.37,
+  `@upstash/ratelimit` 2.0 added.
+
+> **Phase 5 status:** ✅ shipped. Next: Phase 6 — Core CRUD.
+
+---
+
 ## [0.5.0] — 2026-04-24
 
 > **Phase 4 — RBAC & Permissions**
@@ -299,7 +334,8 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
      Update these with each new release tag.
      ══════════════════════════════════════════════════════════════ -->
 
-[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v0.5.0...HEAD
+[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.6.0
 [0.5.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.5.0
 [0.4.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.4.0
 [0.3.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.3.0
