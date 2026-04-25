@@ -29,6 +29,43 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
 
 ---
 
+## [0.15.0] — 2026-04-24
+
+> **Phase 14 — Testing & CI/CD Hardening**
+> Production-ready before v1.0.0 launch.
+
+### Added
+
+- `.github/workflows/ci.yml` — five-job CI pipeline:
+  1. lint-typecheck — `pnpm ci:lint`, `pnpm check`, `pnpm db:check`
+  2. unit-tests — Vitest with browser-mode chromium
+  3. e2e-tests — Playwright against the build, gated on lint+typecheck
+  4. build — production-build smoke
+  5. secret-scan — gitleaks-action
+- `src/lib/server/observability.ts` — Sentry SvelteKit init when
+  `SENTRY_DSN` / `PUBLIC_SENTRY_DSN` is set; PII-stripped beforeSend;
+  no-op fallback for dev.
+- `src/hooks.server.ts` `handleError` now captures via Sentry when
+  configured (includes route id, status, errorId, user id) while
+  retaining structured stderr output.
+- Unit tests for `errors.ts` (LumenError, isLumenError,
+  flattenValibotIssues), `validation/schemas.ts` (email lowercasing,
+  slug rules, sign-in, createNode, createLink self-link guard), and
+  `rbac.ts` (`outranks` comparator).
+- `@sentry/sveltekit` 10.x added.
+
+### Notes
+
+- Vitest runs the existing browser + node project layout from
+  `vite.config.ts`. 16 tests pass locally.
+- The CI workflow expects two repository secrets:
+  `NEON_PREVIEW_DATABASE_URL` and `CI_BETTER_AUTH_SECRET`. Both are
+  test-mode values.
+
+> **Phase 14 status:** ✅ shipped. **Next: v1.0.0 — Public Launch (Web).**
+
+---
+
 ## [0.14.0] — 2026-04-24
 
 > **Phase 13 — Tier-Based Access Control**
@@ -573,7 +610,8 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
      Update these with each new release tag.
      ══════════════════════════════════════════════════════════════ -->
 
-[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v0.14.0...HEAD
+[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v0.15.0...HEAD
+[0.15.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.15.0
 [0.14.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.14.0
 [0.13.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.13.0
 [0.12.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.12.0

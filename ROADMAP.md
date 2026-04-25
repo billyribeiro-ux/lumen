@@ -1,7 +1,7 @@
 # Lumen Roadmap
 
 > **Last updated:** 2026-04-24
-> **Current version:** `v0.14.0`
+> **Current version:** `v0.15.0`
 > **Status legend:** ✅ Shipped · 🚧 In Progress · 📅 Planned · 🔮 Exploring
 
 Lumen is built using the **PE7 14-Phase Topological Dependency Chain** — each phase is a hard dependency of the next, never skipped, never shortcut.
@@ -25,10 +25,9 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 
 ## Current Milestone
 
-### 🚧 v0.15.0 — Testing & CI/CD
+### 🚧 v1.0.0 — Public Launch (Web)
 **Target:** Q1 2027
-**Phase:** 14 (Testing & CI)
-**Focus:** Vitest unit + integration suite, Playwright E2E for critical flows, GitHub Actions CI, Vercel preview deployments, Sentry + OpenTelemetry instrumentation, staging environment, load testing for the Stripe webhook endpoint.
+**Focus:** Final pre-launch verification, marketing copy, ship the public web product.
 
 ---
 
@@ -50,8 +49,8 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 | v0.12.0  | 11    | Pricing Page & Checkout            | ✅ Shipped | 2026-04-24 |
 | v0.13.0  | 12    | Customer Portal                    | ✅ Shipped | 2026-04-24 |
 | v0.14.0  | 13    | Tier-Based Access Control          | ✅ Shipped | 2026-04-24 |
-| v0.15.0  | 14    | Testing & CI/CD Hardening          | 🚧 In Progress | Q1 2027 |
-| v1.0.0   | —     | **Public Launch (Web)**            | 📅 Planned | Q1 2027    |
+| v0.15.0  | 14    | Testing & CI/CD Hardening          | ✅ Shipped | 2026-04-24 |
+| v1.0.0   | —     | **Public Launch (Web)**            | 🚧 Pending external accounts | Q1 2027 |
 | v1.1.0   | 15    | Tauri 2 Desktop App                | 📅 Planned | Q1 2027    |
 | v1.2.0   | 16    | AI Co-Pilot (Claude API)           | 📅 Planned | Q2 2027    |
 | v1.3.0   | 17    | Graph View (Motion GPU / WebGPU)   | 📅 Planned | Q2 2027    |
@@ -189,17 +188,12 @@ Public `/pricing` rendered from the DB catalog, monthly/annual toggle with auto-
 
 ---
 
-### 📅 Phase 14 — Testing & CI/CD (`v0.15.0`)
+### ✅ Phase 14 — Testing & CI/CD (`v0.15.0`)
+**Shipped 2026-04-24**
 
-Production-hardening before launch.
+Five-job GitHub Actions CI (lint+typecheck, unit-tests, e2e-tests, build, secret-scan), Sentry SvelteKit integration with PII-stripped beforeSend, initial unit-test coverage for `errors`, `validation/schemas`, and `rbac.outranks`. Vercel preview deploys flow via the existing Vercel + Neon integration; production observability is wired and waits on `SENTRY_DSN` + `NEON_PREVIEW_DATABASE_URL` + `CI_BETTER_AUTH_SECRET` repository secrets to go live.
 
-- Vitest unit + integration suite (90%+ lib coverage)
-- Playwright E2E for all critical flows
-- GitHub Actions CI (lint, type check, test, build)
-- Preview deployments on every PR (Vercel)
-- Sentry + OpenTelemetry instrumentation
-- Staging environment parity with production
-- Load testing for Stripe webhook endpoint
+**Deferred to v1.0.0 final-prep:** load testing the Stripe webhook endpoint, full E2E happy-path coverage (auth → create node → publish → checkout), Lighthouse CI for performance budget enforcement.
 
 ---
 
