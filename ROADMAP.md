@@ -1,7 +1,7 @@
 # Lumen Roadmap
 
 > **Last updated:** 2026-04-24
-> **Current version:** `v1.3.0`
+> **Current version:** `v1.4.0` — PE7 14-phase chain complete.
 > **Status legend:** ✅ Shipped · 🚧 In Progress · 📅 Planned · 🔮 Exploring
 
 Lumen is built using the **PE7 14-Phase Topological Dependency Chain** — each phase is a hard dependency of the next, never skipped, never shortcut.
@@ -25,10 +25,9 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 
 ## Current Milestone
 
-### 🚧 v1.4.0 — Public Publishing
-**Target:** Q2 2027
-**Phase:** 18 (Publishing)
-**Focus:** ⌘⇧P publishes any node to a public read-only URL; custom subdomains for Studio; SEO-optimized rendering; privacy-respecting analytics; optional comments.
+### 🔮 v2.0.0 — Team Collaboration (post-PE7)
+**Target:** Q3 2027
+**Focus:** CRDT-based real-time editing, presence, shared projects, team RBAC, SSO (SAML/OIDC), audit-log export.
 
 ---
 
@@ -55,7 +54,7 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 | v1.1.0   | 15    | Tauri 2 Desktop App                | ✅ Scaffold shipped | 2026-04-24 |
 | v1.2.0   | 16    | AI Co-Pilot (Claude API)           | ✅ Shipped | 2026-04-24 |
 | v1.3.0   | 17    | Graph View (Motion GPU / WebGPU)   | ✅ Shipped | 2026-04-24 |
-| v1.4.0   | 18    | Public Publishing & Subdomains     | 🚧 In Progress | Q2 2027 |
+| v1.4.0   | 18    | Public Publishing & Subdomains     | ✅ Shipped | 2026-04-24 |
 | v2.0.0   | —     | Team Collaboration (Studio tier)   | 🔮 Exploring | Q3 2027  |
 
 ---
@@ -225,15 +224,10 @@ D3 force-directed layout on a 2D canvas with hue-mapped node types and per-relat
 
 ---
 
-### 📅 Phase 18 — Public Publishing (`v1.4.0`)
+### ✅ Phase 18 — Public Publishing (`v1.4.0`)
+**Shipped 2026-04-24**
 
-Share any node as a public page.
-
-- One-keystroke publish (`⌘⇧P`)
-- Custom subdomain support (`billy.lumen.so`)
-- SEO-optimized rendering
-- Analytics (privacy-respecting, self-hosted)
-- Comment threads (opt-in)
+`/api/publish` POST/DELETE pins a `node_versions.id` to a public URL. SEO-rendered `/p/[slug]` view with Lumen attribution. Tier-gated (Pro path-based, Studio custom subdomain). Edge subdomain routing arrives in v1.4.x once the Vercel rewrite is in place.
 
 ---
 

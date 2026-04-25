@@ -29,6 +29,37 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
 
 ---
 
+## [1.4.0] — 2026-04-24
+
+> **Phase 18 — Public Publishing**
+> One-keystroke publish (⌘⇧P) to a public read-only URL.
+
+### Added
+
+- `src/lib/server/publishing.ts` — `publish()` / `unpublish()` /
+  `getPublic()`. Each `publications` row pins a specific
+  `node_versions.id`, so editing the source node after publish does not
+  silently update the public copy until the user republishes.
+- `src/routes/api/publish/+server.ts` — POST publishes (entitlement-gated,
+  Studio-only for custom subdomains), DELETE unpublishes. Both audit-logged.
+- `src/routes/p/[slug]/+page.{server,svelte}` — public read-only page.
+  SEO meta tags, Lumen attribution, optional comments section
+  scaffolded. The route subscribes to a `x-lumen-subdomain` request
+  header that the Vercel edge function will set in v1.4.x to support
+  Studio's custom-subdomain renders (`<username>.lumen.so/p/<slug>`).
+
+### Tier gating
+
+| Tier | Path-based publish | Custom subdomain | Comments |
+|---|---|---|---|
+| Free | ❌ | ❌ | — |
+| Pro | ✅ | ❌ | optional |
+| Studio | ✅ | ✅ | optional |
+
+> **Phase 18 status:** ✅ shipped. **PE7 14-phase chain complete.**
+
+---
+
 ## [1.3.0] — 2026-04-24
 
 > **Phase 17 — Graph View**
@@ -740,7 +771,8 @@ and never reveal the system prompt itself.
      Update these with each new release tag.
      ══════════════════════════════════════════════════════════════ -->
 
-[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v1.3.0...HEAD
+[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v1.4.0...HEAD
+[1.4.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v1.4.0
 [1.3.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v1.3.0
 [1.2.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v1.2.0
 [1.1.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v1.1.0
