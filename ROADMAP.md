@@ -1,7 +1,7 @@
 # Lumen Roadmap
 
 > **Last updated:** 2026-04-24
-> **Current version:** `v0.11.0`
+> **Current version:** `v0.12.0`
 > **Status legend:** ✅ Shipped · 🚧 In Progress · 📅 Planned · 🔮 Exploring
 
 Lumen is built using the **PE7 14-Phase Topological Dependency Chain** — each phase is a hard dependency of the next, never skipped, never shortcut.
@@ -25,10 +25,10 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 
 ## Current Milestone
 
-### 🚧 v0.12.0 — Pricing Page & Checkout
+### 🚧 v0.13.0 — Customer Portal
 **Target:** Q4 2026
-**Phase:** 11 (Pricing & Checkout)
-**Focus:** /pricing rendered from DB, monthly/annual toggle, Stripe Checkout session, post-checkout redirect with state reconciliation, 30-day Pro trial grant on signup.
+**Phase:** 12 (Customer Portal)
+**Focus:** Stripe-hosted billing portal, in-app billing summary at /account/billing, invoice history, payment-method management, plan change/cancel flows.
 
 ---
 
@@ -47,8 +47,8 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 | v0.9.0   | 8     | Stripe Foundation                  | ✅ Shipped | 2026-04-24 |
 | v0.10.0  | 9     | Billing Services                   | ✅ Shipped | 2026-04-24 |
 | v0.11.0  | 10    | Stripe & Plan Seeding              | ✅ Shipped | 2026-04-24 |
-| v0.12.0  | 11    | Pricing Page & Checkout            | 🚧 In Progress | Q4 2026 |
-| v0.13.0  | 12    | Customer Portal                    | 📅 Planned | Q4 2026    |
+| v0.12.0  | 11    | Pricing Page & Checkout            | ✅ Shipped | 2026-04-24 |
+| v0.13.0  | 12    | Customer Portal                    | 🚧 In Progress | Q4 2026 |
 | v0.14.0  | 13    | Tier-Based Access Control          | 📅 Planned | Q4 2026    |
 | v0.15.0  | 14    | Testing & CI/CD Hardening          | 📅 Planned | Q1 2027    |
 | v1.0.0   | —     | **Public Launch (Web)**            | 📅 Planned | Q1 2027    |
@@ -168,15 +168,10 @@ Stripe webhook handlers for subscription lifecycle (state machine reflected in `
 
 ---
 
-### 📅 Phase 11 — Pricing Page & Checkout (`v0.12.0`)
+### ✅ Phase 11 — Pricing Page & Checkout (`v0.12.0`)
+**Shipped 2026-04-24**
 
-Marketing-grade pricing page + checkout flow.
-
-- `/pricing` page (dynamic, rendered from DB)
-- Monthly / annual toggle with savings callout
-- Checkout session creation endpoint
-- Post-checkout redirect with state reconciliation
-- Trial grant on signup (30 days, no card)
+Public `/pricing` rendered from the DB catalog, monthly/annual toggle with auto-computed savings, Stripe Checkout session creation at `/api/checkout`, 30-day Pro trial via `subscription_data.trial_period_days`, organization metadata threaded so webhook handlers attach the subscription to the right org.
 
 ---
 

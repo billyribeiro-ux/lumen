@@ -29,6 +29,34 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
 
 ---
 
+## [0.12.0] — 2026-04-24
+
+> **Phase 11 — Pricing Page & Checkout**
+
+### Added
+
+- `src/routes/(marketing)/pricing/+page.{server.ts,svelte}` — public
+  pricing page rendered from the DB catalog. Monthly/annual toggle.
+  Auto-computed annual savings ribbon. Feature manifest expanded into
+  per-plan checkmarks.
+- `src/routes/(marketing)/+layout.svelte` — public marketing shell.
+- `src/routes/api/checkout/+server.ts` — POST handler that resolves
+  the Stripe price by `lookupKey`, creates a Checkout session with
+  `client_reference_id`, `automatic_tax`, `allow_promotion_codes`,
+  `subscription_data.metadata` (organization_id + user_id so the
+  Phase 9 webhook handlers attach the resulting subscription to the
+  right org), and a 30-day Pro trial when the lookup key starts with
+  `pro_`. Anonymous users redirect to `/sign-in?next=/pricing`.
+
+### Notes
+
+- Page is public (`/pricing` is in the auth allowlist).
+- The success URL points at `/account/billing` (Phase 12).
+
+> **Phase 11 status:** ✅ shipped. Next: Phase 12 — Customer Portal.
+
+---
+
 ## [0.11.0] — 2026-04-24
 
 > **Phase 10 — Stripe & Plan Seeding**
@@ -496,7 +524,8 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
      Update these with each new release tag.
      ══════════════════════════════════════════════════════════════ -->
 
-[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v0.11.0...HEAD
+[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v0.12.0...HEAD
+[0.12.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.12.0
 [0.11.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.11.0
 [0.10.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.10.0
 [0.9.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.9.0
