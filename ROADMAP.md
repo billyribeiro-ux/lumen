@@ -1,7 +1,7 @@
 # Lumen Roadmap
 
 > **Last updated:** 2026-04-24
-> **Current version:** `v0.12.0`
+> **Current version:** `v0.13.0`
 > **Status legend:** ✅ Shipped · 🚧 In Progress · 📅 Planned · 🔮 Exploring
 
 Lumen is built using the **PE7 14-Phase Topological Dependency Chain** — each phase is a hard dependency of the next, never skipped, never shortcut.
@@ -25,10 +25,10 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 
 ## Current Milestone
 
-### 🚧 v0.13.0 — Customer Portal
+### 🚧 v0.14.0 — Tier-Based Access Control
 **Target:** Q4 2026
-**Phase:** 12 (Customer Portal)
-**Focus:** Stripe-hosted billing portal, in-app billing summary at /account/billing, invoice history, payment-method management, plan change/cancel flows.
+**Phase:** 13 (Tier Access)
+**Focus:** Per-request entitlement cache, tier limits enforcement (max nodes, AI quota, seat count, publish count), UI gating, upgrade prompts at the point of friction.
 
 ---
 
@@ -48,8 +48,8 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 | v0.10.0  | 9     | Billing Services                   | ✅ Shipped | 2026-04-24 |
 | v0.11.0  | 10    | Stripe & Plan Seeding              | ✅ Shipped | 2026-04-24 |
 | v0.12.0  | 11    | Pricing Page & Checkout            | ✅ Shipped | 2026-04-24 |
-| v0.13.0  | 12    | Customer Portal                    | 🚧 In Progress | Q4 2026 |
-| v0.14.0  | 13    | Tier-Based Access Control          | 📅 Planned | Q4 2026    |
+| v0.13.0  | 12    | Customer Portal                    | ✅ Shipped | 2026-04-24 |
+| v0.14.0  | 13    | Tier-Based Access Control          | 🚧 In Progress | Q4 2026 |
 | v0.15.0  | 14    | Testing & CI/CD Hardening          | 📅 Planned | Q1 2027    |
 | v1.0.0   | —     | **Public Launch (Web)**            | 📅 Planned | Q1 2027    |
 | v1.1.0   | 15    | Tauri 2 Desktop App                | 📅 Planned | Q1 2027    |
@@ -175,16 +175,10 @@ Public `/pricing` rendered from the DB catalog, monthly/annual toggle with auto-
 
 ---
 
-### 📅 Phase 12 — Customer Portal (`v0.13.0`)
+### ✅ Phase 12 — Customer Portal (`v0.13.0`)
+**Shipped 2026-04-24**
 
-Self-serve billing management.
-
-- Stripe-hosted customer portal integration
-- In-app billing summary (`/account/billing`)
-- Invoice history with download
-- Payment method management
-- Plan change flow (upgrade / downgrade)
-- Cancel flow with retention prompt
+`/account/billing` shows the active plan, status, trial countdown, payment methods, and recent invoices. "Manage subscription" / "Manage payment methods" exchange the user's Stripe customer id for a Billing Portal session at `/api/portal`.
 
 ---
 

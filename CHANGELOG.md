@@ -29,6 +29,24 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
 
 ---
 
+## [0.13.0] — 2026-04-24
+
+> **Phase 12 — Customer Portal**
+
+### Added
+
+- `src/routes/account/billing/+page.{server.ts,svelte}` — in-app billing
+  summary: current plan + status, trial countdown, payment-methods
+  list, last 10 invoices with download links.
+- `src/routes/api/portal/+server.ts` — exchanges the user's Stripe
+  customer id for a hosted Billing Portal session and 303s.
+- "Manage subscription" + "Manage payment methods" buttons in the
+  billing summary post to the portal endpoint.
+
+> **Phase 12 status:** ✅ shipped. Next: Phase 13 — Tier-Based Access Control.
+
+---
+
 ## [0.12.0] — 2026-04-24
 
 > **Phase 11 — Pricing Page & Checkout**
@@ -524,7 +542,8 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
      Update these with each new release tag.
      ══════════════════════════════════════════════════════════════ -->
 
-[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v0.12.0...HEAD
+[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v0.13.0...HEAD
+[0.13.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.13.0
 [0.12.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.12.0
 [0.11.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.11.0
 [0.10.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.10.0
