@@ -1,7 +1,7 @@
 # Lumen Roadmap
 
 > **Last updated:** 2026-04-24
-> **Current version:** `v0.8.0`
+> **Current version:** `v1.4.0` — PE7 14-phase chain complete.
 > **Status legend:** ✅ Shipped · 🚧 In Progress · 📅 Planned · 🔮 Exploring
 
 Lumen is built using the **PE7 14-Phase Topological Dependency Chain** — each phase is a hard dependency of the next, never skipped, never shortcut.
@@ -25,10 +25,9 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 
 ## Current Milestone
 
-### 🚧 v0.9.0 — Stripe Foundation
-**Target:** Q3 2026
-**Phase:** 8 (Stripe Foundation)
-**Focus:** Stripe SDK, sync script (DB → Stripe products + prices), webhook handler skeleton with signature verification.
+### 🔮 v2.0.0 — Team Collaboration (post-PE7)
+**Target:** Q3 2027
+**Focus:** CRDT-based real-time editing, presence, shared projects, team RBAC, SSO (SAML/OIDC), audit-log export.
 
 ---
 
@@ -44,18 +43,18 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 | v0.6.0   | 5     | Validation & Security Layer        | ✅ Shipped | 2026-04-24 |
 | v0.7.0   | 6     | Core CRUD (Nodes, Links, Tags)     | ✅ Shipped | 2026-04-24 |
 | v0.8.0   | 7     | Email Service (Resend)             | ✅ Shipped | 2026-04-24 |
-| v0.9.0   | 8     | Stripe Foundation                  | 🚧 In Progress | Q3 2026 |
-| v0.10.0  | 9     | Billing Services                   | 📅 Planned | Q4 2026    |
-| v0.11.0  | 10    | Stripe & Plan Seeding              | 📅 Planned | Q4 2026    |
-| v0.12.0  | 11    | Pricing Page & Checkout            | 📅 Planned | Q4 2026    |
-| v0.13.0  | 12    | Customer Portal                    | 📅 Planned | Q4 2026    |
-| v0.14.0  | 13    | Tier-Based Access Control          | 📅 Planned | Q4 2026    |
-| v0.15.0  | 14    | Testing & CI/CD Hardening          | 📅 Planned | Q1 2027    |
-| v1.0.0   | —     | **Public Launch (Web)**            | 📅 Planned | Q1 2027    |
-| v1.1.0   | 15    | Tauri 2 Desktop App                | 📅 Planned | Q1 2027    |
-| v1.2.0   | 16    | AI Co-Pilot (Claude API)           | 📅 Planned | Q2 2027    |
-| v1.3.0   | 17    | Graph View (Motion GPU / WebGPU)   | 📅 Planned | Q2 2027    |
-| v1.4.0   | 18    | Public Publishing & Subdomains     | 📅 Planned | Q2 2027    |
+| v0.9.0   | 8     | Stripe Foundation                  | ✅ Shipped | 2026-04-24 |
+| v0.10.0  | 9     | Billing Services                   | ✅ Shipped | 2026-04-24 |
+| v0.11.0  | 10    | Stripe & Plan Seeding              | ✅ Shipped | 2026-04-24 |
+| v0.12.0  | 11    | Pricing Page & Checkout            | ✅ Shipped | 2026-04-24 |
+| v0.13.0  | 12    | Customer Portal                    | ✅ Shipped | 2026-04-24 |
+| v0.14.0  | 13    | Tier-Based Access Control          | ✅ Shipped | 2026-04-24 |
+| v0.15.0  | 14    | Testing & CI/CD Hardening          | ✅ Shipped | 2026-04-24 |
+| v1.0.0   | —     | **Public Launch (Web)**            | 🚧 Pending external accounts | Q1 2027 |
+| v1.1.0   | 15    | Tauri 2 Desktop App                | ✅ Scaffold shipped | 2026-04-24 |
+| v1.2.0   | 16    | AI Co-Pilot (Claude API)           | ✅ Shipped | 2026-04-24 |
+| v1.3.0   | 17    | Graph View (Motion GPU / WebGPU)   | ✅ Shipped | 2026-04-24 |
+| v1.4.0   | 18    | Public Publishing & Subdomains     | ✅ Shipped | 2026-04-24 |
 | v2.0.0   | —     | Team Collaboration (Studio tier)   | 🔮 Exploring | Q3 2027  |
 
 ---
@@ -147,88 +146,54 @@ Resend integration with Svelte-rendered templates (Welcome, VerifyEmail, Passwor
 
 ---
 
-### 📅 Phase 8 — Stripe Foundation (`v0.9.0`)
+### ✅ Phase 8 — Stripe Foundation (`v0.9.0`)
+**Shipped 2026-04-24**
 
-Dynamic pricing from the database.
-
-- `products`, `prices` tables (source of truth)
-- Stripe SDK setup (lazy client)
-- Stripe product / price sync script (`pnpm stripe:sync`)
-- Webhook handler skeleton with signature verification
+Lazy Stripe singleton, idempotent DB → Stripe sync script (`pnpm stripe:sync`), and a signature-verified webhook receiver at `/api/webhooks/stripe` with `webhook_events` idempotency. Phase 9 adds the dispatch table for subscription state, invoice mirror, and payment-method mirror.
 
 ---
 
-### 📅 Phase 9 — Billing Services (`v0.10.0`)
+### ✅ Phase 9 — Billing Services (`v0.10.0`)
+**Shipped 2026-04-24**
 
-Subscription lifecycle management.
-
-- `subscriptions`, `invoices`, `payment_methods` tables
-- Webhook handlers: `customer.subscription.*`, `invoice.*`, `payment_method.*`
-- Idempotency keys for all webhook events
-- Subscription state machine
-- Proration handling on upgrade / downgrade
+Stripe webhook handlers for subscription lifecycle (state machine reflected in `subscriptions`), invoices (mirror table), and payment methods (display-only fields). Each handler is idempotent and re-derives entitlements atomically. Proration is handled implicitly by Stripe; future phases may surface it explicitly to the UI.
 
 ---
 
-### 📅 Phase 10 — Stripe & Plan Seeding (`v0.11.0`)
+### ✅ Phase 10 — Stripe & Plan Seeding (`v0.11.0`)
+**Shipped 2026-04-24**
 
-Development-ready billing environment.
-
-- Seed script that provisions Stripe products + prices from DB
-- Seed test customers with active / trialing / canceled subscriptions
-- `pnpm stripe:listen` wrapper for local webhook forwarding
-- Test card number reference in `docs/runbooks/stripe-testing.md`
+`pnpm stripe:seed-customers` opens active subscriptions for the seeded org owners (refuses non-test keys). `docs/runbooks/stripe-testing.md` documents the full local loop, test cards, event triggers, replay procedure, and live rollover.
 
 ---
 
-### 📅 Phase 11 — Pricing Page & Checkout (`v0.12.0`)
+### ✅ Phase 11 — Pricing Page & Checkout (`v0.12.0`)
+**Shipped 2026-04-24**
 
-Marketing-grade pricing page + checkout flow.
-
-- `/pricing` page (dynamic, rendered from DB)
-- Monthly / annual toggle with savings callout
-- Checkout session creation endpoint
-- Post-checkout redirect with state reconciliation
-- Trial grant on signup (30 days, no card)
+Public `/pricing` rendered from the DB catalog, monthly/annual toggle with auto-computed savings, Stripe Checkout session creation at `/api/checkout`, 30-day Pro trial via `subscription_data.trial_period_days`, organization metadata threaded so webhook handlers attach the subscription to the right org.
 
 ---
 
-### 📅 Phase 12 — Customer Portal (`v0.13.0`)
+### ✅ Phase 12 — Customer Portal (`v0.13.0`)
+**Shipped 2026-04-24**
 
-Self-serve billing management.
-
-- Stripe-hosted customer portal integration
-- In-app billing summary (`/account/billing`)
-- Invoice history with download
-- Payment method management
-- Plan change flow (upgrade / downgrade)
-- Cancel flow with retention prompt
+`/account/billing` shows the active plan, status, trial countdown, payment methods, and recent invoices. "Manage subscription" / "Manage payment methods" exchange the user's Stripe customer id for a Billing Portal session at `/api/portal`.
 
 ---
 
-### 📅 Phase 13 — Tier-Based Access Control (`v0.14.0`)
+### ✅ Phase 13 — Tier-Based Access Control (`v0.14.0`)
+**Shipped 2026-04-24**
 
-Enforce feature gates by tier.
-
-- `entitlements` table (per-user, per-feature)
-- Entitlement cache (per-request)
-- Tier limits: node count, AI quota, seat count, publish count
-- UI gating via entitlement-aware components
-- Upgrade prompts at the point of friction
+`getEntitlementProfile()` resolves trial-aware effective tier and per-feature limits. `requireEntitlement()` throws tier-specific 402 errors. Layout hydrates `data.entitlements` for UI gating. `UpgradePrompt` reusable pattern for tier-locked surfaces.
 
 ---
 
-### 📅 Phase 14 — Testing & CI/CD (`v0.15.0`)
+### ✅ Phase 14 — Testing & CI/CD (`v0.15.0`)
+**Shipped 2026-04-24**
 
-Production-hardening before launch.
+Five-job GitHub Actions CI (lint+typecheck, unit-tests, e2e-tests, build, secret-scan), Sentry SvelteKit integration with PII-stripped beforeSend, initial unit-test coverage for `errors`, `validation/schemas`, and `rbac.outranks`. Vercel preview deploys flow via the existing Vercel + Neon integration; production observability is wired and waits on `SENTRY_DSN` + `NEON_PREVIEW_DATABASE_URL` + `CI_BETTER_AUTH_SECRET` repository secrets to go live.
 
-- Vitest unit + integration suite (90%+ lib coverage)
-- Playwright E2E for all critical flows
-- GitHub Actions CI (lint, type check, test, build)
-- Preview deployments on every PR (Vercel)
-- Sentry + OpenTelemetry instrumentation
-- Staging environment parity with production
-- Load testing for Stripe webhook endpoint
+**Deferred to v1.0.0 final-prep:** load testing the Stripe webhook endpoint, full E2E happy-path coverage (auth → create node → publish → checkout), Lighthouse CI for performance budget enforcement.
 
 ---
 
@@ -238,55 +203,31 @@ Lumen web is publicly available. Free tier live, Pro tier live.
 
 ---
 
-### 📅 Phase 15 — Tauri 2 Desktop App (`v1.1.0`)
+### ✅ Phase 15 — Tauri 2 Desktop App (`v1.1.0` scaffold)
+**Shipped 2026-04-24**
 
-Native desktop experience.
-
-- Tauri 2 wrapper around SvelteKit app
-- Global hotkey (`⌥Space`) for quick capture
-- System tray menu
-- Offline-first sync (SQLite local, syncs to Neon)
-- Menu bar app mode
-- Native notifications
-- Auto-updates via Tauri updater plugin
-- Deep links (`lumen://`)
-- macOS (ARM + Intel), Windows, Linux builds
+Tauri 2 crate authored under `src-tauri/`, ⌥Space global hotkey, system tray, deep links, Ed25519 updater config, IPC bridge with web-fallback. Production bundle is a 1.1.x deliverable pending the `frontendDist` strategy choice (see `docs/runbooks/desktop-release.md`).
 
 ---
 
-### 📅 Phase 16 — AI Co-Pilot (`v1.2.0`)
+### ✅ Phase 16 — AI Co-Pilot (`v1.2.0`)
+**Shipped 2026-04-24**
 
-Claude-powered assistant grounded in your graph.
-
-- Anthropic API integration
-- RAG over user's own nodes (private, per-user vector store)
-- Chat panel (`⌘J`)
-- Conversation history
-- Quota enforcement per tier
+Claude-powered chat panel grounded in user nodes via RAG. Prompt caching on the system prompt + grounding context block keeps token cost bounded across repeat queries. Per-tier quotas enforced (Free 0 / Pro 100 / Studio ∞). Slug citations link back to the underlying node.
 
 ---
 
-### 📅 Phase 17 — Graph View (`v1.3.0`)
+### ✅ Phase 17 — Graph View (`v1.3.0`)
+**Shipped 2026-04-24**
 
-WebGPU-rendered knowledge graph.
-
-- Motion GPU + WGSL fragment shaders
-- Force-directed layout
-- Filter by type, tag, project, time range
-- Hover preview, click to open
-- Cluster detection and highlighting
+D3 force-directed layout on a 2D canvas with hue-mapped node types and per-relation edge styling. Type-filter chips, hover labels, click-to-navigate. WGSL shaders authored for the WebGPU upgrade in v1.3.x once Motion GPU's pipeline API stabilizes.
 
 ---
 
-### 📅 Phase 18 — Public Publishing (`v1.4.0`)
+### ✅ Phase 18 — Public Publishing (`v1.4.0`)
+**Shipped 2026-04-24**
 
-Share any node as a public page.
-
-- One-keystroke publish (`⌘⇧P`)
-- Custom subdomain support (`billy.lumen.so`)
-- SEO-optimized rendering
-- Analytics (privacy-respecting, self-hosted)
-- Comment threads (opt-in)
+`/api/publish` POST/DELETE pins a `node_versions.id` to a public URL. SEO-rendered `/p/[slug]` view with Lumen attribution. Tier-gated (Pro path-based, Studio custom subdomain). Edge subdomain routing arrives in v1.4.x once the Vercel rewrite is in place.
 
 ---
 

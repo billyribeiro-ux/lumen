@@ -1,0 +1,20 @@
+{
+  "$schema": "https://schema.tauri.app/capability/2",
+  "identifier": "main-capability",
+  "description": "Lumen desktop main window default capabilities.",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "shell:allow-open",
+    "fs:default",
+    "fs:allow-read-text-file",
+    "fs:allow-write-text-file",
+    "dialog:default",
+    "notification:default",
+    "deep-link:default",
+    "global-shortcut:default",
+    "updater:default",
+    "store:default",
+    "sql:default"
+  ]
+}

@@ -2,6 +2,7 @@ import { redirect } from '@sveltejs/kit';
 import { eq, sql } from 'drizzle-orm';
 import { db } from '$lib/server/db';
 import { memberships, organizations } from '$lib/server/db/schema/organizations';
+import { getEntitlementProfile } from '$lib/server/entitlements';
 import { permissionsForOrg } from '$lib/server/rbac';
 import type { LayoutServerLoad } from './$types';
 
@@ -48,6 +49,8 @@ export const load: LayoutServerLoad = async (event) => {
     ? await permissionsForOrg(user.id, activeOrgId)
     : { role: null, keys: [] as string[] };
 
+  const entitlements = activeOrgId ? await getEntitlementProfile(user.id, activeOrgId) : null;
+
   const themeCookie = event.cookies.get('lumen.theme');
   const initialTheme: 'obsidian' | 'parchment' | 'nord-pe7' =
     themeCookie === 'parchment' || themeCookie === 'nord-pe7' ? themeCookie : 'obsidian';
@@ -58,6 +61,7 @@ export const load: LayoutServerLoad = async (event) => {
     activeOrgId,
     role,
     permissions: new Set(keys),
+    entitlements,
     initialTheme,
   };
 };

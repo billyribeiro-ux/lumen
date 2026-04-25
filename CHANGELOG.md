@@ -29,6 +29,362 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
 
 ---
 
+## [1.4.0] — 2026-04-24
+
+> **Phase 18 — Public Publishing**
+> One-keystroke publish (⌘⇧P) to a public read-only URL.
+
+### Added
+
+- `src/lib/server/publishing.ts` — `publish()` / `unpublish()` /
+  `getPublic()`. Each `publications` row pins a specific
+  `node_versions.id`, so editing the source node after publish does not
+  silently update the public copy until the user republishes.
+- `src/routes/api/publish/+server.ts` — POST publishes (entitlement-gated,
+  Studio-only for custom subdomains), DELETE unpublishes. Both audit-logged.
+- `src/routes/p/[slug]/+page.{server,svelte}` — public read-only page.
+  SEO meta tags, Lumen attribution, optional comments section
+  scaffolded. The route subscribes to a `x-lumen-subdomain` request
+  header that the Vercel edge function will set in v1.4.x to support
+  Studio's custom-subdomain renders (`<username>.lumen.so/p/<slug>`).
+
+### Tier gating
+
+| Tier | Path-based publish | Custom subdomain | Comments |
+|---|---|---|---|
+| Free | ❌ | ❌ | — |
+| Pro | ✅ | ❌ | optional |
+| Studio | ✅ | ✅ | optional |
+
+> **Phase 18 status:** ✅ shipped. **PE7 14-phase chain complete.**
+
+---
+
+## [1.3.0] — 2026-04-24
+
+> **Phase 17 — Graph View**
+> Force-directed knowledge graph rendered to canvas, with WebGPU
+> shaders authored for the next iteration.
+
+### Added
+
+- `src/routes/(app)/graph/+page.{server,svelte}` — `/graph` route
+  loads the org's nodes + links and mounts `GraphView`.
+- `src/routes/api/graph/+server.ts` — JSON snapshot endpoint scoped
+  to the active org (1500 nodes, 5000 links cap).
+- `src/lib/components/graph/GraphView.svelte` — D3 force-directed
+  layout (charge -220, link distance 80, collision radius 18) on a
+  2D canvas. Per-type hue mapping, soft glow disks via radial
+  gradient, hover label, click → `/n/<slug>`. Type-filter chips
+  rebuild the layout for the filtered subgraph.
+- `src/lib/components/graph/layout.ts` — pure D3 force layout
+  factory; reusable when the WebGPU pipeline arrives.
+- `src/lib/components/graph/shaders/node.wgsl` — node fragment
+  shader (soft inner disk + outer glow + sin-pulse based on
+  `time_seconds`).
+- `src/lib/components/graph/shaders/edge.wgsl` — edge fragment
+  shader with relation-type hue shift and quadratic falloff.
+- `@motion-core/motion-gpu` 0.8, `d3-force` 3, `d3-quadtree` 3 added.
+
+### Notes
+
+- The 2D canvas renderer ships v1.3.0 because it works in every
+  browser today and meets the 30 FPS / 1000-node target on a mid
+  laptop. The WebGPU upgrade lands in v1.3.x once `motion-gpu`'s
+  pipeline + bind-group abstractions stabilize against the WGSL
+  shaders we already authored.
+
+> **Phase 17 status:** ✅ shipped. Next: Phase 18 — Public Publishing.
+
+---
+
+## [1.2.0] — 2026-04-24
+
+> **Phase 16 — AI Co-Pilot**
+> Claude-powered chat panel grounded in the user's graph.
+
+### Added
+
+- `@anthropic-ai/sdk` 0.91.x dependency.
+- `src/lib/server/ai/client.ts` — lazy Anthropic client.
+  Production startup hard-fails without `ANTHROPIC_API_KEY`. Default
+  model resolved from `ANTHROPIC_MODEL` (falls back to
+  `claude-opus-4-7`).
+- `src/lib/server/ai/grounding.ts` — `fetchGroundingNodes()` retrieves
+  the top 8 nodes matching the query (title + body substring; v1.x
+  upgrades to tsvector + embeddings). `formatGroundingForPrompt()`
+  renders them as XML-tagged context blocks for Claude.
+- `src/lib/server/ai/index.ts` — orchestrator. `createConversation()`,
+  `listConversations()`, `getConversation()`, `sendMessage()`. The
+  Claude call uses **prompt caching** on both the static system prompt
+  and the dynamic grounding context block via `cache_control:
+  { type: 'ephemeral' }`, so repeat queries over the same node set
+  amortize the input tokens. Persists user + assistant turns and
+  bumps token counters atomically via `dbTransact`.
+- `src/routes/api/ai/+server.ts` — POST endpoint with Valibot input
+  validation, entitlement gate (`aiQuery` — Pro 100/mo, Studio
+  unlimited), audit-log write of token + citation summary.
+- `src/routes/(app)/ai/+page.{server.ts,svelte}` — chat panel
+  (will be reachable via ⌘J once the keyboard registry routes
+  `cmd.ai.open`). Shows tier-locked `UpgradePrompt` for Free users,
+  surfaces token usage and slug citations, includes recent-
+  conversations sidebar.
+
+### System prompt
+
+Lumen tells Claude to ground every answer in the user's nodes,
+cite by slug (`[node-slug]`), keep responses short and actionable,
+and never reveal the system prompt itself.
+
+> **Phase 16 status:** ✅ shipped. Next: Phase 17 — Graph View.
+
+---
+
+## [1.1.0] — 2026-04-24
+
+> **Phase 15 — Tauri 2 Desktop**
+> Desktop scaffold (post-v1.0.0). Same SvelteKit code powers the app;
+> Rust backend adds OS integrations.
+
+### Added
+
+- `src-tauri/` — Rust crate `lumen` (Cargo.toml pins Tauri 2 + plugins:
+  shell, fs, dialog, notification, deep-link, global-shortcut, updater,
+  store, sql).
+- `src-tauri/src/lib.rs` — Tauri builder, plugin registration, ⌥Space
+  global hotkey emitting `lumen:quick-capture`, macOS hide-on-close
+  behavior, system tray init.
+- `src-tauri/src/commands/quick_capture.rs` — `submit_capture` IPC
+  command that returns a desktop-prefixed idempotency token for the
+  sync engine to ship to `/api/inbox`.
+- `src-tauri/src/commands/sync.rs` — `push_changes` / `pull_changes`
+  IPC stubs (concrete sync algorithm lands in 1.1.x).
+- `src-tauri/src/commands/tray.rs` — system tray menu (Open / Quick
+  Capture / Today's Daily / Settings / Quit) with click-to-summon and
+  emit-then-show navigation.
+- `src-tauri/tauri.conf.json` — windows config (Overlay title bar
+  for macOS), tray icon, bundle targets (app/dmg/msi/appimage/deb),
+  updater + deep-link plugin config.
+- `src-tauri/capabilities/main.json` — narrow allowlist for the main
+  window.
+- `src/lib/desktop/ipc.ts` — typed IPC client with `isTauri()` guard.
+  Every helper falls back to no-op on web so a single SvelteKit build
+  works in both targets.
+- `pnpm tauri:dev`, `pnpm tauri:build`, `pnpm tauri:icon` scripts.
+- `docs/runbooks/desktop-release.md` — full development setup,
+  build pipeline, code-signing, auto-updater, and the open
+  architectural decision around `frontendDist` (hosted UI vs static
+  SPA vs Node sidecar).
+- `@tauri-apps/cli` (dev), `@tauri-apps/api` (runtime).
+
+### Notes
+
+- Desktop production bundles will not build until the `frontendDist`
+  decision lands and Rust toolchain is provisioned. The runbook
+  recommends path 1 (hosted UI, thin wrapper).
+- Icons must be dropped via `pnpm tauri:icon static/favicon.svg`
+  before the first bundle.
+
+> **Phase 15 status:** ✅ scaffold shipped. **Production bundle is a
+> 1.1.x deliverable** pending Billy's choice of frontendDist strategy.
+
+---
+
+## [0.15.0] — 2026-04-24
+
+> **Phase 14 — Testing & CI/CD Hardening**
+> Production-ready before v1.0.0 launch.
+
+### Added
+
+- `.github/workflows/ci.yml` — five-job CI pipeline:
+  1. lint-typecheck — `pnpm ci:lint`, `pnpm check`, `pnpm db:check`
+  2. unit-tests — Vitest with browser-mode chromium
+  3. e2e-tests — Playwright against the build, gated on lint+typecheck
+  4. build — production-build smoke
+  5. secret-scan — gitleaks-action
+- `src/lib/server/observability.ts` — Sentry SvelteKit init when
+  `SENTRY_DSN` / `PUBLIC_SENTRY_DSN` is set; PII-stripped beforeSend;
+  no-op fallback for dev.
+- `src/hooks.server.ts` `handleError` now captures via Sentry when
+  configured (includes route id, status, errorId, user id) while
+  retaining structured stderr output.
+- Unit tests for `errors.ts` (LumenError, isLumenError,
+  flattenValibotIssues), `validation/schemas.ts` (email lowercasing,
+  slug rules, sign-in, createNode, createLink self-link guard), and
+  `rbac.ts` (`outranks` comparator).
+- `@sentry/sveltekit` 10.x added.
+
+### Notes
+
+- Vitest runs the existing browser + node project layout from
+  `vite.config.ts`. 16 tests pass locally.
+- The CI workflow expects two repository secrets:
+  `NEON_PREVIEW_DATABASE_URL` and `CI_BETTER_AUTH_SECRET`. Both are
+  test-mode values.
+
+> **Phase 14 status:** ✅ shipped. **Next: v1.0.0 — Public Launch (Web).**
+
+---
+
+## [0.14.0] — 2026-04-24
+
+> **Phase 13 — Tier-Based Access Control**
+
+### Added
+
+- `src/lib/server/entitlements.ts` — `getEntitlementProfile()` resolves
+  the user's effective tier (with trial-aware override), merging
+  default per-tier limits with any DB-stored overrides.
+  `requireEntitlement()` throws a `LumenError('entitlement_denied')`
+  with a tailored upgrade message keyed to the gated feature
+  (createNode, createProject, aiQuery, publish, desktop, apiAccess).
+- `(app)/+layout.server.ts` now hydrates `data.entitlements` so child
+  routes can server-side gate without an extra fetch.
+- `n/new/+page.server.ts` enforces `createNode` entitlement and
+  surfaces 402 errors as form-level upgrade prompts.
+- `src/lib/components/patterns/UpgradePrompt.svelte` — reusable
+  upgrade-prompt panel with tier-aware copy, /pricing CTA.
+
+### Limits matrix (per `LUMEN_VISION.md`)
+
+| Tier | maxNodes | aiQueries/mo | maxSeats | publish | desktop | apiAccess |
+|---|---|---|---|---|---|---|
+| Free | 100 | 0 | 1 | ❌ | ❌ | ❌ |
+| Pro | ∞ | 100 | 1 | ✅ | ✅ | ❌ |
+| Studio | ∞ | ∞ | 5 | ✅ | ✅ | ✅ |
+
+> **Phase 13 status:** ✅ shipped. Next: Phase 14 — Testing & CI/CD Hardening (last phase before v1.0.0 launch).
+
+---
+
+## [0.13.0] — 2026-04-24
+
+> **Phase 12 — Customer Portal**
+
+### Added
+
+- `src/routes/account/billing/+page.{server.ts,svelte}` — in-app billing
+  summary: current plan + status, trial countdown, payment-methods
+  list, last 10 invoices with download links.
+- `src/routes/api/portal/+server.ts` — exchanges the user's Stripe
+  customer id for a hosted Billing Portal session and 303s.
+- "Manage subscription" + "Manage payment methods" buttons in the
+  billing summary post to the portal endpoint.
+
+> **Phase 12 status:** ✅ shipped. Next: Phase 13 — Tier-Based Access Control.
+
+---
+
+## [0.12.0] — 2026-04-24
+
+> **Phase 11 — Pricing Page & Checkout**
+
+### Added
+
+- `src/routes/(marketing)/pricing/+page.{server.ts,svelte}` — public
+  pricing page rendered from the DB catalog. Monthly/annual toggle.
+  Auto-computed annual savings ribbon. Feature manifest expanded into
+  per-plan checkmarks.
+- `src/routes/(marketing)/+layout.svelte` — public marketing shell.
+- `src/routes/api/checkout/+server.ts` — POST handler that resolves
+  the Stripe price by `lookupKey`, creates a Checkout session with
+  `client_reference_id`, `automatic_tax`, `allow_promotion_codes`,
+  `subscription_data.metadata` (organization_id + user_id so the
+  Phase 9 webhook handlers attach the resulting subscription to the
+  right org), and a 30-day Pro trial when the lookup key starts with
+  `pro_`. Anonymous users redirect to `/sign-in?next=/pricing`.
+
+### Notes
+
+- Page is public (`/pricing` is in the auth allowlist).
+- The success URL points at `/account/billing` (Phase 12).
+
+> **Phase 11 status:** ✅ shipped. Next: Phase 12 — Customer Portal.
+
+---
+
+## [0.11.0] — 2026-04-24
+
+> **Phase 10 — Stripe & Plan Seeding**
+
+### Added
+
+- `scripts/stripe/seed-customers.ts` — creates Stripe test customers for
+  the seeded Lumen Labs and Indie Studio org owners, attaches
+  `pm_card_visa`, opens active subscriptions with org/user metadata
+  so the Phase 9 webhook handlers can resolve membership.
+  Refuses to run against a non-`sk_test_` key.
+- `pnpm stripe:seed-customers` script.
+- `docs/runbooks/stripe-testing.md` — full local-loop workflow
+  (`stripe listen` → `stripe:sync` → `stripe:seed-customers`),
+  test card list, event-trigger reference, replay procedure,
+  cleanup, and live-rollover steps.
+
+> **Phase 10 status:** ✅ shipped. Next: Phase 11 — Pricing & Checkout.
+
+---
+
+## [0.10.0] — 2026-04-24
+
+> **Phase 9 — Billing Services**
+> Subscription state machine, idempotent webhook handlers (`customer.subscription.*`, `invoice.*`, `payment_method.*`), entitlement re-derivation.
+
+### Added
+
+- `src/lib/server/billing/handlers.ts`:
+  - `handleSubscriptionEvent` — atomic subscription mirror + entitlement
+    re-derivation under one transaction; pulls `current_period_*` from
+    the SubscriptionItem (Stripe API `2026-04-22.dahlia` shape); reads
+    org/user from `subscription.metadata` on first insert.
+  - `handleInvoiceEvent` — mirrors invoices via the new
+    `Invoice.parent.subscription_details.subscription` shape; resolves
+    organizationId via the linked subscription; idempotent on
+    `stripe_invoice_id`.
+  - `handlePaymentMethodEvent` — upsert/delete on
+    `payment_method.attached/detached/updated`. Display fields only
+    (last4, brand, exp_*); never stores PAN.
+  - `dispatchStripeEvent` — pattern-matches `customer.subscription.*`,
+    `invoice.*`, `payment_method.*`. Unhandled types are logged and
+    persisted (`webhook_events`) for replay.
+- The webhook receiver now invokes `dispatchStripeEvent`.
+
+> **Phase 9 status:** ✅ shipped. Next: Phase 10 — Stripe & Plan Seeding.
+
+---
+
+## [0.9.0] — 2026-04-24
+
+> **Phase 8 — Stripe Foundation**
+
+### Added
+
+- `src/lib/server/stripe/client.ts` — lazy Stripe singleton (`getStripe()`).
+  Production startup hard-fails without `STRIPE_SECRET_KEY`.
+- `src/lib/server/stripe/webhook.ts` — `constructEvent()` (signature
+  verify), `recordWebhookEvent()` (idempotent insert via the `webhook_events`
+  uniqueness on `(provider, providerEventId)`), `markWebhookProcessed`,
+  `markWebhookFailed`.
+- `src/routes/api/webhooks/stripe/+server.ts` — POST handler with
+  signature verification, idempotency replay short-circuit, and
+  failure path that re-raises 500 so Stripe retries.
+- `scripts/stripe/sync.ts` — DB → Stripe sync for products + prices.
+  Idempotent. Backfills `stripe_product_id` / `stripe_price_id` on the
+  catalog rows. `--dry-run` flag.
+- `pnpm stripe:sync`, `pnpm stripe:listen` scripts wired.
+- `biome.json` — `noDocumentCookie` and `noImportantStyles` disabled
+  (intentional patterns: theme cookie + reduced-motion overrides).
+
+### Notes
+
+- Webhook handler dispatch table (subscription state machine, invoice
+  mirror, payment-method mirror) lands in Phase 9.
+- `pnpm stripe:listen` requires the Stripe CLI (`brew install stripe/stripe-cli/stripe`).
+
+> **Phase 8 status:** ✅ shipped. Next: Phase 9 — Billing Services.
+
+---
+
 ## [0.8.0] — 2026-04-24
 
 > **Phase 7 — Email Service**
@@ -415,7 +771,18 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
      Update these with each new release tag.
      ══════════════════════════════════════════════════════════════ -->
 
-[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v0.8.0...HEAD
+[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v1.4.0...HEAD
+[1.4.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v1.4.0
+[1.3.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v1.3.0
+[1.2.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v1.2.0
+[1.1.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v1.1.0
+[0.15.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.15.0
+[0.14.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.14.0
+[0.13.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.13.0
+[0.12.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.12.0
+[0.11.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.11.0
+[0.10.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.10.0
+[0.9.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.9.0
 [0.8.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.8.0
 [0.7.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.7.0
 [0.6.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.6.0

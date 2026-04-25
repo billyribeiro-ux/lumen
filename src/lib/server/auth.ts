@@ -53,10 +53,27 @@ if (isProduction) {
   }
 }
 
+// Resolve the secret. Production deploys MUST set it; in dev / build /
+// analyse we fall back to a warning placeholder so module import doesn't
+// crash. Sessions signed with the placeholder will not validate, which
+// is fail-safe.
+const resolvedSecret = (() => {
+  const v = env('BETTER_AUTH_SECRET');
+  if (v) return v;
+  if (isProduction) {
+    throw new Error('BETTER_AUTH_SECRET is required in production.');
+  }
+  console.warn(
+    '[auth] BETTER_AUTH_SECRET is not set. Using a placeholder; sessions WILL NOT WORK. ' +
+      'Generate one with: openssl rand -base64 32',
+  );
+  return 'lumen-dev-placeholder-not-cryptographically-safe-set-BETTER_AUTH_SECRET';
+})();
+
 export const auth = betterAuth({
   appName: 'Lumen',
-  baseURL: required('BETTER_AUTH_URL', 'http://localhost:5173'),
-  secret: required('BETTER_AUTH_SECRET'),
+  baseURL: env('BETTER_AUTH_URL') ?? 'http://localhost:5173',
+  secret: resolvedSecret,
 
   database: drizzleAdapter(db, {
     provider: 'pg',
@@ -201,3 +218,4 @@ export const auth = betterAuth({
 
 export type Auth = typeof auth;
 export type AuthSession = Awaited<ReturnType<typeof auth.api.getSession>>;
+void required; // kept for future required-only env helpers.

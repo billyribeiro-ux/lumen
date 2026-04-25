@@ -1,0 +1,53 @@
+# Lumen local-dev stack — Postgres + Redis.
+#
+# Usage:
+#   docker compose up -d
+#   docker compose down -v      # full wipe
+#
+# Postgres available at localhost:5432 (postgres / lumen / lumen).
+# Redis available at  localhost:6379 (no auth).
+#
+# Set in .env:
+#   DATABASE_URL=postgres://postgres:lumen@localhost:5432/lumen
+#   UPSTASH_REDIS_REST_URL=                # leave empty; rate limiter no-ops
+#   UPSTASH_REDIS_REST_TOKEN=
+#
+# If you swap the @neondatabase/serverless driver for `pg` to talk to
+# this Postgres directly, see docs/runbooks/local-dev.md for the
+# 15-minute change. The default Lumen build expects Neon's HTTP driver,
+# so the easiest path is still a free Neon dev branch — keep this
+# compose file as a fallback.
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: lumen-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: lumen
+      POSTGRES_DB: lumen
+    ports:
+      - '5432:5432'
+    volumes:
+      - lumen-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d lumen']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: lumen-redis
+    restart: unless-stopped
+    ports:
+      - '6379:6379'
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  lumen-postgres-data:

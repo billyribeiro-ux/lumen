@@ -9,7 +9,7 @@ import { issueInvitation } from '$lib/server/invitations';
 import { getRoleForOrg } from '$lib/server/rbac';
 import type { Actions, PageServerLoad } from './$types';
 
-const ROLES: Role[] = ['admin', 'editor', 'viewer'];
+const _ROLES: Role[] = ['admin', 'editor', 'viewer'];
 
 export const load: PageServerLoad = async (event) => {
   const user = requireUser(event);
@@ -69,7 +69,7 @@ export const actions: Actions = {
 
     if (!organizationId) return fail(400, { message: 'Organization missing.' });
     if (!email) return fail(400, { message: 'Email is required.' });
-    if (!ROLES.includes(role)) return fail(400, { message: 'Invalid role.' });
+    if (!_ROLES.includes(role)) return fail(400, { message: 'Invalid role.' });
 
     const { user } = await requirePermissionFor(event, 'org.invite', organizationId);
 
@@ -132,6 +132,6 @@ export const actions: Actions = {
   },
 };
 
-export { ROLES };
+export { _ROLES };
 
 void redirect; // not yet used at this surface; keep available for future flows.

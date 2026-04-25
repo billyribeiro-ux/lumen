@@ -4,6 +4,7 @@
 import { type Handle, type HandleServerError, redirect } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 import { auth } from '$lib/server/auth';
+import { isObservabilityConfigured, Sentry } from '$lib/server/observability';
 import { checkRateLimit } from '$lib/server/rate-limit';
 
 const PUBLIC_PREFIXES = [
@@ -97,6 +98,19 @@ export const handle: Handle = sequence(session, guard, rateLimit, securityHeader
 
 export const handleError: HandleServerError = ({ error, event, status, message }) => {
   const errorId = crypto.randomUUID();
+
+  if (isObservabilityConfigured()) {
+    Sentry.captureException(error, {
+      tags: { route: event.route.id ?? 'unknown', status: String(status) },
+      extra: {
+        errorId,
+        path: event.url.pathname,
+        method: event.request.method,
+      },
+      ...(event.locals.user ? { user: { id: event.locals.user.id } } : {}),
+    });
+  }
+
   console.error(
     JSON.stringify({
       level: 'error',
