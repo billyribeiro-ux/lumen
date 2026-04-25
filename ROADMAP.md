@@ -1,7 +1,7 @@
 # Lumen Roadmap
 
 > **Last updated:** 2026-04-24
-> **Current version:** `v0.6.0`
+> **Current version:** `v0.7.0`
 > **Status legend:** ✅ Shipped · 🚧 In Progress · 📅 Planned · 🔮 Exploring
 
 Lumen is built using the **PE7 14-Phase Topological Dependency Chain** — each phase is a hard dependency of the next, never skipped, never shortcut.
@@ -25,10 +25,10 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 
 ## Current Milestone
 
-### 🚧 v0.7.0 — Core CRUD
+### 🚧 v0.8.0 — Email Service
 **Target:** Q3 2026
-**Phase:** 6 (Core CRUD)
-**Focus:** Node CRUD across all 9 types, bidirectional links, tags + autocomplete, full-text search, versioning, command bar (⌘K), split panes (⌘\), themes (Obsidian/Parchment/Nord-PE7), self-hosted Inter+JetBrains Mono+Literata.
+**Phase:** 7 (Email Service)
+**Focus:** Resend SDK, Svelte-rendered email templates, transactional flows (welcome, verify, magic link, password reset, team invite, weekly digest), preferences, unsubscribe handling.
 
 ---
 
@@ -42,8 +42,8 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 | v0.4.0   | 3     | Authentication (Better Auth + Passkeys + 2FA) | ✅ Shipped | 2026-04-24 |
 | v0.5.0   | 4     | RBAC & Permissions                 | ✅ Shipped | 2026-04-24 |
 | v0.6.0   | 5     | Validation & Security Layer        | ✅ Shipped | 2026-04-24 |
-| v0.7.0   | 6     | Core CRUD (Nodes, Links, Tags)     | 🚧 In Progress | Q3 2026 |
-| v0.8.0   | 7     | Email Service (Resend)             | 📅 Planned | Q3 2026    |
+| v0.7.0   | 6     | Core CRUD (Nodes, Links, Tags)     | ✅ Shipped | 2026-04-24 |
+| v0.8.0   | 7     | Email Service (Resend)             | 🚧 In Progress | Q3 2026 |
 | v0.9.0   | 8     | Stripe Foundation                  | 📅 Planned | Q3 2026    |
 | v0.10.0  | 9     | Billing Services                   | 📅 Planned | Q4 2026    |
 | v0.11.0  | 10    | Stripe & Plan Seeding              | 📅 Planned | Q4 2026    |
@@ -125,19 +125,16 @@ Valibot schemas for auth, organizations, nodes, links, tags, and inbox capture. 
 
 ---
 
-### 📅 Phase 6 — Core CRUD (`v0.7.0`)
+### ✅ Phase 6 — Core CRUD (`v0.7.0`)
+**Shipped 2026-04-24**
 
-The core Lumen experience.
+The visible product. Node CRUD across all 9 types with version history, command bar (⌘K) backed by `/api/search`, three OKLCH themes (Obsidian/Parchment/Nord-PE7), self-hosted Inter+JetBrains Mono+Literata, global keyboard shortcut registry (`⌘N`, `⌘K`, `⌘⇧T`, `⌘/`), backlinks panel, audit-logged mutations.
 
-- Node CRUD (all types: note, task, decision, spec, snippet, link, person, daily)
-- Bidirectional link creation (`[[wiki-style]]`)
-- Typed relations (`blocks`, `related`, `supersedes`, `derives_from`)
-- Tag CRUD + tag autocomplete
-- Full-text search (Postgres `tsvector`)
-- Node versioning on every edit
-- Command bar (`⌘K`) with fuzzy search
-- Split panes (`⌘\`)
-- Keyboard shortcut system
+**Deferred to 6.x (post-launch hardening):**
+- Postgres `tsvector` migration to upgrade `searchNodes` from substring to full-text.
+- `[[wiki-link]]` auto-link parser inside node bodies.
+- Split panes (`⌘\`).
+- WYSIWYG editor (current surface is markdown textarea).
 
 ---
 

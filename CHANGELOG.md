@@ -29,6 +29,63 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
 
 ---
 
+## [0.7.0] — 2026-04-24
+
+> **Phase 6 — Core CRUD**
+> The visible product begins. Node CRUD across all 9 types, command bar
+> (⌘K), three themes, self-hosted fonts, keyboard shortcut system.
+
+### Added
+
+- `src/lib/server/nodes.ts` — `createNode` / `updateNode` / `softDeleteNode`
+  / `listNodes` / `getNodeBySlug` / `createLink` / `backlinksFor` /
+  `suggestTags` / `searchNodes`. Atomic header + content + version
+  writes via `dbTransact`; substring search until tsvector lands.
+- PE7 CSS architecture under `src/lib/styles/`:
+  - `tokens.css` — `@layer reset, tokens, theme, base, layout, components,
+    utilities` cascade. OKLCH-only color, fluid type + spacing scales,
+    logical properties throughout. Three theme palettes (Obsidian
+    default OLED / Parchment / Nord-PE7).
+  - `fonts.css` — self-hosted `@font-face` declarations for Inter,
+    JetBrains Mono, and Literata. WOFF2 binaries to be dropped at
+    `static/fonts/...` before launch.
+  - `base.css` — modern reset, global typography, always-visible focus
+    ring, `prefers-reduced-motion` gate.
+- `src/lib/stores/theme.svelte.ts` — three-theme runes store with cookie
+  + localStorage persistence. Server reads `lumen.theme` cookie for
+  FOUC-free initial paint.
+- `src/lib/stores/shortcuts.svelte.ts` — global keyboard dispatcher with
+  `Mod`/`Alt`/`Shift` normalization, editable-context awareness, and
+  `format()` for platform-correct keybinding rendering.
+- `src/lib/components/layout/Topbar.svelte` — brand, command-bar
+  trigger with platform-aware shortcut hint, org switcher, theme cycle,
+  account link.
+- `src/lib/components/command-bar/CommandBar.svelte` — Bits UI Dialog
+  with live search via `/api/search`, keyboard nav, registered commands
+  (`Mod+K` open, `Mod+Shift+T` cycle theme, `Mod+N` new node, `Mod+/`
+  help).
+- `src/routes/(app)/` group:
+  - `+layout.server.ts` resolves member orgs, sticky active org via
+    cookie, hydrates permissions, reads theme cookie.
+  - `+layout.svelte` mounts Topbar + CommandBar.
+  - `+page.svelte` shows the recent-nodes dashboard.
+  - `n/new/` create form (validated via Valibot).
+  - `n/[slug]/` view + edit + delete with version notes, backlinks,
+    audit-logged mutations.
+- `src/routes/api/search/+server.ts` — authed JSON search endpoint
+  scoped to the active organization.
+- `bits-ui` 2.18, `@iconify/svelte` 5.2, `shiki` 4.0 added.
+
+### Changed
+
+- Public allowlist tightened in `src/hooks.server.ts` — `/` is now
+  auth-gated; the Phase 1 placeholder root page was removed. The
+  marketing surface ships in Phase 11.
+
+> **Phase 6 status:** ✅ shipped. Next: Phase 7 — Email Service.
+
+---
+
 ## [0.6.0] — 2026-04-24
 
 > **Phase 5 — Validation & Security**
@@ -334,7 +391,8 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
      Update these with each new release tag.
      ══════════════════════════════════════════════════════════════ -->
 
-[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v0.6.0...HEAD
+[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v0.7.0...HEAD
+[0.7.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.7.0
 [0.6.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.6.0
 [0.5.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.5.0
 [0.4.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.4.0
