@@ -1,5 +1,5 @@
 import { fail, redirect } from '@sveltejs/kit';
-import { auth } from '$lib/server/auth';
+import { getAuth } from '$lib/server/auth';
 import { copyAuthCookies } from '$lib/server/auth-bridge';
 import type { Actions, PageServerLoad } from './$types';
 
@@ -21,7 +21,7 @@ export const actions: Actions = {
 
     let response: Response;
     try {
-      response = await auth.api.signInEmail({
+      response = await getAuth().api.signInEmail({
         body: { email, password, callbackURL },
         headers: event.request.headers,
         asResponse: true,

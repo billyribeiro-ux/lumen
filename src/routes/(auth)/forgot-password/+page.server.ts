@@ -1,5 +1,5 @@
 import { fail } from '@sveltejs/kit';
-import { auth } from '$lib/server/auth';
+import { getAuth } from '$lib/server/auth';
 import type { Actions } from './$types';
 
 export const actions: Actions = {
@@ -9,7 +9,7 @@ export const actions: Actions = {
     if (!email) return fail(400, { email, message: 'Email is required.' });
 
     try {
-      await auth.api.requestPasswordReset({
+      await getAuth().api.requestPasswordReset({
         body: { email, redirectTo: '/reset-password' },
         headers: event.request.headers,
       });

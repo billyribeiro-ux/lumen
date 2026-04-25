@@ -1,5 +1,5 @@
 import { fail, redirect } from '@sveltejs/kit';
-import { auth } from '$lib/server/auth';
+import { getAuth } from '$lib/server/auth';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = ({ url }) => {
@@ -19,7 +19,7 @@ export const actions: Actions = {
     }
 
     try {
-      await auth.api.resetPassword({
+      await getAuth().api.resetPassword({
         body: { newPassword: password, token },
         headers: event.request.headers,
       });

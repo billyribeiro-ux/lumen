@@ -3,7 +3,7 @@
 
 import { type Handle, type HandleServerError, redirect } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
-import { auth } from '$lib/server/auth';
+import { getAuth } from '$lib/server/auth';
 import { isObservabilityConfigured, Sentry } from '$lib/server/observability';
 import { checkRateLimit } from '$lib/server/rate-limit';
 
@@ -28,7 +28,7 @@ const isPublic = (pathname: string): boolean => {
 };
 
 const session: Handle = async ({ event, resolve }) => {
-  const result = await auth.api.getSession({ headers: event.request.headers });
+  const result = await getAuth().api.getSession({ headers: event.request.headers });
   event.locals.session = result?.session ?? null;
   event.locals.user = result?.user ?? null;
   return resolve(event);
