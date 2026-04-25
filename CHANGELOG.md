@@ -29,6 +29,34 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
 
 ---
 
+## [0.10.0] — 2026-04-24
+
+> **Phase 9 — Billing Services**
+> Subscription state machine, idempotent webhook handlers (`customer.subscription.*`, `invoice.*`, `payment_method.*`), entitlement re-derivation.
+
+### Added
+
+- `src/lib/server/billing/handlers.ts`:
+  - `handleSubscriptionEvent` — atomic subscription mirror + entitlement
+    re-derivation under one transaction; pulls `current_period_*` from
+    the SubscriptionItem (Stripe API `2026-04-22.dahlia` shape); reads
+    org/user from `subscription.metadata` on first insert.
+  - `handleInvoiceEvent` — mirrors invoices via the new
+    `Invoice.parent.subscription_details.subscription` shape; resolves
+    organizationId via the linked subscription; idempotent on
+    `stripe_invoice_id`.
+  - `handlePaymentMethodEvent` — upsert/delete on
+    `payment_method.attached/detached/updated`. Display fields only
+    (last4, brand, exp_*); never stores PAN.
+  - `dispatchStripeEvent` — pattern-matches `customer.subscription.*`,
+    `invoice.*`, `payment_method.*`. Unhandled types are logged and
+    persisted (`webhook_events`) for replay.
+- The webhook receiver now invokes `dispatchStripeEvent`.
+
+> **Phase 9 status:** ✅ shipped. Next: Phase 10 — Stripe & Plan Seeding.
+
+---
+
 ## [0.9.0] — 2026-04-24
 
 > **Phase 8 — Stripe Foundation**
@@ -447,7 +475,8 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
      Update these with each new release tag.
      ══════════════════════════════════════════════════════════════ -->
 
-[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v0.9.0...HEAD
+[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v0.10.0...HEAD
+[0.10.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.10.0
 [0.9.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.9.0
 [0.8.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.8.0
 [0.7.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.7.0

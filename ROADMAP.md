@@ -1,7 +1,7 @@
 # Lumen Roadmap
 
 > **Last updated:** 2026-04-24
-> **Current version:** `v0.9.0`
+> **Current version:** `v0.10.0`
 > **Status legend:** ✅ Shipped · 🚧 In Progress · 📅 Planned · 🔮 Exploring
 
 Lumen is built using the **PE7 14-Phase Topological Dependency Chain** — each phase is a hard dependency of the next, never skipped, never shortcut.
@@ -25,10 +25,10 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 
 ## Current Milestone
 
-### 🚧 v0.10.0 — Billing Services
+### 🚧 v0.11.0 — Stripe & Plan Seeding
 **Target:** Q4 2026
-**Phase:** 9 (Billing Services)
-**Focus:** Subscription state machine, idempotent webhook handlers (`customer.subscription.*`, `invoice.*`, `payment_method.*`), proration handling.
+**Phase:** 10 (Plan Seeding)
+**Focus:** Seed Stripe products + prices via the sync script; test customers in trialing/active/canceled states; testing runbook.
 
 ---
 
@@ -45,8 +45,8 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 | v0.7.0   | 6     | Core CRUD (Nodes, Links, Tags)     | ✅ Shipped | 2026-04-24 |
 | v0.8.0   | 7     | Email Service (Resend)             | ✅ Shipped | 2026-04-24 |
 | v0.9.0   | 8     | Stripe Foundation                  | ✅ Shipped | 2026-04-24 |
-| v0.10.0  | 9     | Billing Services                   | 🚧 In Progress | Q4 2026 |
-| v0.11.0  | 10    | Stripe & Plan Seeding              | 📅 Planned | Q4 2026    |
+| v0.10.0  | 9     | Billing Services                   | ✅ Shipped | 2026-04-24 |
+| v0.11.0  | 10    | Stripe & Plan Seeding              | 🚧 In Progress | Q4 2026 |
 | v0.12.0  | 11    | Pricing Page & Checkout            | 📅 Planned | Q4 2026    |
 | v0.13.0  | 12    | Customer Portal                    | 📅 Planned | Q4 2026    |
 | v0.14.0  | 13    | Tier-Based Access Control          | 📅 Planned | Q4 2026    |
@@ -154,15 +154,10 @@ Lazy Stripe singleton, idempotent DB → Stripe sync script (`pnpm stripe:sync`)
 
 ---
 
-### 📅 Phase 9 — Billing Services (`v0.10.0`)
+### ✅ Phase 9 — Billing Services (`v0.10.0`)
+**Shipped 2026-04-24**
 
-Subscription lifecycle management.
-
-- `subscriptions`, `invoices`, `payment_methods` tables
-- Webhook handlers: `customer.subscription.*`, `invoice.*`, `payment_method.*`
-- Idempotency keys for all webhook events
-- Subscription state machine
-- Proration handling on upgrade / downgrade
+Stripe webhook handlers for subscription lifecycle (state machine reflected in `subscriptions`), invoices (mirror table), and payment methods (display-only fields). Each handler is idempotent and re-derives entitlements atomically. Proration is handled implicitly by Stripe; future phases may surface it explicitly to the UI.
 
 ---
 

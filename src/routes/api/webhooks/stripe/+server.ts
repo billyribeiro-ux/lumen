@@ -1,5 +1,6 @@
 import { json, type RequestHandler } from '@sveltejs/kit';
 import type Stripe from 'stripe';
+import { dispatchStripeEvent } from '$lib/server/billing/handlers';
 import {
   constructEvent,
   markWebhookFailed,
@@ -29,20 +30,7 @@ export const POST: RequestHandler = async ({ request }) => {
   }
 
   try {
-    // Phase 9 wires the dispatch table:
-    //   customer.subscription.* → subscription state machine
-    //   invoice.* → invoice mirror
-    //   payment_method.* → payment-method mirror
-    // For now, log and mark processed. Webhook event persisted in
-    // webhook_events for replay once handlers ship.
-    console.info(
-      JSON.stringify({
-        level: 'info',
-        event: 'stripe.webhook.received',
-        type: event.type,
-        id: event.id,
-      }),
-    );
+    await dispatchStripeEvent(event);
     await markWebhookProcessed(recorded.id);
     return json({ ok: true });
   } catch (err) {
