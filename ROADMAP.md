@@ -1,7 +1,7 @@
 # Lumen Roadmap
 
 > **Last updated:** 2026-04-24
-> **Current version:** `v0.13.0`
+> **Current version:** `v0.14.0`
 > **Status legend:** ✅ Shipped · 🚧 In Progress · 📅 Planned · 🔮 Exploring
 
 Lumen is built using the **PE7 14-Phase Topological Dependency Chain** — each phase is a hard dependency of the next, never skipped, never shortcut.
@@ -25,10 +25,10 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 
 ## Current Milestone
 
-### 🚧 v0.14.0 — Tier-Based Access Control
-**Target:** Q4 2026
-**Phase:** 13 (Tier Access)
-**Focus:** Per-request entitlement cache, tier limits enforcement (max nodes, AI quota, seat count, publish count), UI gating, upgrade prompts at the point of friction.
+### 🚧 v0.15.0 — Testing & CI/CD
+**Target:** Q1 2027
+**Phase:** 14 (Testing & CI)
+**Focus:** Vitest unit + integration suite, Playwright E2E for critical flows, GitHub Actions CI, Vercel preview deployments, Sentry + OpenTelemetry instrumentation, staging environment, load testing for the Stripe webhook endpoint.
 
 ---
 
@@ -49,8 +49,8 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 | v0.11.0  | 10    | Stripe & Plan Seeding              | ✅ Shipped | 2026-04-24 |
 | v0.12.0  | 11    | Pricing Page & Checkout            | ✅ Shipped | 2026-04-24 |
 | v0.13.0  | 12    | Customer Portal                    | ✅ Shipped | 2026-04-24 |
-| v0.14.0  | 13    | Tier-Based Access Control          | 🚧 In Progress | Q4 2026 |
-| v0.15.0  | 14    | Testing & CI/CD Hardening          | 📅 Planned | Q1 2027    |
+| v0.14.0  | 13    | Tier-Based Access Control          | ✅ Shipped | 2026-04-24 |
+| v0.15.0  | 14    | Testing & CI/CD Hardening          | 🚧 In Progress | Q1 2027 |
 | v1.0.0   | —     | **Public Launch (Web)**            | 📅 Planned | Q1 2027    |
 | v1.1.0   | 15    | Tauri 2 Desktop App                | 📅 Planned | Q1 2027    |
 | v1.2.0   | 16    | AI Co-Pilot (Claude API)           | 📅 Planned | Q2 2027    |
@@ -182,15 +182,10 @@ Public `/pricing` rendered from the DB catalog, monthly/annual toggle with auto-
 
 ---
 
-### 📅 Phase 13 — Tier-Based Access Control (`v0.14.0`)
+### ✅ Phase 13 — Tier-Based Access Control (`v0.14.0`)
+**Shipped 2026-04-24**
 
-Enforce feature gates by tier.
-
-- `entitlements` table (per-user, per-feature)
-- Entitlement cache (per-request)
-- Tier limits: node count, AI quota, seat count, publish count
-- UI gating via entitlement-aware components
-- Upgrade prompts at the point of friction
+`getEntitlementProfile()` resolves trial-aware effective tier and per-feature limits. `requireEntitlement()` throws tier-specific 402 errors. Layout hydrates `data.entitlements` for UI gating. `UpgradePrompt` reusable pattern for tier-locked surfaces.
 
 ---
 

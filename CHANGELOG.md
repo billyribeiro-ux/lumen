@@ -29,6 +29,37 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
 
 ---
 
+## [0.14.0] — 2026-04-24
+
+> **Phase 13 — Tier-Based Access Control**
+
+### Added
+
+- `src/lib/server/entitlements.ts` — `getEntitlementProfile()` resolves
+  the user's effective tier (with trial-aware override), merging
+  default per-tier limits with any DB-stored overrides.
+  `requireEntitlement()` throws a `LumenError('entitlement_denied')`
+  with a tailored upgrade message keyed to the gated feature
+  (createNode, createProject, aiQuery, publish, desktop, apiAccess).
+- `(app)/+layout.server.ts` now hydrates `data.entitlements` so child
+  routes can server-side gate without an extra fetch.
+- `n/new/+page.server.ts` enforces `createNode` entitlement and
+  surfaces 402 errors as form-level upgrade prompts.
+- `src/lib/components/patterns/UpgradePrompt.svelte` — reusable
+  upgrade-prompt panel with tier-aware copy, /pricing CTA.
+
+### Limits matrix (per `LUMEN_VISION.md`)
+
+| Tier | maxNodes | aiQueries/mo | maxSeats | publish | desktop | apiAccess |
+|---|---|---|---|---|---|---|
+| Free | 100 | 0 | 1 | ❌ | ❌ | ❌ |
+| Pro | ∞ | 100 | 1 | ✅ | ✅ | ❌ |
+| Studio | ∞ | ∞ | 5 | ✅ | ✅ | ✅ |
+
+> **Phase 13 status:** ✅ shipped. Next: Phase 14 — Testing & CI/CD Hardening (last phase before v1.0.0 launch).
+
+---
+
 ## [0.13.0] — 2026-04-24
 
 > **Phase 12 — Customer Portal**
@@ -542,7 +573,8 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
      Update these with each new release tag.
      ══════════════════════════════════════════════════════════════ -->
 
-[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v0.13.0...HEAD
+[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v0.14.0...HEAD
+[0.14.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.14.0
 [0.13.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.13.0
 [0.12.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.12.0
 [0.11.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.11.0

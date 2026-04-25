@@ -1,7 +1,9 @@
 import { fail, redirect } from '@sveltejs/kit';
 import * as v from 'valibot';
+import { isLumenError } from '$lib/errors';
 import { audit } from '$lib/server/audit';
 import { requirePermissionFor } from '$lib/server/auth-helpers';
+import { requireEntitlement } from '$lib/server/entitlements';
 import { createNode } from '$lib/server/nodes';
 import { createNodeSchema } from '$lib/validation/schemas';
 import type { Actions, PageServerLoad } from './$types';
@@ -32,6 +34,13 @@ export const actions: Actions = {
     }
 
     const { user } = await requirePermissionFor(event, 'node.create', parsed.output.organizationId);
+
+    try {
+      await requireEntitlement(event, 'createNode', parsed.output.organizationId);
+    } catch (err) {
+      if (isLumenError(err)) return fail(402, { input, message: err.message });
+      throw err;
+    }
 
     const node = await createNode({
       organizationId: parsed.output.organizationId,
