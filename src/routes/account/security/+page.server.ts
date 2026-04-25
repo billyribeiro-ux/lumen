@@ -1,11 +1,12 @@
 import { redirect } from '@sveltejs/kit';
-import { auth } from '$lib/server/auth';
+import { getAuth } from '$lib/server/auth';
 import { copyAuthCookies } from '$lib/server/auth-bridge';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async (event) => {
   if (!event.locals.user) throw redirect(303, '/sign-in?next=/account/security');
 
+  const auth = getAuth();
   const sessions = await auth.api
     .listSessions({ headers: event.request.headers })
     .catch(() => [] as Array<unknown>);
@@ -23,7 +24,7 @@ export const load: PageServerLoad = async (event) => {
 
 export const actions: Actions = {
   signOutEverywhere: async (event) => {
-    const response = await auth.api.revokeOtherSessions({
+    const response = await getAuth().api.revokeOtherSessions({
       headers: event.request.headers,
       asResponse: true,
     });
