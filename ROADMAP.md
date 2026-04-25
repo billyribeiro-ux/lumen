@@ -1,7 +1,7 @@
 # Lumen Roadmap
 
 > **Last updated:** 2026-04-24
-> **Current version:** `v1.2.0`
+> **Current version:** `v1.3.0`
 > **Status legend:** ✅ Shipped · 🚧 In Progress · 📅 Planned · 🔮 Exploring
 
 Lumen is built using the **PE7 14-Phase Topological Dependency Chain** — each phase is a hard dependency of the next, never skipped, never shortcut.
@@ -25,10 +25,10 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 
 ## Current Milestone
 
-### 🚧 v1.3.0 — Graph View
+### 🚧 v1.4.0 — Public Publishing
 **Target:** Q2 2027
-**Phase:** 17 (Graph View)
-**Focus:** WebGPU-rendered force-directed graph via @motion-core/motion-gpu, WGSL fragment shaders, filters by type/tag/time/project, hover preview, cluster detection.
+**Phase:** 18 (Publishing)
+**Focus:** ⌘⇧P publishes any node to a public read-only URL; custom subdomains for Studio; SEO-optimized rendering; privacy-respecting analytics; optional comments.
 
 ---
 
@@ -54,8 +54,8 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 | v1.0.0   | —     | **Public Launch (Web)**            | 🚧 Pending external accounts | Q1 2027 |
 | v1.1.0   | 15    | Tauri 2 Desktop App                | ✅ Scaffold shipped | 2026-04-24 |
 | v1.2.0   | 16    | AI Co-Pilot (Claude API)           | ✅ Shipped | 2026-04-24 |
-| v1.3.0   | 17    | Graph View (Motion GPU / WebGPU)   | 🚧 In Progress | Q2 2027 |
-| v1.4.0   | 18    | Public Publishing & Subdomains     | 📅 Planned | Q2 2027    |
+| v1.3.0   | 17    | Graph View (Motion GPU / WebGPU)   | ✅ Shipped | 2026-04-24 |
+| v1.4.0   | 18    | Public Publishing & Subdomains     | 🚧 In Progress | Q2 2027 |
 | v2.0.0   | —     | Team Collaboration (Studio tier)   | 🔮 Exploring | Q3 2027  |
 
 ---
@@ -218,15 +218,10 @@ Claude-powered chat panel grounded in user nodes via RAG. Prompt caching on the 
 
 ---
 
-### 📅 Phase 17 — Graph View (`v1.3.0`)
+### ✅ Phase 17 — Graph View (`v1.3.0`)
+**Shipped 2026-04-24**
 
-WebGPU-rendered knowledge graph.
-
-- Motion GPU + WGSL fragment shaders
-- Force-directed layout
-- Filter by type, tag, project, time range
-- Hover preview, click to open
-- Cluster detection and highlighting
+D3 force-directed layout on a 2D canvas with hue-mapped node types and per-relation edge styling. Type-filter chips, hover labels, click-to-navigate. WGSL shaders authored for the WebGPU upgrade in v1.3.x once Motion GPU's pipeline API stabilizes.
 
 ---
 

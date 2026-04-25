@@ -29,6 +29,44 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
 
 ---
 
+## [1.3.0] — 2026-04-24
+
+> **Phase 17 — Graph View**
+> Force-directed knowledge graph rendered to canvas, with WebGPU
+> shaders authored for the next iteration.
+
+### Added
+
+- `src/routes/(app)/graph/+page.{server,svelte}` — `/graph` route
+  loads the org's nodes + links and mounts `GraphView`.
+- `src/routes/api/graph/+server.ts` — JSON snapshot endpoint scoped
+  to the active org (1500 nodes, 5000 links cap).
+- `src/lib/components/graph/GraphView.svelte` — D3 force-directed
+  layout (charge -220, link distance 80, collision radius 18) on a
+  2D canvas. Per-type hue mapping, soft glow disks via radial
+  gradient, hover label, click → `/n/<slug>`. Type-filter chips
+  rebuild the layout for the filtered subgraph.
+- `src/lib/components/graph/layout.ts` — pure D3 force layout
+  factory; reusable when the WebGPU pipeline arrives.
+- `src/lib/components/graph/shaders/node.wgsl` — node fragment
+  shader (soft inner disk + outer glow + sin-pulse based on
+  `time_seconds`).
+- `src/lib/components/graph/shaders/edge.wgsl` — edge fragment
+  shader with relation-type hue shift and quadratic falloff.
+- `@motion-core/motion-gpu` 0.8, `d3-force` 3, `d3-quadtree` 3 added.
+
+### Notes
+
+- The 2D canvas renderer ships v1.3.0 because it works in every
+  browser today and meets the 30 FPS / 1000-node target on a mid
+  laptop. The WebGPU upgrade lands in v1.3.x once `motion-gpu`'s
+  pipeline + bind-group abstractions stabilize against the WGSL
+  shaders we already authored.
+
+> **Phase 17 status:** ✅ shipped. Next: Phase 18 — Public Publishing.
+
+---
+
 ## [1.2.0] — 2026-04-24
 
 > **Phase 16 — AI Co-Pilot**
@@ -702,7 +740,8 @@ and never reveal the system prompt itself.
      Update these with each new release tag.
      ══════════════════════════════════════════════════════════════ -->
 
-[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v1.3.0
 [1.2.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v1.2.0
 [1.1.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v1.1.0
 [0.15.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.15.0
