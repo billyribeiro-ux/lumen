@@ -29,6 +29,27 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
 
 ---
 
+## [0.11.0] — 2026-04-24
+
+> **Phase 10 — Stripe & Plan Seeding**
+
+### Added
+
+- `scripts/stripe/seed-customers.ts` — creates Stripe test customers for
+  the seeded Lumen Labs and Indie Studio org owners, attaches
+  `pm_card_visa`, opens active subscriptions with org/user metadata
+  so the Phase 9 webhook handlers can resolve membership.
+  Refuses to run against a non-`sk_test_` key.
+- `pnpm stripe:seed-customers` script.
+- `docs/runbooks/stripe-testing.md` — full local-loop workflow
+  (`stripe listen` → `stripe:sync` → `stripe:seed-customers`),
+  test card list, event-trigger reference, replay procedure,
+  cleanup, and live-rollover steps.
+
+> **Phase 10 status:** ✅ shipped. Next: Phase 11 — Pricing & Checkout.
+
+---
+
 ## [0.10.0] — 2026-04-24
 
 > **Phase 9 — Billing Services**
@@ -475,7 +496,8 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
      Update these with each new release tag.
      ══════════════════════════════════════════════════════════════ -->
 
-[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v0.10.0...HEAD
+[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v0.11.0...HEAD
+[0.11.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.11.0
 [0.10.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.10.0
 [0.9.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.9.0
 [0.8.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.8.0

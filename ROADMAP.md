@@ -1,7 +1,7 @@
 # Lumen Roadmap
 
 > **Last updated:** 2026-04-24
-> **Current version:** `v0.10.0`
+> **Current version:** `v0.11.0`
 > **Status legend:** ✅ Shipped · 🚧 In Progress · 📅 Planned · 🔮 Exploring
 
 Lumen is built using the **PE7 14-Phase Topological Dependency Chain** — each phase is a hard dependency of the next, never skipped, never shortcut.
@@ -25,10 +25,10 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 
 ## Current Milestone
 
-### 🚧 v0.11.0 — Stripe & Plan Seeding
+### 🚧 v0.12.0 — Pricing Page & Checkout
 **Target:** Q4 2026
-**Phase:** 10 (Plan Seeding)
-**Focus:** Seed Stripe products + prices via the sync script; test customers in trialing/active/canceled states; testing runbook.
+**Phase:** 11 (Pricing & Checkout)
+**Focus:** /pricing rendered from DB, monthly/annual toggle, Stripe Checkout session, post-checkout redirect with state reconciliation, 30-day Pro trial grant on signup.
 
 ---
 
@@ -46,8 +46,8 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 | v0.8.0   | 7     | Email Service (Resend)             | ✅ Shipped | 2026-04-24 |
 | v0.9.0   | 8     | Stripe Foundation                  | ✅ Shipped | 2026-04-24 |
 | v0.10.0  | 9     | Billing Services                   | ✅ Shipped | 2026-04-24 |
-| v0.11.0  | 10    | Stripe & Plan Seeding              | 🚧 In Progress | Q4 2026 |
-| v0.12.0  | 11    | Pricing Page & Checkout            | 📅 Planned | Q4 2026    |
+| v0.11.0  | 10    | Stripe & Plan Seeding              | ✅ Shipped | 2026-04-24 |
+| v0.12.0  | 11    | Pricing Page & Checkout            | 🚧 In Progress | Q4 2026 |
 | v0.13.0  | 12    | Customer Portal                    | 📅 Planned | Q4 2026    |
 | v0.14.0  | 13    | Tier-Based Access Control          | 📅 Planned | Q4 2026    |
 | v0.15.0  | 14    | Testing & CI/CD Hardening          | 📅 Planned | Q1 2027    |
@@ -161,14 +161,10 @@ Stripe webhook handlers for subscription lifecycle (state machine reflected in `
 
 ---
 
-### 📅 Phase 10 — Stripe & Plan Seeding (`v0.11.0`)
+### ✅ Phase 10 — Stripe & Plan Seeding (`v0.11.0`)
+**Shipped 2026-04-24**
 
-Development-ready billing environment.
-
-- Seed script that provisions Stripe products + prices from DB
-- Seed test customers with active / trialing / canceled subscriptions
-- `pnpm stripe:listen` wrapper for local webhook forwarding
-- Test card number reference in `docs/runbooks/stripe-testing.md`
+`pnpm stripe:seed-customers` opens active subscriptions for the seeded org owners (refuses non-test keys). `docs/runbooks/stripe-testing.md` documents the full local loop, test cards, event triggers, replay procedure, and live rollover.
 
 ---
 
