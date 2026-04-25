@@ -1,7 +1,7 @@
 # Lumen Roadmap
 
 > **Last updated:** 2026-04-24
-> **Current version:** `v1.1.0`
+> **Current version:** `v1.2.0`
 > **Status legend:** ✅ Shipped · 🚧 In Progress · 📅 Planned · 🔮 Exploring
 
 Lumen is built using the **PE7 14-Phase Topological Dependency Chain** — each phase is a hard dependency of the next, never skipped, never shortcut.
@@ -25,10 +25,10 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 
 ## Current Milestone
 
-### 🚧 v1.2.0 — AI Co-Pilot
+### 🚧 v1.3.0 — Graph View
 **Target:** Q2 2027
-**Phase:** 16 (AI Co-Pilot)
-**Focus:** Anthropic Claude API integration, RAG over user nodes, chat panel (⌘J), conversation history, per-tier quota enforcement.
+**Phase:** 17 (Graph View)
+**Focus:** WebGPU-rendered force-directed graph via @motion-core/motion-gpu, WGSL fragment shaders, filters by type/tag/time/project, hover preview, cluster detection.
 
 ---
 
@@ -53,8 +53,8 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 | v0.15.0  | 14    | Testing & CI/CD Hardening          | ✅ Shipped | 2026-04-24 |
 | v1.0.0   | —     | **Public Launch (Web)**            | 🚧 Pending external accounts | Q1 2027 |
 | v1.1.0   | 15    | Tauri 2 Desktop App                | ✅ Scaffold shipped | 2026-04-24 |
-| v1.2.0   | 16    | AI Co-Pilot (Claude API)           | 🚧 In Progress | Q2 2027 |
-| v1.3.0   | 17    | Graph View (Motion GPU / WebGPU)   | 📅 Planned | Q2 2027    |
+| v1.2.0   | 16    | AI Co-Pilot (Claude API)           | ✅ Shipped | 2026-04-24 |
+| v1.3.0   | 17    | Graph View (Motion GPU / WebGPU)   | 🚧 In Progress | Q2 2027 |
 | v1.4.0   | 18    | Public Publishing & Subdomains     | 📅 Planned | Q2 2027    |
 | v2.0.0   | —     | Team Collaboration (Studio tier)   | 🔮 Exploring | Q3 2027  |
 
@@ -211,15 +211,10 @@ Tauri 2 crate authored under `src-tauri/`, ⌥Space global hotkey, system tray, 
 
 ---
 
-### 📅 Phase 16 — AI Co-Pilot (`v1.2.0`)
+### ✅ Phase 16 — AI Co-Pilot (`v1.2.0`)
+**Shipped 2026-04-24**
 
-Claude-powered assistant grounded in your graph.
-
-- Anthropic API integration
-- RAG over user's own nodes (private, per-user vector store)
-- Chat panel (`⌘J`)
-- Conversation history
-- Quota enforcement per tier
+Claude-powered chat panel grounded in user nodes via RAG. Prompt caching on the system prompt + grounding context block keeps token cost bounded across repeat queries. Per-tier quotas enforced (Free 0 / Pro 100 / Studio ∞). Slug citations link back to the underlying node.
 
 ---
 

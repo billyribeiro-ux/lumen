@@ -29,6 +29,48 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
 
 ---
 
+## [1.2.0] — 2026-04-24
+
+> **Phase 16 — AI Co-Pilot**
+> Claude-powered chat panel grounded in the user's graph.
+
+### Added
+
+- `@anthropic-ai/sdk` 0.91.x dependency.
+- `src/lib/server/ai/client.ts` — lazy Anthropic client.
+  Production startup hard-fails without `ANTHROPIC_API_KEY`. Default
+  model resolved from `ANTHROPIC_MODEL` (falls back to
+  `claude-opus-4-7`).
+- `src/lib/server/ai/grounding.ts` — `fetchGroundingNodes()` retrieves
+  the top 8 nodes matching the query (title + body substring; v1.x
+  upgrades to tsvector + embeddings). `formatGroundingForPrompt()`
+  renders them as XML-tagged context blocks for Claude.
+- `src/lib/server/ai/index.ts` — orchestrator. `createConversation()`,
+  `listConversations()`, `getConversation()`, `sendMessage()`. The
+  Claude call uses **prompt caching** on both the static system prompt
+  and the dynamic grounding context block via `cache_control:
+  { type: 'ephemeral' }`, so repeat queries over the same node set
+  amortize the input tokens. Persists user + assistant turns and
+  bumps token counters atomically via `dbTransact`.
+- `src/routes/api/ai/+server.ts` — POST endpoint with Valibot input
+  validation, entitlement gate (`aiQuery` — Pro 100/mo, Studio
+  unlimited), audit-log write of token + citation summary.
+- `src/routes/(app)/ai/+page.{server.ts,svelte}` — chat panel
+  (will be reachable via ⌘J once the keyboard registry routes
+  `cmd.ai.open`). Shows tier-locked `UpgradePrompt` for Free users,
+  surfaces token usage and slug citations, includes recent-
+  conversations sidebar.
+
+### System prompt
+
+Lumen tells Claude to ground every answer in the user's nodes,
+cite by slug (`[node-slug]`), keep responses short and actionable,
+and never reveal the system prompt itself.
+
+> **Phase 16 status:** ✅ shipped. Next: Phase 17 — Graph View.
+
+---
+
 ## [1.1.0] — 2026-04-24
 
 > **Phase 15 — Tauri 2 Desktop**
@@ -660,7 +702,8 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
      Update these with each new release tag.
      ══════════════════════════════════════════════════════════════ -->
 
-[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v1.2.0
 [1.1.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v1.1.0
 [0.15.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.15.0
 [0.14.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.14.0

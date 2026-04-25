@@ -1,6 +1,6 @@
 {
   "name": "lumen",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
   "description": "Keyboard-driven knowledge OS for builders — your second brain, lit.",
   "homepage": "https://lumen.so",
@@ -75,6 +75,7 @@
     "vitest-browser-svelte": "^2.1.0"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.91.1",
     "@better-auth/passkey": "^1.6.9",
     "@iconify/svelte": "^5.2.1",
     "@neondatabase/serverless": "^1.1.0",
