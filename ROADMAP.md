@@ -1,7 +1,7 @@
 # Lumen Roadmap
 
 > **Last updated:** 2026-04-24
-> **Current version:** `v0.15.0`
+> **Current version:** `v1.1.0`
 > **Status legend:** ✅ Shipped · 🚧 In Progress · 📅 Planned · 🔮 Exploring
 
 Lumen is built using the **PE7 14-Phase Topological Dependency Chain** — each phase is a hard dependency of the next, never skipped, never shortcut.
@@ -25,9 +25,10 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 
 ## Current Milestone
 
-### 🚧 v1.0.0 — Public Launch (Web)
-**Target:** Q1 2027
-**Focus:** Final pre-launch verification, marketing copy, ship the public web product.
+### 🚧 v1.2.0 — AI Co-Pilot
+**Target:** Q2 2027
+**Phase:** 16 (AI Co-Pilot)
+**Focus:** Anthropic Claude API integration, RAG over user nodes, chat panel (⌘J), conversation history, per-tier quota enforcement.
 
 ---
 
@@ -51,8 +52,8 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 | v0.14.0  | 13    | Tier-Based Access Control          | ✅ Shipped | 2026-04-24 |
 | v0.15.0  | 14    | Testing & CI/CD Hardening          | ✅ Shipped | 2026-04-24 |
 | v1.0.0   | —     | **Public Launch (Web)**            | 🚧 Pending external accounts | Q1 2027 |
-| v1.1.0   | 15    | Tauri 2 Desktop App                | 📅 Planned | Q1 2027    |
-| v1.2.0   | 16    | AI Co-Pilot (Claude API)           | 📅 Planned | Q2 2027    |
+| v1.1.0   | 15    | Tauri 2 Desktop App                | ✅ Scaffold shipped | 2026-04-24 |
+| v1.2.0   | 16    | AI Co-Pilot (Claude API)           | 🚧 In Progress | Q2 2027 |
 | v1.3.0   | 17    | Graph View (Motion GPU / WebGPU)   | 📅 Planned | Q2 2027    |
 | v1.4.0   | 18    | Public Publishing & Subdomains     | 📅 Planned | Q2 2027    |
 | v2.0.0   | —     | Team Collaboration (Studio tier)   | 🔮 Exploring | Q3 2027  |
@@ -203,19 +204,10 @@ Lumen web is publicly available. Free tier live, Pro tier live.
 
 ---
 
-### 📅 Phase 15 — Tauri 2 Desktop App (`v1.1.0`)
+### ✅ Phase 15 — Tauri 2 Desktop App (`v1.1.0` scaffold)
+**Shipped 2026-04-24**
 
-Native desktop experience.
-
-- Tauri 2 wrapper around SvelteKit app
-- Global hotkey (`⌥Space`) for quick capture
-- System tray menu
-- Offline-first sync (SQLite local, syncs to Neon)
-- Menu bar app mode
-- Native notifications
-- Auto-updates via Tauri updater plugin
-- Deep links (`lumen://`)
-- macOS (ARM + Intel), Windows, Linux builds
+Tauri 2 crate authored under `src-tauri/`, ⌥Space global hotkey, system tray, deep links, Ed25519 updater config, IPC bridge with web-fallback. Production bundle is a 1.1.x deliverable pending the `frontendDist` strategy choice (see `docs/runbooks/desktop-release.md`).
 
 ---
 

@@ -29,6 +29,56 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
 
 ---
 
+## [1.1.0] — 2026-04-24
+
+> **Phase 15 — Tauri 2 Desktop**
+> Desktop scaffold (post-v1.0.0). Same SvelteKit code powers the app;
+> Rust backend adds OS integrations.
+
+### Added
+
+- `src-tauri/` — Rust crate `lumen` (Cargo.toml pins Tauri 2 + plugins:
+  shell, fs, dialog, notification, deep-link, global-shortcut, updater,
+  store, sql).
+- `src-tauri/src/lib.rs` — Tauri builder, plugin registration, ⌥Space
+  global hotkey emitting `lumen:quick-capture`, macOS hide-on-close
+  behavior, system tray init.
+- `src-tauri/src/commands/quick_capture.rs` — `submit_capture` IPC
+  command that returns a desktop-prefixed idempotency token for the
+  sync engine to ship to `/api/inbox`.
+- `src-tauri/src/commands/sync.rs` — `push_changes` / `pull_changes`
+  IPC stubs (concrete sync algorithm lands in 1.1.x).
+- `src-tauri/src/commands/tray.rs` — system tray menu (Open / Quick
+  Capture / Today's Daily / Settings / Quit) with click-to-summon and
+  emit-then-show navigation.
+- `src-tauri/tauri.conf.json` — windows config (Overlay title bar
+  for macOS), tray icon, bundle targets (app/dmg/msi/appimage/deb),
+  updater + deep-link plugin config.
+- `src-tauri/capabilities/main.json` — narrow allowlist for the main
+  window.
+- `src/lib/desktop/ipc.ts` — typed IPC client with `isTauri()` guard.
+  Every helper falls back to no-op on web so a single SvelteKit build
+  works in both targets.
+- `pnpm tauri:dev`, `pnpm tauri:build`, `pnpm tauri:icon` scripts.
+- `docs/runbooks/desktop-release.md` — full development setup,
+  build pipeline, code-signing, auto-updater, and the open
+  architectural decision around `frontendDist` (hosted UI vs static
+  SPA vs Node sidecar).
+- `@tauri-apps/cli` (dev), `@tauri-apps/api` (runtime).
+
+### Notes
+
+- Desktop production bundles will not build until the `frontendDist`
+  decision lands and Rust toolchain is provisioned. The runbook
+  recommends path 1 (hosted UI, thin wrapper).
+- Icons must be dropped via `pnpm tauri:icon static/favicon.svg`
+  before the first bundle.
+
+> **Phase 15 status:** ✅ scaffold shipped. **Production bundle is a
+> 1.1.x deliverable** pending Billy's choice of frontendDist strategy.
+
+---
+
 ## [0.15.0] — 2026-04-24
 
 > **Phase 14 — Testing & CI/CD Hardening**
@@ -610,7 +660,8 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
      Update these with each new release tag.
      ══════════════════════════════════════════════════════════════ -->
 
-[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v0.15.0...HEAD
+[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v1.1.0
 [0.15.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.15.0
 [0.14.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.14.0
 [0.13.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.13.0
