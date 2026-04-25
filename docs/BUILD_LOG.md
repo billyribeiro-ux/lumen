@@ -232,7 +232,25 @@
 | 9 | 2026-04-24 | 4 | `package.json` | _next commit_ | release(rbac): v0.5.0 |
 | 10 | 2026-04-24 | 4 | `CHANGELOG.md` | _next commit_ | (same commit as #9) |
 | 11 | 2026-04-24 | 4 | `ROADMAP.md` | _next commit_ | (same commit as #9) |
-| 12 | 2026-04-24 | 4 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record Phase 4 + v0.5.0 release prep |
+| 12 | 2026-04-24 | 4 | `docs/BUILD_LOG.md` | 42a8ccd | docs(log): record Phase 4 + v0.5.0 release prep |
+
+---
+
+## Phase 5 — Validation & Security (Shipped 2026-04-24)
+
+| # | Date | Phase | File | Commit | Subject |
+|---|---|---|---|---|---|
+| 1 | 2026-04-24 | 5 | `src/lib/validation/schemas.ts` | ad27aee | feat(validation): Valibot schemas + audit log + rate limit + CSP headers |
+| 2 | 2026-04-24 | 5 | `src/lib/errors.ts` | ad27aee | (same commit as #1) |
+| 3 | 2026-04-24 | 5 | `src/lib/server/audit.ts` | ad27aee | (same commit as #1) |
+| 4 | 2026-04-24 | 5 | `src/lib/server/rate-limit.ts` | ad27aee | (same commit as #1) |
+| 5 | 2026-04-24 | 5 | `src/hooks.server.ts` | ad27aee | (same commit as #1) |
+| 6 | 2026-04-24 | 5 | `package.json` | ad27aee | (same commit as #1) |
+| 7 | 2026-04-24 | 5 | `pnpm-lock.yaml` | ad27aee | (same commit as #1) |
+| 8 | 2026-04-24 | 5 | `package.json` | _next commit_ | release(validation): v0.6.0 |
+| 9 | 2026-04-24 | 5 | `CHANGELOG.md` | _next commit_ | (same commit as #8) |
+| 10 | 2026-04-24 | 5 | `ROADMAP.md` | _next commit_ | (same commit as #8) |
+| 11 | 2026-04-24 | 5 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record Phase 5 + v0.6.0 release prep |
 
 ---
 
@@ -245,6 +263,7 @@
 | v0.3.0 | 2026-04-24 | 2 | _pending PR-merge_ | Phase 2: Database Seeding — personas, RBAC, billing catalog, sample content |
 | v0.4.0 | 2026-04-24 | 3 | _pending PR-merge_ | Phase 3: Authentication — Better Auth + passkeys + TOTP + OAuth + magic links |
 | v0.5.0 | 2026-04-24 | 4 | _pending PR-merge_ | Phase 4: RBAC & Permissions — can()/requirePermission() + invite flow |
+| v0.6.0 | 2026-04-24 | 5 | _pending PR-merge_ | Phase 5: Validation & Security — Valibot + audit + rate-limit + CSP |
 
 ---
 
