@@ -59,11 +59,13 @@
       },
       "suspicious": {
         "noConsole": { "level": "warn", "options": { "allow": ["error", "warn", "info"] } },
-        "noExplicitAny": "error"
+        "noExplicitAny": "error",
+        "noDocumentCookie": "off"
       },
       "complexity": {
         "noUselessTypeConstraint": "error",
-        "useLiteralKeys": "off"
+        "useLiteralKeys": "off",
+        "noImportantStyles": "off"
       }
     }
   },

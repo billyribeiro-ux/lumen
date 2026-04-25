@@ -29,6 +29,38 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
 
 ---
 
+## [0.9.0] — 2026-04-24
+
+> **Phase 8 — Stripe Foundation**
+
+### Added
+
+- `src/lib/server/stripe/client.ts` — lazy Stripe singleton (`getStripe()`).
+  Production startup hard-fails without `STRIPE_SECRET_KEY`.
+- `src/lib/server/stripe/webhook.ts` — `constructEvent()` (signature
+  verify), `recordWebhookEvent()` (idempotent insert via the `webhook_events`
+  uniqueness on `(provider, providerEventId)`), `markWebhookProcessed`,
+  `markWebhookFailed`.
+- `src/routes/api/webhooks/stripe/+server.ts` — POST handler with
+  signature verification, idempotency replay short-circuit, and
+  failure path that re-raises 500 so Stripe retries.
+- `scripts/stripe/sync.ts` — DB → Stripe sync for products + prices.
+  Idempotent. Backfills `stripe_product_id` / `stripe_price_id` on the
+  catalog rows. `--dry-run` flag.
+- `pnpm stripe:sync`, `pnpm stripe:listen` scripts wired.
+- `biome.json` — `noDocumentCookie` and `noImportantStyles` disabled
+  (intentional patterns: theme cookie + reduced-motion overrides).
+
+### Notes
+
+- Webhook handler dispatch table (subscription state machine, invoice
+  mirror, payment-method mirror) lands in Phase 9.
+- `pnpm stripe:listen` requires the Stripe CLI (`brew install stripe/stripe-cli/stripe`).
+
+> **Phase 8 status:** ✅ shipped. Next: Phase 9 — Billing Services.
+
+---
+
 ## [0.8.0] — 2026-04-24
 
 > **Phase 7 — Email Service**
@@ -415,7 +447,8 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
      Update these with each new release tag.
      ══════════════════════════════════════════════════════════════ -->
 
-[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v0.8.0...HEAD
+[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v0.9.0...HEAD
+[0.9.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.9.0
 [0.8.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.8.0
 [0.7.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.7.0
 [0.6.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.6.0

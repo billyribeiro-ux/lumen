@@ -1,7 +1,7 @@
 # Lumen Roadmap
 
 > **Last updated:** 2026-04-24
-> **Current version:** `v0.8.0`
+> **Current version:** `v0.9.0`
 > **Status legend:** ✅ Shipped · 🚧 In Progress · 📅 Planned · 🔮 Exploring
 
 Lumen is built using the **PE7 14-Phase Topological Dependency Chain** — each phase is a hard dependency of the next, never skipped, never shortcut.
@@ -25,10 +25,10 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 
 ## Current Milestone
 
-### 🚧 v0.9.0 — Stripe Foundation
-**Target:** Q3 2026
-**Phase:** 8 (Stripe Foundation)
-**Focus:** Stripe SDK, sync script (DB → Stripe products + prices), webhook handler skeleton with signature verification.
+### 🚧 v0.10.0 — Billing Services
+**Target:** Q4 2026
+**Phase:** 9 (Billing Services)
+**Focus:** Subscription state machine, idempotent webhook handlers (`customer.subscription.*`, `invoice.*`, `payment_method.*`), proration handling.
 
 ---
 
@@ -44,8 +44,8 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 | v0.6.0   | 5     | Validation & Security Layer        | ✅ Shipped | 2026-04-24 |
 | v0.7.0   | 6     | Core CRUD (Nodes, Links, Tags)     | ✅ Shipped | 2026-04-24 |
 | v0.8.0   | 7     | Email Service (Resend)             | ✅ Shipped | 2026-04-24 |
-| v0.9.0   | 8     | Stripe Foundation                  | 🚧 In Progress | Q3 2026 |
-| v0.10.0  | 9     | Billing Services                   | 📅 Planned | Q4 2026    |
+| v0.9.0   | 8     | Stripe Foundation                  | ✅ Shipped | 2026-04-24 |
+| v0.10.0  | 9     | Billing Services                   | 🚧 In Progress | Q4 2026 |
 | v0.11.0  | 10    | Stripe & Plan Seeding              | 📅 Planned | Q4 2026    |
 | v0.12.0  | 11    | Pricing Page & Checkout            | 📅 Planned | Q4 2026    |
 | v0.13.0  | 12    | Customer Portal                    | 📅 Planned | Q4 2026    |
@@ -147,14 +147,10 @@ Resend integration with Svelte-rendered templates (Welcome, VerifyEmail, Passwor
 
 ---
 
-### 📅 Phase 8 — Stripe Foundation (`v0.9.0`)
+### ✅ Phase 8 — Stripe Foundation (`v0.9.0`)
+**Shipped 2026-04-24**
 
-Dynamic pricing from the database.
-
-- `products`, `prices` tables (source of truth)
-- Stripe SDK setup (lazy client)
-- Stripe product / price sync script (`pnpm stripe:sync`)
-- Webhook handler skeleton with signature verification
+Lazy Stripe singleton, idempotent DB → Stripe sync script (`pnpm stripe:sync`), and a signature-verified webhook receiver at `/api/webhooks/stripe` with `webhook_events` idempotency. Phase 9 adds the dispatch table for subscription state, invoice mirror, and payment-method mirror.
 
 ---
 
