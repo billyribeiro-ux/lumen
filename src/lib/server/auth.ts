@@ -105,14 +105,29 @@ export const auth = betterAuth({
       },
     },
     sendResetPassword: async ({ user, url }) => {
-      // Phase 7 will swap this for a Resend-rendered Svelte email template.
-      console.info(`[auth] Password reset for ${user.email}: ${url}`);
+      const { sendEmail } = await import('./email');
+      const { default: PasswordReset } = await import('./email/templates/PasswordReset.svelte');
+      await sendEmail({
+        to: user.email,
+        subject: 'Reset your Lumen password',
+        template: PasswordReset,
+        props: { name: user.name, resetUrl: url },
+        tags: [{ name: 'category', value: 'password_reset' }],
+      });
     },
   },
 
   emailVerification: {
     sendVerificationEmail: async ({ user, url }) => {
-      console.info(`[auth] Verify email for ${user.email}: ${url}`);
+      const { sendEmail } = await import('./email');
+      const { default: VerifyEmail } = await import('./email/templates/VerifyEmail.svelte');
+      await sendEmail({
+        to: user.email,
+        subject: 'Verify your Lumen email',
+        template: VerifyEmail,
+        props: { name: user.name, verificationUrl: url },
+        tags: [{ name: 'category', value: 'verify_email' }],
+      });
     },
     sendOnSignUp: true,
     autoSignInAfterVerification: true,
@@ -159,7 +174,15 @@ export const auth = betterAuth({
     }),
     magicLink({
       sendMagicLink: async ({ email, url }) => {
-        console.info(`[auth] Magic link for ${email}: ${url}`);
+        const { sendEmail } = await import('./email');
+        const { default: MagicLink } = await import('./email/templates/MagicLink.svelte');
+        await sendEmail({
+          to: email,
+          subject: 'Your Lumen sign-in link',
+          template: MagicLink,
+          props: { magicUrl: url },
+          tags: [{ name: 'category', value: 'magic_link' }],
+        });
       },
       expiresIn: 60 * 15, // 15 min
     }),

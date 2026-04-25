@@ -1,14 +1,14 @@
 // Invitation issuance + acceptance.
 //
 // Tokens are 32 random url-safe base64 chars (192 bits of entropy).
-// 7-day TTL by default. Email delivery is stubbed in dev; Phase 7
-// wires Resend.
+// 7-day TTL by default. Email delivery uses the Phase 7 sendEmail
+// helper — Resend in production, stderr in dev.
 
 import { error } from '@sveltejs/kit';
 import { and, eq, isNull } from 'drizzle-orm';
 import { db, dbTransact } from './db';
 import { users } from './db/schema/auth';
-import { invitations, memberships } from './db/schema/organizations';
+import { invitations, memberships, organizations } from './db/schema/organizations';
 import type { Role } from './db/schema/rbac';
 
 export interface IssueInvitationInput {
@@ -54,12 +54,51 @@ export async function issueInvitation(input: IssueInvitationInput): Promise<{
 
   if (!row) error(500, 'Failed to issue invitation.');
 
-  // Phase 7 will swap this for a Resend-rendered Svelte email template.
-  console.info(
-    `[invitation] sent for ${input.email} → org ${input.organizationId}: /invite/${row.token}`,
-  );
+  await sendInviteEmail({
+    organizationId: input.organizationId,
+    email: input.email,
+    role: input.role,
+    invitedBy: input.invitedBy,
+    token: row.token,
+  });
 
   return row;
+}
+
+async function sendInviteEmail(input: {
+  organizationId: string;
+  email: string;
+  role: string;
+  invitedBy: string;
+  token: string;
+}): Promise<void> {
+  const { sendEmail } = await import('./email');
+  const { default: TeamInvite } = await import('./email/templates/TeamInvite.svelte');
+
+  // Resolve org name + inviter name for the template.
+  const [{ default: TeamInviteImport }, orgRows, inviterRows] = await Promise.all([
+    import('./email/templates/TeamInvite.svelte'),
+    db
+      .select({ name: organizations.name })
+      .from(organizations)
+      .where(eq(organizations.id, input.organizationId))
+      .limit(1),
+    db.select({ name: users.name }).from(users).where(eq(users.id, input.invitedBy)).limit(1),
+  ]);
+  void TeamInviteImport;
+
+  const orgName = orgRows[0]?.name ?? 'a team';
+  const inviterName = inviterRows[0]?.name ?? 'A teammate';
+  const baseUrl = process.env['BETTER_AUTH_URL'] ?? 'http://localhost:5173';
+  const acceptUrl = `${baseUrl}/invite/${input.token}`;
+
+  await sendEmail({
+    to: input.email,
+    subject: `${inviterName} invited you to ${orgName} on Lumen`,
+    template: TeamInvite,
+    props: { inviterName, organizationName: orgName, role: input.role, acceptUrl },
+    tags: [{ name: 'category', value: 'team_invite' }],
+  });
 }
 
 export async function acceptInvitation(input: { token: string; userId: string }): Promise<{
