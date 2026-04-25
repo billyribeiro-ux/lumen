@@ -250,7 +250,40 @@
 | 8 | 2026-04-24 | 5 | `package.json` | _next commit_ | release(validation): v0.6.0 |
 | 9 | 2026-04-24 | 5 | `CHANGELOG.md` | _next commit_ | (same commit as #8) |
 | 10 | 2026-04-24 | 5 | `ROADMAP.md` | _next commit_ | (same commit as #8) |
-| 11 | 2026-04-24 | 5 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record Phase 5 + v0.6.0 release prep |
+| 11 | 2026-04-24 | 5 | `docs/BUILD_LOG.md` | 2d10fdd | docs(log): record Phase 5 + v0.6.0 release prep |
+
+---
+
+## Phase 6 — Core CRUD (Shipped 2026-04-24)
+
+| # | Date | Phase | File | Commit | Subject |
+|---|---|---|---|---|---|
+| 1 | 2026-04-24 | 6 | `src/lib/server/nodes.ts` | e883c94 | feat(crud): node CRUD + command bar + themes + keyboard system |
+| 2 | 2026-04-24 | 6 | `src/lib/styles/tokens.css` | e883c94 | (same commit as #1) |
+| 3 | 2026-04-24 | 6 | `src/lib/styles/fonts.css` | e883c94 | (same commit as #1) |
+| 4 | 2026-04-24 | 6 | `src/lib/styles/base.css` | e883c94 | (same commit as #1) |
+| 5 | 2026-04-24 | 6 | `src/routes/+layout.svelte` | e883c94 | (same commit as #1) |
+| 6 | 2026-04-24 | 6 | `src/routes/+page.svelte` (deleted) | e883c94 | (same commit as #1) |
+| 7 | 2026-04-24 | 6 | `src/lib/stores/theme.svelte.ts` | e883c94 | (same commit as #1) |
+| 8 | 2026-04-24 | 6 | `src/lib/stores/shortcuts.svelte.ts` | e883c94 | (same commit as #1) |
+| 9 | 2026-04-24 | 6 | `src/lib/components/layout/Topbar.svelte` | e883c94 | (same commit as #1) |
+| 10 | 2026-04-24 | 6 | `src/lib/components/command-bar/CommandBar.svelte` | e883c94 | (same commit as #1) |
+| 11 | 2026-04-24 | 6 | `src/routes/(app)/+layout.server.ts` | e883c94 | (same commit as #1) |
+| 12 | 2026-04-24 | 6 | `src/routes/(app)/+layout.svelte` | e883c94 | (same commit as #1) |
+| 13 | 2026-04-24 | 6 | `src/routes/(app)/+page.server.ts` | e883c94 | (same commit as #1) |
+| 14 | 2026-04-24 | 6 | `src/routes/(app)/+page.svelte` | e883c94 | (same commit as #1) |
+| 15 | 2026-04-24 | 6 | `src/routes/(app)/n/new/+page.server.ts` | e883c94 | (same commit as #1) |
+| 16 | 2026-04-24 | 6 | `src/routes/(app)/n/new/+page.svelte` | e883c94 | (same commit as #1) |
+| 17 | 2026-04-24 | 6 | `src/routes/(app)/n/[slug]/+page.server.ts` | e883c94 | (same commit as #1) |
+| 18 | 2026-04-24 | 6 | `src/routes/(app)/n/[slug]/+page.svelte` | e883c94 | (same commit as #1) |
+| 19 | 2026-04-24 | 6 | `src/routes/api/search/+server.ts` | e883c94 | (same commit as #1) |
+| 20 | 2026-04-24 | 6 | `src/hooks.server.ts` | e883c94 | (same commit as #1) |
+| 21 | 2026-04-24 | 6 | `package.json` | e883c94 | (same commit as #1) |
+| 22 | 2026-04-24 | 6 | `pnpm-lock.yaml` | e883c94 | (same commit as #1) |
+| 23 | 2026-04-24 | 6 | `package.json` | _next commit_ | release(crud): v0.7.0 |
+| 24 | 2026-04-24 | 6 | `CHANGELOG.md` | _next commit_ | (same commit as #23) |
+| 25 | 2026-04-24 | 6 | `ROADMAP.md` | _next commit_ | (same commit as #23) |
+| 26 | 2026-04-24 | 6 | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record Phase 6 + v0.7.0 release prep |
 
 ---
 
@@ -264,6 +297,7 @@
 | v0.4.0 | 2026-04-24 | 3 | _pending PR-merge_ | Phase 3: Authentication — Better Auth + passkeys + TOTP + OAuth + magic links |
 | v0.5.0 | 2026-04-24 | 4 | _pending PR-merge_ | Phase 4: RBAC & Permissions — can()/requirePermission() + invite flow |
 | v0.6.0 | 2026-04-24 | 5 | _pending PR-merge_ | Phase 5: Validation & Security — Valibot + audit + rate-limit + CSP |
+| v0.7.0 | 2026-04-24 | 6 | _pending PR-merge_ | Phase 6: Core CRUD — nodes, command bar, themes, keyboard system |
 
 ---
 
