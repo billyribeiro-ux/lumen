@@ -1,7 +1,7 @@
 # Lumen Roadmap
 
 > **Last updated:** 2026-04-24
-> **Current version:** `v0.7.0`
+> **Current version:** `v0.8.0`
 > **Status legend:** ✅ Shipped · 🚧 In Progress · 📅 Planned · 🔮 Exploring
 
 Lumen is built using the **PE7 14-Phase Topological Dependency Chain** — each phase is a hard dependency of the next, never skipped, never shortcut.
@@ -25,10 +25,10 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 
 ## Current Milestone
 
-### 🚧 v0.8.0 — Email Service
+### 🚧 v0.9.0 — Stripe Foundation
 **Target:** Q3 2026
-**Phase:** 7 (Email Service)
-**Focus:** Resend SDK, Svelte-rendered email templates, transactional flows (welcome, verify, magic link, password reset, team invite, weekly digest), preferences, unsubscribe handling.
+**Phase:** 8 (Stripe Foundation)
+**Focus:** Stripe SDK, sync script (DB → Stripe products + prices), webhook handler skeleton with signature verification.
 
 ---
 
@@ -43,8 +43,8 @@ Build the keyboard-driven knowledge OS that engineers, founders, and builders ac
 | v0.5.0   | 4     | RBAC & Permissions                 | ✅ Shipped | 2026-04-24 |
 | v0.6.0   | 5     | Validation & Security Layer        | ✅ Shipped | 2026-04-24 |
 | v0.7.0   | 6     | Core CRUD (Nodes, Links, Tags)     | ✅ Shipped | 2026-04-24 |
-| v0.8.0   | 7     | Email Service (Resend)             | 🚧 In Progress | Q3 2026 |
-| v0.9.0   | 8     | Stripe Foundation                  | 📅 Planned | Q3 2026    |
+| v0.8.0   | 7     | Email Service (Resend)             | ✅ Shipped | 2026-04-24 |
+| v0.9.0   | 8     | Stripe Foundation                  | 🚧 In Progress | Q3 2026 |
 | v0.10.0  | 9     | Billing Services                   | 📅 Planned | Q4 2026    |
 | v0.11.0  | 10    | Stripe & Plan Seeding              | 📅 Planned | Q4 2026    |
 | v0.12.0  | 11    | Pricing Page & Checkout            | 📅 Planned | Q4 2026    |
@@ -138,17 +138,12 @@ The visible product. Node CRUD across all 9 types with version history, command 
 
 ---
 
-### 📅 Phase 7 — Email Service (`v0.8.0`)
+### ✅ Phase 7 — Email Service (`v0.8.0`)
+**Shipped 2026-04-24**
 
-Transactional email via Resend.
+Resend integration with Svelte-rendered templates (Welcome, VerifyEmail, PasswordReset, MagicLink, TeamInvite). Better Auth callbacks and the invitation flow now route through `sendEmail()`. Dev path stubs to stderr; production hard-fails without `RESEND_API_KEY`.
 
-- Resend SDK integration
-- Email template system (Svelte-rendered)
-- Welcome email, verification, password reset, magic link
-- Team invite emails
-- Weekly digest email
-- Email preferences in account settings
-- Unsubscribe tokens + handling
+**Deferred to 7.x post-launch:** weekly digest, in-app email preferences, unsubscribe token table.
 
 ---
 

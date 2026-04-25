@@ -29,6 +29,30 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
 
 ---
 
+## [0.8.0] — 2026-04-24
+
+> **Phase 7 — Email Service**
+> Resend-backed transactional email with Svelte-rendered templates.
+
+### Added
+
+- `src/lib/server/email/index.ts` — `sendEmail<P>()` generic. SSR-renders
+  a Svelte component via `render()`, wraps in a brand shell with inline
+  CSS, derives a plain-text fallback. Dev path (no RESEND_API_KEY)
+  logs structured JSON to stderr; production hard-fails at boot
+  without a key.
+- Five Svelte email templates under `src/lib/server/email/templates/`:
+  Welcome, VerifyEmail, PasswordReset, MagicLink, TeamInvite.
+- `auth.ts` callbacks (`sendResetPassword`, `sendVerificationEmail`,
+  magic-link plugin) now dynamic-import the templates and route
+  through `sendEmail()` with category tags for Resend analytics.
+- `invitations.ts` resolves the org name + inviter name and sends
+  the team-invite email through `sendEmail()`.
+
+> **Phase 7 status:** ✅ shipped. Next: Phase 8 — Stripe Foundation.
+
+---
+
 ## [0.7.0] — 2026-04-24
 
 > **Phase 6 — Core CRUD**
@@ -391,7 +415,8 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
      Update these with each new release tag.
      ══════════════════════════════════════════════════════════════ -->
 
-[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v0.7.0...HEAD
+[Unreleased]: https://github.com/billyribeiro-ux/lumen/compare/v0.8.0...HEAD
+[0.8.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.8.0
 [0.7.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.7.0
 [0.6.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.6.0
 [0.5.0]: https://github.com/billyribeiro-ux/lumen/releases/tag/v0.5.0
