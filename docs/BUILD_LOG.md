@@ -328,7 +328,11 @@
 | 33 | 2026-06-04 | maint | `docs/BUILD_LOG.md` | c4c21f3 | docs(log): record e2e pass-with-no-tests flag |
 | 34 | 2026-06-04 | maint | `playwright.config.ts` | d76e08b | test(e2e): add production-server smoke spec |
 | 35 | 2026-06-04 | maint | `e2e/smoke.e2e.ts` | d76e08b | (same commit as #34) |
-| 36 | 2026-06-04 | maint | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record first e2e smoke spec |
+| 36 | 2026-06-04 | maint | `docs/BUILD_LOG.md` | 08b12ad | docs(log): record first e2e smoke spec |
+| 37 | 2026-06-04 | maint | `src/lib/server/auth.ts` | 0649dc8 | feat(auth): degrade gracefully instead of 500-ing the public surface |
+| 38 | 2026-06-04 | maint | `src/hooks.server.ts` | 0649dc8 | (same commit as #37) — session hook degrades to anonymous on failure |
+| 39 | 2026-06-04 | maint | `e2e/auth.e2e.ts` | 0649dc8 | (same commit as #37) — public auth-surface e2e specs |
+| 40 | 2026-06-04 | maint | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record auth resilience + auth e2e specs |
 
 ---
 
