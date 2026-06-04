@@ -325,7 +325,10 @@
 | 30 | 2026-06-04 | maint | `src/lib/server/db/index.ts` | c9270ef | fix(db): lazy-init Drizzle client so the build never requires DATABASE_URL |
 | 31 | 2026-06-04 | maint | `docs/BUILD_LOG.md` | fb5a110 | docs(log): record lazy Drizzle client fix for E2E build |
 | 32 | 2026-06-04 | maint | `package.json` | 03f05dc | test(e2e): pass with no tests until the e2e suite exists |
-| 33 | 2026-06-04 | maint | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record e2e pass-with-no-tests flag |
+| 33 | 2026-06-04 | maint | `docs/BUILD_LOG.md` | c4c21f3 | docs(log): record e2e pass-with-no-tests flag |
+| 34 | 2026-06-04 | maint | `playwright.config.ts` | d76e08b | test(e2e): add production-server smoke spec |
+| 35 | 2026-06-04 | maint | `e2e/smoke.e2e.ts` | d76e08b | (same commit as #34) |
+| 36 | 2026-06-04 | maint | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record first e2e smoke spec |
 
 ---
 
