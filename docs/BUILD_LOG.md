@@ -319,7 +319,9 @@
 | 24 | 2026-06-04 | maint | `docs/BUILD_LOG.md` | 5a9e830 | docs(log): record CI dummy-env fix for lint-typecheck and unit-tests |
 | 25 | 2026-06-04 | maint | `.github/workflows/ci.yml` | 434ec1e | ci(workflow): fix pnpm version conflict; bump CI actions and dev images to latest |
 | 26 | 2026-06-04 | maint | `docker-compose.yml` | 434ec1e | (same commit as #25) |
-| 27 | 2026-06-04 | maint | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record CI pnpm-conflict fix + latest action/image bumps |
+| 27 | 2026-06-04 | maint | `docs/BUILD_LOG.md` | 5774689 | docs(log): record CI pnpm-conflict fix + latest action/image bumps |
+| 28 | 2026-06-04 | maint | `pnpm-workspace.yaml` | 9baa3a3 | build(deps): unblock CI install — opt out of release-age delay + relax strict builds |
+| 29 | 2026-06-04 | maint | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record CI-install unblock (minimumReleaseAge + strictDepBuilds) |
 
 ---
 
