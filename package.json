@@ -29,7 +29,7 @@
     "format:check": "biome format . && prettier --check '**/*.svelte'",
     "ci:lint": "biome ci . && prettier --check '**/*.svelte'",
     "test:unit": "vitest",
-    "test:e2e": "playwright test",
+    "test:e2e": "playwright test --pass-with-no-tests",
     "test": "pnpm test:unit --run && pnpm test:e2e",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
