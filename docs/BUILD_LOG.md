@@ -316,7 +316,10 @@
 | 21 | 2026-06-04 | maint | `docs/runbooks/local-dev.md` | b078564 | (same commit as #1) |
 | 22 | 2026-06-04 | maint | `docs/BUILD_LOG.md` | d85bb7b | docs(log): record dependency upgrade + Node 24.16.0 / pnpm 11 toolchain bump |
 | 23 | 2026-06-04 | maint | `.github/workflows/ci.yml` | 64ccdad | ci(workflow): give lint-typecheck and unit-tests jobs a dummy DATABASE_URL |
-| 24 | 2026-06-04 | maint | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record CI dummy-env fix for lint-typecheck and unit-tests |
+| 24 | 2026-06-04 | maint | `docs/BUILD_LOG.md` | 5a9e830 | docs(log): record CI dummy-env fix for lint-typecheck and unit-tests |
+| 25 | 2026-06-04 | maint | `.github/workflows/ci.yml` | 434ec1e | ci(workflow): fix pnpm version conflict; bump CI actions and dev images to latest |
+| 26 | 2026-06-04 | maint | `docker-compose.yml` | 434ec1e | (same commit as #25) |
+| 27 | 2026-06-04 | maint | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record CI pnpm-conflict fix + latest action/image bumps |
 
 ---
 
