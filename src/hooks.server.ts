@@ -28,9 +28,31 @@ const isPublic = (pathname: string): boolean => {
 };
 
 const session: Handle = async ({ event, resolve }) => {
-  const result = await getAuth().api.getSession({ headers: event.request.headers });
-  event.locals.session = result?.session ?? null;
-  event.locals.user = result?.user ?? null;
+  try {
+    const result = await getAuth().api.getSession({ headers: event.request.headers });
+    event.locals.session = result?.session ?? null;
+    event.locals.user = result?.user ?? null;
+  } catch (error) {
+    // Session resolution failed — e.g. the database is unreachable. Degrade to an
+    // anonymous request instead of 500-ing every route: public pages still render
+    // and the guard redirects protected routes to sign-in. The failure is logged
+    // (and reported, if observability is configured) so a real outage stays loud.
+    event.locals.session = null;
+    event.locals.user = null;
+    if (isObservabilityConfigured()) {
+      Sentry.captureException(error, { tags: { hook: 'session', path: event.url.pathname } });
+    }
+    console.error(
+      JSON.stringify({
+        level: 'error',
+        timestamp: new Date().toISOString(),
+        message: 'session resolution failed; treating request as anonymous',
+        path: event.url.pathname,
+        detail:
+          error instanceof Error ? { name: error.name, message: error.message } : String(error),
+      }),
+    );
+  }
   return resolve(event);
 };
 
