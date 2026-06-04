@@ -6,12 +6,10 @@
 
 import Stripe from 'stripe';
 
+// Read lazily at first use rather than throwing at module load — eager
+// top-level throws break the production build's analyse step, where env
+// vars are not injected. `getStripe()` fails fast on first real use.
 const apiKey = process.env['STRIPE_SECRET_KEY'];
-const isProduction = process.env['NODE_ENV'] === 'production';
-
-if (isProduction && !apiKey) {
-  throw new Error('STRIPE_SECRET_KEY is required in production.');
-}
 
 let _client: Stripe | null = null;
 
@@ -21,7 +19,7 @@ export function getStripe(): Stripe {
       throw new Error('STRIPE_SECRET_KEY is not configured. Stripe operations are disabled.');
     }
     _client = new Stripe(apiKey, {
-      apiVersion: '2026-04-22.dahlia',
+      apiVersion: '2026-05-27.dahlia',
       appInfo: {
         name: 'Lumen',
         url: 'https://lumen.so',

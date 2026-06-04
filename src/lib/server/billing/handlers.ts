@@ -80,11 +80,15 @@ export async function handleSubscriptionEvent(event: Stripe.Event) {
       .where(eq(subscriptions.stripeSubscriptionId, sub.id))
       .limit(1);
 
+    // Re-derive entitlements from the canonical product tier. The org + user
+    // are sourced from the existing row when present, otherwise from the
+    // Stripe customer metadata encoded at checkout time (Phase 11).
+    let subRow: { organizationId: string; userId: string };
     if (existing) {
       await tx.update(subscriptions).set(baseUpdate).where(eq(subscriptions.id, existing.id));
+      subRow = { organizationId: existing.organizationId, userId: existing.userId };
     } else {
-      // First time we see this subscription. The org + user are encoded in
-      // the Stripe customer metadata at checkout time (Phase 11).
+      // First time we see this subscription.
       const orgIdFromMeta = sub.metadata['organization_id'];
       const userIdFromMeta = sub.metadata['user_id'];
       if (!orgIdFromMeta || !userIdFromMeta) {
@@ -96,18 +100,8 @@ export async function handleSubscriptionEvent(event: Stripe.Event) {
         userId: userIdFromMeta,
         ...baseUpdate,
       });
+      subRow = { organizationId: orgIdFromMeta, userId: userIdFromMeta };
     }
-
-    // Re-derive entitlements from the canonical product tier.
-    const subRow = existing
-      ? {
-          organizationId: existing.organizationId,
-          userId: existing.userId,
-        }
-      : {
-          organizationId: sub.metadata['organization_id']!,
-          userId: sub.metadata['user_id']!,
-        };
 
     const tier = TIER_FROM_PRODUCT_METADATA(
       typeof item.price.product === 'object' && item.price.product

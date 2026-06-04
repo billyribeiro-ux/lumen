@@ -9,9 +9,9 @@ plug in incrementally.
 ## 0. Prereqs
 
 ```bash
-# Node 22+, pnpm 10+, Docker (or Neon free tier instead)
-node --version       # v22.x or v24.x
-pnpm --version       # 10.x
+# Node 24.16.0, pnpm 11+, Docker (or Neon free tier instead)
+node --version       # v24.16.0 (see .nvmrc)
+pnpm --version       # 11.x
 docker --version     # any recent
 ```
 

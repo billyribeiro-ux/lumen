@@ -14,7 +14,7 @@ export const load: PageServerLoad = async (event) => {
   if (!activeOrgId) error(404, 'Active organization not set.');
 
   const result = await getNodeBySlug(activeOrgId, event.params.slug);
-  if (!result || !result.node || result.node.deletedAt) error(404, 'Node not found.');
+  if (!result?.node || result.node.deletedAt) error(404, 'Node not found.');
 
   const backlinks = await backlinksFor(result.node.id);
   return { node: result.node, content: result.content, backlinks };

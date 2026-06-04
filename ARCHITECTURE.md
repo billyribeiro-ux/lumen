@@ -139,8 +139,8 @@ Every choice justified. Every choice versioned. Every choice replaceable if it s
 | UI compiler | Svelte | 5.55.x | Runes reactivity model, snippets, attachments. Smaller runtime than React. |
 | Language | TypeScript | 5.7+ strict | Non-negotiable. `strict: true`, `noUncheckedIndexedAccess: true`, `exactOptionalPropertyTypes: true`. |
 | Build | Vite | 8.x | Native SvelteKit integration. Rolldown migration path. |
-| Runtime | Node.js | 22 LTS | Standard. Neon serverless driver requires ≥19. |
-| Package manager | pnpm | 10.x | Deterministic installs, disk-efficient, monorepo-ready. Enforced; no npm/yarn/bun allowed. |
+| Runtime | Node.js | 24.16.0 | Pinned via `.nvmrc`. Neon serverless driver requires ≥19. |
+| Package manager | pnpm | 11.x | Deterministic installs, disk-efficient, monorepo-ready. Enforced; no npm/yarn/bun allowed. |
 
 ### 3.2 Data Layer
 
