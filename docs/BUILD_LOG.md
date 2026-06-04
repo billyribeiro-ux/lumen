@@ -314,7 +314,9 @@
 | 19 | 2026-06-04 | maint | `CONTRIBUTING.md` | b078564 | (same commit as #1) |
 | 20 | 2026-06-04 | maint | `README.md` | b078564 | (same commit as #1) |
 | 21 | 2026-06-04 | maint | `docs/runbooks/local-dev.md` | b078564 | (same commit as #1) |
-| 22 | 2026-06-04 | maint | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record dependency upgrade + Node 24.16.0 / pnpm 11 toolchain bump |
+| 22 | 2026-06-04 | maint | `docs/BUILD_LOG.md` | d85bb7b | docs(log): record dependency upgrade + Node 24.16.0 / pnpm 11 toolchain bump |
+| 23 | 2026-06-04 | maint | `.github/workflows/ci.yml` | 64ccdad | ci(workflow): give lint-typecheck and unit-tests jobs a dummy DATABASE_URL |
+| 24 | 2026-06-04 | maint | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record CI dummy-env fix for lint-typecheck and unit-tests |
 
 ---
 
