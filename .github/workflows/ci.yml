@@ -17,6 +17,12 @@ jobs:
   lint-typecheck:
     name: Lint + type check
     runs-on: ubuntu-24.04
+    # `pnpm check` resolves `$env/static/private` (e.g. DATABASE_URL) at
+    # svelte-kit sync time; dummy values satisfy the type generation without
+    # touching a real database.
+    env:
+      DATABASE_URL: postgres://user:password@localhost/lumen-ci
+      BETTER_AUTH_SECRET: dummy-ci-secret-not-used-at-runtime
     steps:
       - uses: actions/checkout@v5
       - uses: pnpm/action-setup@v4
@@ -34,6 +40,12 @@ jobs:
   unit-tests:
     name: Unit tests
     runs-on: ubuntu-24.04
+    # The server test project imports `src/lib/server/**`, which evaluates the
+    # Drizzle/Neon client at module load (reads DATABASE_URL). Dummy values let
+    # the modules import; no test actually opens a connection.
+    env:
+      DATABASE_URL: postgres://user:password@localhost/lumen-ci
+      BETTER_AUTH_SECRET: dummy-ci-secret-not-used-at-runtime
     steps:
       - uses: actions/checkout@v5
       - uses: pnpm/action-setup@v4
