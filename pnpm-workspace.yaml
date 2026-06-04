@@ -1,2 +1,14 @@
+# Opt out of the registry's minimum-release-age delay so same-day "latest"
+# packages resolve. 0 = pnpm default (no delay).
+minimumReleaseAge: 0
+
+# Don't fail the install over dependencies whose postinstall/build scripts are
+# skipped. None are needed to build or test (esbuild ships prebuilt platform
+# binaries; lefthook is git hooks; @sentry/cli is sourcemap upload). pnpm 11
+# otherwise aborts with ERR_PNPM_IGNORED_BUILDS when CI=true (GitHub Actions).
+strictDepBuilds: false
+
 overrides:
+  # better-auth's kysely-adapter@1.6.x imports DEFAULT_MIGRATION_TABLE from the
+  # kysely root, which moved to the kysely/migration subpath in kysely 0.29.
   kysely: ^0.28.17
