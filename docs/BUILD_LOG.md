@@ -321,7 +321,9 @@
 | 26 | 2026-06-04 | maint | `docker-compose.yml` | 434ec1e | (same commit as #25) |
 | 27 | 2026-06-04 | maint | `docs/BUILD_LOG.md` | 5774689 | docs(log): record CI pnpm-conflict fix + latest action/image bumps |
 | 28 | 2026-06-04 | maint | `pnpm-workspace.yaml` | 9baa3a3 | build(deps): unblock CI install — opt out of release-age delay + relax strict builds |
-| 29 | 2026-06-04 | maint | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record CI-install unblock (minimumReleaseAge + strictDepBuilds) |
+| 29 | 2026-06-04 | maint | `docs/BUILD_LOG.md` | 2dac631 | docs(log): record CI-install unblock (minimumReleaseAge + strictDepBuilds) |
+| 30 | 2026-06-04 | maint | `src/lib/server/db/index.ts` | c9270ef | fix(db): lazy-init Drizzle client so the build never requires DATABASE_URL |
+| 31 | 2026-06-04 | maint | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record lazy Drizzle client fix for E2E build |
 
 ---
 
