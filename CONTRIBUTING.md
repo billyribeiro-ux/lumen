@@ -34,8 +34,8 @@ This project adheres to a Code of Conduct. By participating, you agree to uphold
 
 | Tool     | Version     | Install                                   |
 | -------- | ----------- | ----------------------------------------- |
-| Node.js  | 22 LTS      | `brew install node@22` or [nodejs.org](https://nodejs.org) |
-| pnpm     | 10.x        | `corepack enable` or `brew install pnpm`  |
+| Node.js  | 24.16.0     | `nvm use` (see `.nvmrc`) or [nodejs.org](https://nodejs.org) |
+| pnpm     | 11.x        | `corepack enable` or `brew install pnpm`  |
 | Git      | 2.40+       | `brew install git`                        |
 | GitHub CLI | 2.x       | `brew install gh`                         |
 | Rust     | 1.80+       | `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs \| sh` (for Tauri desktop) |

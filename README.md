@@ -9,7 +9,7 @@ A keyboard-driven knowledge OS for builders — where your code, docs, decisions
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 [![Built with SvelteKit](https://img.shields.io/badge/Built%20with-SvelteKit-FF3E00.svg)](https://svelte.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6.svg)](https://www.typescriptlang.org/)
-[![pnpm](https://img.shields.io/badge/pnpm-10.x-F69220.svg)](https://pnpm.io)
+[![pnpm](https://img.shields.io/badge/pnpm-11.x-F69220.svg)](https://pnpm.io)
 
 [Website](https://lumen.so) · [Documentation](./docs) · [Roadmap](./ROADMAP.md) · [Changelog](./CHANGELOG.md)
 
@@ -67,7 +67,7 @@ Full shortcut reference: [docs/shortcuts.md](./docs/shortcuts.md)
 | Email | Resend |
 | Desktop | Tauri 2 |
 | Deployment | Vercel |
-| Package Manager | pnpm 10.x |
+| Package Manager | pnpm 11.x |
 | Linter / Formatter | Biome |
 | Testing | Vitest + Playwright |
 | Observability | Sentry + OpenTelemetry |
@@ -78,8 +78,8 @@ Architecture deep-dive: [ARCHITECTURE.md](./ARCHITECTURE.md)
 
 ### Prerequisites
 
-- **Node.js** 22 LTS or higher
-- **pnpm** 10.x (`corepack enable` or `brew install pnpm`)
+- **Node.js** 24.16.0 (see `.nvmrc` — `nvm use` / `fnm use`)
+- **pnpm** 11.x (`corepack enable` or `brew install pnpm`)
 - **A Neon Postgres database** ([neon.tech](https://neon.tech))
 - **Stripe account** (test mode for development)
 - **Resend account** (for transactional email)

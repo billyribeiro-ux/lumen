@@ -6,12 +6,10 @@
 
 import Anthropic from '@anthropic-ai/sdk';
 
+// Read lazily at first use rather than throwing at module load — eager
+// top-level throws break the production build's analyse step, where env
+// vars are not injected. `getAnthropic()` fails fast on first real use.
 const apiKey = process.env['ANTHROPIC_API_KEY'];
-const isProduction = process.env['NODE_ENV'] === 'production';
-
-if (isProduction && !apiKey) {
-  throw new Error('ANTHROPIC_API_KEY is required in production.');
-}
 
 let _client: Anthropic | null = null;
 

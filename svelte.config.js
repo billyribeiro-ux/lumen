@@ -11,7 +11,7 @@ const config = {
       // Default region for the SvelteKit handler. Tune per-route via
       // `export const config = { regions: [...] }` in load/action files
       // when latency-sensitive routes need geographic colocation.
-      runtime: 'nodejs22.x',
+      runtime: 'nodejs24.x',
       regions: ['iad1'],
       // Fluid Compute is enabled at the project level in Vercel; the
       // adapter does not need explicit opt-in.

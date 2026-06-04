@@ -287,6 +287,39 @@
 
 ---
 
+## Maintenance — Dependency & Toolchain Upkeep (Post-PE7)
+
+> Post-completion upkeep. Not a numbered PE7 phase; the `Phase` column reads `maint`.
+
+| # | Date | Phase | File | Commit | Subject |
+|---|---|---|---|---|---|
+| 1 | 2026-06-04 | maint | `package.json` | b078564 | chore(deps): upgrade all dependencies to latest (2026-06-04); Node 24.16.0 + pnpm 11 |
+| 2 | 2026-06-04 | maint | `pnpm-lock.yaml` | b078564 | (same commit as #1) |
+| 3 | 2026-06-04 | maint | `pnpm-workspace.yaml` | b078564 | (same commit as #1) |
+| 4 | 2026-06-04 | maint | `.nvmrc` | b078564 | (same commit as #1) |
+| 5 | 2026-06-04 | maint | `.node-version` | b078564 | (same commit as #1) |
+| 6 | 2026-06-04 | maint | `svelte.config.js` | b078564 | (same commit as #1) |
+| 7 | 2026-06-04 | maint | `.github/workflows/ci.yml` | b078564 | (same commit as #1) |
+| 8 | 2026-06-04 | maint | `playwright.config.ts` | b078564 | (same commit as #1) |
+| 9 | 2026-06-04 | maint | `biome.json` | b078564 | (same commit as #1) |
+| 10 | 2026-06-04 | maint | `src/lib/server/stripe/client.ts` | b078564 | (same commit as #1) |
+| 11 | 2026-06-04 | maint | `scripts/stripe/seed-customers.ts` | b078564 | (same commit as #1) |
+| 12 | 2026-06-04 | maint | `scripts/stripe/sync.ts` | b078564 | (same commit as #1) |
+| 13 | 2026-06-04 | maint | `src/lib/server/billing/handlers.ts` | b078564 | (same commit as #1) |
+| 14 | 2026-06-04 | maint | `src/lib/server/ai/client.ts` | b078564 | (same commit as #1) |
+| 15 | 2026-06-04 | maint | `src/lib/server/email/index.ts` | b078564 | (same commit as #1) |
+| 16 | 2026-06-04 | maint | `src/routes/(marketing)/pricing/+page.server.ts` | b078564 | (same commit as #1) |
+| 17 | 2026-06-04 | maint | `src/routes/(app)/n/[slug]/+page.server.ts` | b078564 | (same commit as #1) |
+| 18 | 2026-06-04 | maint | `ARCHITECTURE.md` | b078564 | (same commit as #1) |
+| 19 | 2026-06-04 | maint | `CONTRIBUTING.md` | b078564 | (same commit as #1) |
+| 20 | 2026-06-04 | maint | `README.md` | b078564 | (same commit as #1) |
+| 21 | 2026-06-04 | maint | `docs/runbooks/local-dev.md` | b078564 | (same commit as #1) |
+| 22 | 2026-06-04 | maint | `docs/BUILD_LOG.md` | d85bb7b | docs(log): record dependency upgrade + Node 24.16.0 / pnpm 11 toolchain bump |
+| 23 | 2026-06-04 | maint | `.github/workflows/ci.yml` | 64ccdad | ci(workflow): give lint-typecheck and unit-tests jobs a dummy DATABASE_URL |
+| 24 | 2026-06-04 | maint | `docs/BUILD_LOG.md` | _this commit_ | docs(log): record CI dummy-env fix for lint-typecheck and unit-tests |
+
+---
+
 ## Milestone Tags
 
 | Tag | Date | Phase | Commit | Description |

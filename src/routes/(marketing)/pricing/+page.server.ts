@@ -14,8 +14,12 @@ export const load: PageServerLoad = async () => {
 
   const byProduct: Record<string, typeof priceRows> = {};
   for (const p of priceRows) {
-    if (!byProduct[p.productId]) byProduct[p.productId] = [];
-    byProduct[p.productId]!.push(p);
+    let list = byProduct[p.productId];
+    if (!list) {
+      list = [];
+      byProduct[p.productId] = list;
+    }
+    list.push(p);
   }
 
   return {

@@ -37,7 +37,7 @@ if (!stripeKey.startsWith('sk_test_')) {
   process.exit(1);
 }
 
-const stripe = new Stripe(stripeKey, { apiVersion: '2026-04-22.dahlia' });
+const stripe = new Stripe(stripeKey, { apiVersion: '2026-05-27.dahlia' });
 const db = drizzle(neon(databaseUrl), { schema, casing: 'snake_case' });
 
 interface PlanSeed {

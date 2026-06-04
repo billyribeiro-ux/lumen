@@ -11,11 +11,6 @@ import { render } from 'svelte/server';
 const apiKey = process.env['RESEND_API_KEY'];
 const fromAddress = process.env['EMAIL_FROM'] ?? 'Lumen <no-reply@lumen.so>';
 const replyTo = process.env['EMAIL_REPLY_TO'] ?? 'support@lumen.so';
-const isProduction = process.env['NODE_ENV'] === 'production';
-
-if (isProduction && !apiKey) {
-  throw new Error('RESEND_API_KEY is required in production.');
-}
 
 const client = apiKey ? new Resend(apiKey) : null;
 
@@ -40,6 +35,12 @@ export async function sendEmail<P extends Record<string, unknown>>(
   const text = input.text ?? stripHtml(rendered.body);
 
   if (!client) {
+    // A missing key is tolerated in dev (log + no-op) but a hard error in
+    // production — enforced at first use rather than at module load so the
+    // build's analyse step does not require runtime secrets.
+    if (process.env['NODE_ENV'] === 'production') {
+      throw new Error('RESEND_API_KEY is required in production.');
+    }
     console.info(
       JSON.stringify({
         level: 'info',
