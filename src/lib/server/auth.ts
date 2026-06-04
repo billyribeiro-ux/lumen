@@ -70,12 +70,18 @@ function buildAuth() {
   const githubClientId = env('GITHUB_CLIENT_ID');
   const githubClientSecret = env('GITHUB_CLIENT_SECRET');
 
+  // OAuth providers are optional. When a provider's secrets are absent it is
+  // simply not registered (see `socialProviders` below) — email/password,
+  // passkey, and magic-link auth remain fully functional. In production we log a
+  // warning so a misconfigured deploy stays visible, but we never refuse to boot:
+  // a missing OAuth secret must not take down the entire app (including its
+  // public surface) the way a hard throw here did.
   if (isProduction) {
     if (!googleClientId || !googleClientSecret) {
-      throw new Error('Production requires GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET.');
+      console.warn('auth: GOOGLE_CLIENT_ID/GOOGLE_CLIENT_SECRET unset — Google sign-in disabled.');
     }
     if (!githubClientId || !githubClientSecret) {
-      throw new Error('Production requires GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET.');
+      console.warn('auth: GITHUB_CLIENT_ID/GITHUB_CLIENT_SECRET unset — GitHub sign-in disabled.');
     }
   }
 
